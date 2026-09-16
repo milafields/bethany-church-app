@@ -380,6 +380,51 @@ button {
 }
 
 
+
+/* MINISTRY ASSIGNMENTS */
+
+.assignment-card {
+    margin-bottom: 12px;
+    padding: 16px;
+    border: 1px solid #d6e5f0;
+    border-radius: 13px;
+    background: white;
+    box-shadow: 0 3px 9px rgba(20,70,110,.05);
+}
+
+.assignment-date {
+    color: #07518a;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.assignment-service {
+    margin-top: 6px;
+    color: #17324d;
+    font-weight: bold;
+}
+
+.assignment-workers {
+    margin-top: 7px;
+    color: #405c72;
+    line-height: 1.45;
+}
+
+.assignment-notes {
+    margin-top: 7px;
+    color: #667b8e;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.assignment-empty {
+    padding: 25px 10px;
+    color: #718597;
+    text-align: center;
+}
+
+
 /* CALENDAR TOOLBAR */
 
 .calendar-view-buttons {
@@ -1045,9 +1090,13 @@ button {
     <div class="section-content">
         <div class="info-card">
             <h3>Bus Ministry</h3>
-            <p>Bus visitation, meals, assignments and ministry information will appear here.</p>
+            <p>Assignments published from the Bethany Admin Center appear below automatically.</p>
         </div>
-    </div>
+
+        <div id="busAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
+</div>
 </div>
 
 
@@ -1059,10 +1108,14 @@ button {
 
     <div class="section-content">
         <div class="info-card">
-            <h3>Church Nursery</h3>
-            <p>Sunday morning, Sunday evening and Wednesday nursery assignments will appear here.</p>
+            <h3>Upcoming Nursery Assignments</h3>
+            <p>Assignments published from the Bethany Admin Center appear below automatically.</p>
         </div>
-    </div>
+
+        <div id="nurseryAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
+</div>
 </div>
 
 
@@ -1075,9 +1128,13 @@ button {
     <div class="section-content">
         <div class="info-card">
             <h3>Shelter Meal Schedule</h3>
-            <p>Upcoming shelter meal dates and assigned workers will appear here.</p>
+            <p>Assignments published from the Bethany Admin Center appear below automatically.</p>
         </div>
-    </div>
+
+        <div id="shelterAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
+</div>
 </div>
 
 
@@ -1090,9 +1147,13 @@ button {
     <div class="section-content">
         <div class="info-card">
             <h3>Security Team</h3>
-            <p>Church service security assignments will appear here.</p>
+            <p>Assignments published from the Bethany Admin Center appear below automatically.</p>
         </div>
-    </div>
+
+        <div id="securityAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
+</div>
 </div>
 
 
@@ -1105,9 +1166,13 @@ button {
     <div class="section-content">
         <div class="info-card">
             <h3>Children's Church Schedule</h3>
-            <p>Teachers and helper assignments will appear here.</p>
+            <p>Assignments published from the Bethany Admin Center appear below automatically.</p>
         </div>
-    </div>
+
+        <div id="childrensChurchAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
+</div>
 </div>
 
 
@@ -1120,9 +1185,13 @@ button {
     <div class="section-content">
         <div class="info-card">
             <h3>Ladies Ministry</h3>
-            <p>Meetings, activities and announcements for the ladies ministry will appear here.</p>
+            <p>Assignments published from the Bethany Admin Center appear below automatically.</p>
         </div>
-    </div>
+
+        <div id="ladiesAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
+</div>
 </div>
 
 
@@ -1135,9 +1204,13 @@ button {
     <div class="section-content">
         <div class="info-card">
             <h3>King's Kids</h3>
-            <p>King's Kids schedules, workers and announcements will appear here.</p>
+            <p>Assignments published from the Bethany Admin Center appear below automatically.</p>
         </div>
-    </div>
+
+        <div id="kingsKidsAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
+</div>
 </div>
 
 
@@ -1150,9 +1223,13 @@ button {
     <div class="section-content">
         <div class="info-card">
             <h3>Youth Ministry</h3>
-            <p>Youth activities, trips, meetings and announcements will appear here.</p>
+            <p>Assignments published from the Bethany Admin Center appear below automatically.</p>
         </div>
-    </div>
+
+        <div id="youthAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
+</div>
 </div>
 
 
@@ -1325,6 +1402,12 @@ const eventsRef =
 
 let allEvents = [];
 
+const assignmentsRef =
+    database.ref("assignments");
+
+let allAssignments = [];
+
+
 
 
 eventsRef.on("value", function(snapshot) {
@@ -1352,6 +1435,281 @@ eventsRef.on("value", function(snapshot) {
 
 });
 
+
+
+
+/* MINISTRY ASSIGNMENTS */
+
+assignmentsRef.on(
+    "value",
+    function(snapshot) {
+
+        const data =
+            snapshot.val() || {};
+
+        allAssignments = [];
+
+        Object.keys(data).forEach(function(key) {
+
+            const item = data[key];
+
+            if (item && item.ministry && item.date) {
+
+                allAssignments.push({
+                    id: key,
+                    ...item
+                });
+
+            }
+
+        });
+
+        allAssignments.sort(function(a,b) {
+
+            const dateCompare =
+                (a.date || "").localeCompare(b.date || "");
+
+            if (dateCompare !== 0) {
+                return dateCompare;
+            }
+
+            return (a.service || "")
+                .localeCompare(b.service || "");
+
+        });
+
+        renderAllMinistryAssignments();
+
+    },
+    function(error) {
+
+        console.log(
+            "Assignments could not be loaded:",
+            error
+        );
+
+        showAssignmentLoadError();
+
+    }
+);
+
+
+function renderAllMinistryAssignments() {
+
+    const ministryContainers = {
+
+        bus:
+            "busAssignments",
+
+        nursery:
+            "nurseryAssignments",
+
+        shelter:
+            "shelterAssignments",
+
+        security:
+            "securityAssignments",
+
+        childrensChurch:
+            "childrensChurchAssignments",
+
+        ladies:
+            "ladiesAssignments",
+
+        kingsKids:
+            "kingsKidsAssignments",
+
+        youth:
+            "youthAssignments"
+
+    };
+
+
+    Object.keys(ministryContainers)
+    .forEach(function(ministry) {
+
+        renderMinistryAssignments(
+            ministry,
+            ministryContainers[ministry]
+        );
+
+    });
+
+}
+
+
+function renderMinistryAssignments(
+    ministry,
+    containerId
+) {
+
+    const container =
+        document.getElementById(containerId);
+
+    if (!container) {
+        return;
+    }
+
+
+    const items =
+        allAssignments.filter(function(item) {
+
+            return item.ministry === ministry;
+
+        });
+
+
+    container.innerHTML = "";
+    container.className = "";
+
+
+    if (!items.length) {
+
+        container.className =
+            "assignment-empty";
+
+        container.textContent =
+            "No assignments have been published yet.";
+
+        return;
+    }
+
+
+    items.forEach(function(item) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "assignment-card";
+
+
+        const date =
+            document.createElement("div");
+
+        date.className =
+            "assignment-date";
+
+        date.textContent =
+            formatAssignmentDate(item.date);
+
+        card.appendChild(date);
+
+
+        if (item.service) {
+
+            const service =
+                document.createElement("div");
+
+            service.className =
+                "assignment-service";
+
+            service.textContent =
+                item.service;
+
+            card.appendChild(service);
+
+        }
+
+
+        const workers =
+            document.createElement("div");
+
+        workers.className =
+            "assignment-workers";
+
+        workers.textContent =
+            "Assigned: " +
+            (item.workers || "");
+
+        card.appendChild(workers);
+
+
+        if (item.notes) {
+
+            const notes =
+                document.createElement("div");
+
+            notes.className =
+                "assignment-notes";
+
+            notes.textContent =
+                item.notes;
+
+            card.appendChild(notes);
+
+        }
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+function formatAssignmentDate(dateString) {
+
+    if (!dateString) {
+        return "";
+    }
+
+
+    const parts =
+        dateString.split("-");
+
+
+    const date =
+        new Date(
+            Number(parts[0]),
+            Number(parts[1]) - 1,
+            Number(parts[2])
+        );
+
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+function showAssignmentLoadError() {
+
+    [
+        "busAssignments",
+        "nurseryAssignments",
+        "shelterAssignments",
+        "securityAssignments",
+        "childrensChurchAssignments",
+        "ladiesAssignments",
+        "kingsKidsAssignments",
+        "youthAssignments"
+    ]
+    .forEach(function(id) {
+
+        const container =
+            document.getElementById(id);
+
+        if (container) {
+
+            container.className =
+                "assignment-empty";
+
+            container.textContent =
+                "Assignments could not be loaded.";
+
+        }
+
+    });
+
+}
 
 
 /* CALENDAR */
