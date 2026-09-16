@@ -2,14 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Bethany Baptist Church Member App</title>
+
+<!-- APP / PWA SETTINGS -->
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 
 <meta name="theme-color" content="#073b6f">
 <meta name="description" content="Bethany Baptist Church Member App">
 
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Bethany">
+
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -39,19 +50,27 @@ button, input {
   box-shadow: 0 0 25px rgba(0,0,0,.10);
 }
 
-/* =========================
-   MEMBER ACCESS SCREEN
-========================= */
+
+/* =====================================
+   MEMBER ACCESS
+===================================== */
 
 #loginScreen {
   min-height: 100vh;
   max-width: 600px;
   margin: auto;
+
   display: flex;
   flex-direction: column;
+
   background:
-    linear-gradient(rgba(3,48,89,.86), rgba(7,76,126,.91)),
-    url("Bethany Baptist Church Picture.png") center/cover no-repeat;
+    linear-gradient(
+      rgba(3,48,89,.86),
+      rgba(7,76,126,.91)
+    ),
+    url("Bethany Baptist Church Picture.png")
+    center/cover no-repeat;
+
   color: white;
 }
 
@@ -62,55 +81,92 @@ button, input {
 
 .login-top h1 {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 35px;
   letter-spacing: 1px;
 }
 
-.login-top .member-app {
+.member-app {
   margin-top: 10px;
+
   font-size: 13px;
   letter-spacing: 4px;
   text-transform: uppercase;
+
   color: #d8eaff;
 }
 
 .login-box {
+
   width: calc(100% - 50px);
   max-width: 400px;
+
   margin: 25px auto;
+
   padding: 28px 22px;
-  border: 1px solid rgba(255,255,255,.45);
+
+  border:
+    1px solid rgba(255,255,255,.45);
+
   border-radius: 18px;
-  background: rgba(255,255,255,.93);
-  box-shadow: 0 10px 30px rgba(0,0,0,.20);
+
+  background:
+    rgba(255,255,255,.94);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.20);
+
   color: #0b3c69;
+
   text-align: center;
 }
 
 .login-box h2 {
   margin: 0 0 7px;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 23px;
 }
 
 .login-box p {
   margin: 0 0 20px;
+
   color: #61788e;
+
   font-size: 13px;
 }
 
 #memberCode {
+
   width: 180px;
+
   padding: 14px;
-  border: 2px solid #b8d4ea;
+
+  border:
+    2px solid #b8d4ea;
+
   border-radius: 10px;
+
   outline: none;
+
   background: white;
+
   color: #073b6f;
+
   text-align: center;
+
   font-size: 25px;
   font-weight: bold;
+
   letter-spacing: 10px;
 }
 
@@ -119,16 +175,27 @@ button, input {
 }
 
 .enter-button {
+
   display: block;
+
   width: 180px;
+
   margin: 14px auto 0;
+
   padding: 13px;
+
   border: 0;
+
   border-radius: 10px;
+
   background: #07518a;
+
   color: white;
+
   font-weight: bold;
+
   letter-spacing: 1px;
+
   cursor: pointer;
 }
 
@@ -137,117 +204,210 @@ button, input {
 }
 
 #errorMessage {
+
   min-height: 18px;
+
   margin-top: 12px;
+
   color: #b3261e;
+
   font-size: 13px;
+
   font-weight: bold;
 }
 
 .login-verse {
+
   margin: auto 28px 50px;
+
   padding: 20px;
-  border-top: 1px solid rgba(255,255,255,.35);
-  border-bottom: 1px solid rgba(255,255,255,.35);
+
+  border-top:
+    1px solid rgba(255,255,255,.35);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.35);
+
   text-align: center;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 17px;
+
   font-style: italic;
+
   line-height: 1.55;
 }
 
 .login-verse strong {
+
   display: block;
+
   margin-top: 8px;
+
   font-size: 14px;
+
   font-style: normal;
 }
 
-/* =========================
+
+/* =====================================
    MAIN APP
-========================= */
+===================================== */
 
 #mainApp {
   display: none;
-  padding-bottom: 80px;
+  padding-bottom: 82px;
 }
+
 
 /* HEADER */
 
 .top-bar {
+
   position: sticky;
+
   top: 0;
+
   z-index: 20;
+
   padding: 15px 18px;
-  background: linear-gradient(135deg,#063765,#07578f);
+
+  background:
+    linear-gradient(
+      135deg,
+      #063765,
+      #07578f
+    );
+
   color: white;
+
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.12);
 }
 
 .top-bar h1 {
+
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 22px;
+
   font-weight: normal;
 }
 
-/* REAL CHURCH IMAGE */
+
+/* REAL BETHANY CHURCH IMAGE */
 
 .church-photo {
+
   width: 100%;
+
   background: white;
 }
 
 .church-photo img {
+
   display: block;
+
   width: 100%;
+
   height: auto;
 }
 
-/* VERSE */
+
+/* HOME VERSE */
 
 .home-verse {
+
   padding: 20px 24px;
-  border-bottom: 1px solid #d9e7f2;
-  background: linear-gradient(#ffffff,#edf6fc);
+
+  border-bottom:
+    1px solid #d9e7f2;
+
+  background:
+    linear-gradient(
+      #ffffff,
+      #edf6fc
+    );
+
   color: #123d64;
+
   text-align: center;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
 .home-verse p {
+
   margin: 0;
+
   font-size: 17px;
+
   font-style: italic;
+
   line-height: 1.5;
 }
 
 .home-verse strong {
+
   display: block;
+
   margin-top: 7px;
+
   font-size: 14px;
 }
 
-/* MENU */
+
+/* =====================================
+   HOME MENU
+===================================== */
 
 .menu {
+
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(2,1fr);
+
   gap: 12px;
+
   padding: 16px;
 }
 
 .menu-button {
+
   min-height: 105px;
+
   padding: 15px 8px;
-  border: 1px solid #d3e4f1;
+
+  border:
+    1px solid #d3e4f1;
+
   border-radius: 15px;
+
   background: white;
+
   color: #073b6f;
+
   text-align: center;
+
   cursor: pointer;
-  box-shadow: 0 3px 10px rgba(25,70,105,.07);
+
+  box-shadow:
+    0 3px 10px rgba(25,70,105,.07);
 }
 
 .menu-button:hover {
@@ -255,43 +415,81 @@ button, input {
 }
 
 .menu-icon {
+
   display: block;
+
   margin-bottom: 8px;
+
   font-size: 30px;
 }
 
 .menu-title {
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 15px;
+
   font-weight: bold;
 }
 
-/* BOTTOM SCRIPTURE */
+
+/* =====================================
+   BOTTOM SCRIPTURE
+===================================== */
 
 .bottom-scripture {
+
   margin: 4px 16px 18px;
+
   padding: 23px 18px;
+
   border-radius: 14px;
-  background: linear-gradient(135deg,#073b6f,#08649e);
+
+  background:
+    linear-gradient(
+      135deg,
+      #073b6f,
+      #08649e
+    );
+
   color: white;
+
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,.10);
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.10);
 }
 
 .bottom-scripture .verse-text {
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 18px;
+
   font-style: italic;
+
   line-height: 1.5;
 }
 
 .bottom-scripture .verse-ref {
+
   margin-top: 8px;
+
   font-size: 13px;
+
   font-weight: bold;
 }
 
-/* SECTIONS */
+
+/* =====================================
+   APP SECTIONS
+===================================== */
 
 .section {
   display: none;
@@ -302,31 +500,60 @@ button, input {
 }
 
 .section-header {
+
   position: sticky;
+
   top: 0;
+
   z-index: 25;
+
   display: flex;
+
   align-items: center;
+
   gap: 10px;
+
   padding: 15px;
-  background: linear-gradient(135deg,#063765,#07578f);
+
+  background:
+    linear-gradient(
+      135deg,
+      #063765,
+      #07578f
+    );
+
   color: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.12);
 }
 
 .section-header h2 {
+
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 22px;
+
   font-weight: normal;
 }
 
 .back-button {
+
   width: 35px;
+
   border: 0;
+
   background: transparent;
+
   color: white;
+
   font-size: 30px;
+
   cursor: pointer;
 }
 
@@ -334,155 +561,286 @@ button, input {
   padding: 16px;
 }
 
-/* CALENDAR MONTH NAV */
+
+/* =====================================
+   CALENDAR MONTH NAVIGATION
+===================================== */
 
 .month-nav {
+
   display: grid;
-  grid-template-columns: 48px 1fr 48px;
+
+  grid-template-columns:
+    48px 1fr 48px;
+
   gap: 8px;
+
   align-items: center;
+
   margin-bottom: 15px;
 }
 
 .month-button {
+
   height: 44px;
+
   border: 0;
+
   border-radius: 10px;
+
   background: #dcecf8;
+
   color: #073b6f;
+
   font-size: 25px;
+
   cursor: pointer;
 }
 
 .month-title {
+
   padding: 11px 5px;
+
   border-radius: 10px;
+
   background: #e7f2fa;
+
   color: #073b6f;
+
   text-align: center;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 19px;
+
   font-weight: bold;
 }
 
 .calendar-status {
+
   padding: 30px;
+
   color: #657b8f;
+
   text-align: center;
 }
 
+
+/* EVENT CARDS */
+
 .event-card {
+
   display: flex;
+
   gap: 13px;
+
   margin-bottom: 11px;
+
   padding: 13px;
-  border: 1px solid #d6e5f0;
+
+  border:
+    1px solid #d6e5f0;
+
   border-radius: 13px;
+
   background: white;
-  box-shadow: 0 3px 9px rgba(20,70,110,.06);
+
+  box-shadow:
+    0 3px 9px rgba(20,70,110,.06);
 }
 
 .event-date {
+
   flex: 0 0 60px;
+
   min-height: 64px;
+
   padding: 7px 3px;
+
   border-radius: 10px;
+
   background: #e4f1fa;
+
   color: #06477d;
+
   text-align: center;
 }
 
 .event-month {
+
   display: block;
+
   font-size: 12px;
+
   font-weight: bold;
+
   text-transform: uppercase;
 }
 
 .event-day {
+
   display: block;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 28px;
+
   line-height: 1.05;
 }
 
 .event-info {
+
   flex: 1;
+
   padding-top: 2px;
 }
 
 .event-title {
+
   margin-bottom: 5px;
+
   color: #123b60;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 17px;
+
   font-weight: bold;
 }
 
 .event-time {
+
   color: #07578f;
+
   font-size: 13px;
+
   font-weight: bold;
 }
 
 .event-details {
+
   margin-top: 5px;
+
   color: #667b8e;
+
   font-size: 13px;
+
   line-height: 1.45;
 }
 
-/* INFORMATION */
+
+/* =====================================
+   INFORMATION CARDS
+===================================== */
 
 .info-card {
+
   margin-bottom: 13px;
+
   padding: 19px;
-  border: 1px solid #d7e6f1;
+
+  border:
+    1px solid #d7e6f1;
+
   border-radius: 13px;
+
   background: white;
-  box-shadow: 0 3px 9px rgba(20,70,110,.05);
+
+  box-shadow:
+    0 3px 9px rgba(20,70,110,.05);
 }
 
 .info-card h3 {
+
   margin: 0 0 8px;
+
   color: #07518a;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
 .info-card p {
+
   margin: 0;
+
   color: #4d6477;
+
   line-height: 1.55;
 }
 
-/* BOTTOM NAV */
+
+/* =====================================
+   BOTTOM NAVIGATION
+===================================== */
 
 .bottom-nav {
+
   position: fixed;
+
   z-index: 50;
+
   left: 50%;
+
   bottom: 0;
+
   width: 100%;
+
   max-width: 600px;
-  transform: translateX(-50%);
+
+  transform:
+    translateX(-50%);
+
   display: grid;
-  grid-template-columns: repeat(4,1fr);
-  padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
-  background: linear-gradient(135deg,#063765,#07578f);
-  box-shadow: 0 -3px 12px rgba(0,0,0,.15);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  padding:
+    8px 4px
+    calc(8px + env(safe-area-inset-bottom));
+
+  background:
+    linear-gradient(
+      135deg,
+      #063765,
+      #07578f
+    );
+
+  box-shadow:
+    0 -3px 12px rgba(0,0,0,.15);
 }
 
 .nav-button {
+
   border: 0;
+
   background: transparent;
+
   color: white;
+
   text-align: center;
+
   cursor: pointer;
 }
 
 .nav-icon {
+
   display: block;
+
   margin-bottom: 3px;
+
   font-size: 20px;
 }
 
@@ -490,7 +848,11 @@ button, input {
   font-size: 11px;
 }
 
-@media (max-width:390px) {
+
+/* PHONE */
+
+@media(max-width:390px) {
+
   .login-top h1 {
     font-size: 29px;
   }
@@ -503,26 +865,44 @@ button, input {
   .menu-button {
     min-height: 96px;
   }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ========================
+
+<!-- =====================================
      MEMBER LOGIN
-========================= -->
+===================================== -->
 
 <div id="loginScreen">
 
   <div class="login-top">
-    <h1>Bethany Baptist Church</h1>
-    <div class="member-app">Member App</div>
+
+    <h1>
+      Bethany Baptist Church
+    </h1>
+
+    <div class="member-app">
+      Member App
+    </div>
+
   </div>
 
+
   <div class="login-box">
-    <h2>Member Access</h2>
-    <p>Please enter the church member access code.</p>
+
+    <h2>
+      Member Access
+    </h2>
+
+    <p>
+      Please enter the church member access code.
+    </p>
 
     <input
       id="memberCode"
@@ -533,640 +913,1340 @@ button, input {
       aria-label="Member access code"
     >
 
-    <button class="enter-button" onclick="checkCode()">
+    <button
+      class="enter-button"
+      onclick="checkCode()"
+    >
       ENTER
     </button>
 
     <div id="errorMessage"></div>
+
   </div>
 
+
   <div class="login-verse">
-    “For where two or three are gathered together in my name,
-    there am I in the midst of them.”
-    <strong>Matthew 18:20 KJV</strong>
+
+    “For where two or three are gathered together
+    in my name, there am I in the midst of them.”
+
+    <strong>
+      Matthew 18:20 KJV
+    </strong>
+
   </div>
 
 </div>
 
 
-<!-- ========================
+
+<!-- =====================================
      MAIN APP
-========================= -->
+===================================== -->
 
 <div id="mainApp" class="app">
 
+
 <!-- HOME -->
 
-<div id="homeSection" class="section active">
+<div
+  id="homeSection"
+  class="section active"
+>
 
   <div class="top-bar">
-    <h1>Bethany Baptist Church</h1>
+
+    <h1>
+      Bethany Baptist Church
+    </h1>
+
   </div>
 
+
   <div class="church-photo">
+
     <img
       src="Bethany Baptist Church Picture.png"
       alt="Bethany Baptist Church"
     >
+
   </div>
 
+
   <div class="home-verse">
+
     <p>
-      “Let all things be done decently and in order.”
+      “For the word of God is not bound.”
     </p>
-    <strong>1 Corinthians 14:40 KJV</strong>
+
+    <strong>
+      2 Timothy 2:9 KJV
+    </strong>
+
   </div>
+
 
   <div class="menu">
 
-    <button class="menu-button" onclick="openCalendar()">
-      <span class="menu-icon">📅</span>
-      <span class="menu-title">Calendar</span>
+
+    <button
+      class="menu-button"
+      onclick="openCalendar()"
+    >
+
+      <span class="menu-icon">
+        📅
+      </span>
+
+      <span class="menu-title">
+        Calendar
+      </span>
+
     </button>
 
-    <button class="menu-button" onclick="showSection('announcementsSection')">
-      <span class="menu-icon">📢</span>
-      <span class="menu-title">Announcements</span>
+
+    <button
+      class="menu-button"
+      onclick="showSection('announcementsSection')"
+    >
+
+      <span class="menu-icon">
+        📢
+      </span>
+
+      <span class="menu-title">
+        Announcements
+      </span>
+
     </button>
 
-    <button class="menu-button" onclick="showSection('ministriesSection')">
-      <span class="menu-icon">👥</span>
-      <span class="menu-title">Ministries</span>
+
+    <button
+      class="menu-button"
+      onclick="showSection('ministriesSection')"
+    >
+
+      <span class="menu-icon">
+        👥
+      </span>
+
+      <span class="menu-title">
+        Ministries
+      </span>
+
     </button>
 
-    <button class="menu-button" onclick="showSection('newsletterSection')">
-      <span class="menu-icon">📖</span>
-      <span class="menu-title">Church Newsletter</span>
+
+    <button
+      class="menu-button"
+      onclick="showSection('newsletterSection')"
+    >
+
+      <span class="menu-icon">
+        📖
+      </span>
+
+      <span class="menu-title">
+        Church Newsletter
+      </span>
+
     </button>
 
-    <button class="menu-button" onclick="showSection('prayerSection')">
-      <span class="menu-icon">🙏</span>
-      <span class="menu-title">Prayer Requests</span>
+
+    <button
+      class="menu-button"
+      onclick="showSection('prayerSection')"
+    >
+
+      <span class="menu-icon">
+        🙏
+      </span>
+
+      <span class="menu-title">
+        Prayer Requests
+      </span>
+
     </button>
 
-    <button class="menu-button" onclick="showSection('contactSection')">
-      <span class="menu-icon">☎</span>
-      <span class="menu-title">Contact Us</span>
+
+    <button
+      class="menu-button"
+      onclick="showSection('contactSection')"
+    >
+
+      <span class="menu-icon">
+        ☎
+      </span>
+
+      <span class="menu-title">
+        Contact Us
+      </span>
+
     </button>
 
-    <button class="menu-button" onclick="showSection('busSection')">
-      <span class="menu-icon">🚌</span>
-      <span class="menu-title">Bus Ministry</span>
+
+    <button
+      class="menu-button"
+      onclick="showSection('busSection')"
+    >
+
+      <span class="menu-icon">
+        🚌
+      </span>
+
+      <span class="menu-title">
+        Bus Ministry
+      </span>
+
     </button>
 
-    <button class="menu-button" onclick="showSection('giveSection')">
-      <span class="menu-icon">♥</span>
-      <span class="menu-title">Give</span>
+
+    <button
+      class="menu-button"
+      onclick="showSection('giveSection')"
+    >
+
+      <span class="menu-icon">
+        ♥
+      </span>
+
+      <span class="menu-title">
+        Give
+      </span>
+
     </button>
+
 
   </div>
 
+
   <div class="bottom-scripture">
+
     <div class="verse-text">
+
       “Let all things be done decently and in order.”
+
     </div>
+
     <div class="verse-ref">
+
       1 Corinthians 14:40 KJV
+
     </div>
+
   </div>
 
 </div>
 
 
-<!-- CALENDAR -->
 
-<div id="calendarSection" class="section">
+<!-- =====================================
+     CALENDAR
+===================================== -->
+
+<div
+  id="calendarSection"
+  class="section"
+>
 
   <div class="section-header">
-    <button class="back-button" onclick="showHome()">‹</button>
-    <h2>Church Calendar</h2>
+
+    <button
+      class="back-button"
+      onclick="showHome()"
+    >
+      ‹
+    </button>
+
+    <h2>
+      Church Calendar
+    </h2>
+
   </div>
+
 
   <div class="section-content">
 
+
     <div class="month-nav">
 
-      <button class="month-button" onclick="changeMonth(-1)">
+      <button
+        class="month-button"
+        onclick="changeMonth(-1)"
+      >
         ‹
       </button>
 
-      <div id="monthTitle" class="month-title">
+
+      <div
+        id="monthTitle"
+        class="month-title"
+      >
         Month
       </div>
 
-      <button class="month-button" onclick="changeMonth(1)">
+
+      <button
+        class="month-button"
+        onclick="changeMonth(1)"
+      >
         ›
       </button>
 
     </div>
 
-    <div id="calendarStatus" class="calendar-status">
+
+    <div
+      id="calendarStatus"
+      class="calendar-status"
+    >
       Loading church events...
     </div>
 
+
     <div id="eventsList"></div>
 
+
   </div>
+
 </div>
+
 
 
 <!-- ANNOUNCEMENTS -->
 
-<div id="announcementsSection" class="section">
+<div
+  id="announcementsSection"
+  class="section"
+>
 
   <div class="section-header">
-    <button class="back-button" onclick="showHome()">‹</button>
-    <h2>Announcements</h2>
+
+    <button
+      class="back-button"
+      onclick="showHome()"
+    >
+      ‹
+    </button>
+
+    <h2>
+      Announcements
+    </h2>
+
   </div>
+
 
   <div class="section-content">
 
     <div class="info-card">
-      <h3>Church Announcements</h3>
+
+      <h3>
+        Church Announcements
+      </h3>
+
       <p>
-        Important Bethany Baptist Church announcements will appear here.
+        Important Bethany Baptist Church
+        announcements will appear here.
       </p>
+
     </div>
 
   </div>
+
 </div>
+
 
 
 <!-- MINISTRIES -->
 
-<div id="ministriesSection" class="section">
+<div
+  id="ministriesSection"
+  class="section"
+>
 
   <div class="section-header">
-    <button class="back-button" onclick="showHome()">‹</button>
-    <h2>Ministries</h2>
+
+    <button
+      class="back-button"
+      onclick="showHome()"
+    >
+      ‹
+    </button>
+
+    <h2>
+      Ministries
+    </h2>
+
   </div>
+
 
   <div class="section-content">
 
-    <div class="info-card">
-      <h3>Bus Ministry</h3>
-      <p>Reaching children and families in our community.</p>
-    </div>
 
     <div class="info-card">
-      <h3>Youth Ministry</h3>
-      <p>Activities and opportunities for our young people.</p>
+
+      <h3>
+        Bus Ministry
+      </h3>
+
+      <p>
+        Reaching children and families
+        in our community.
+      </p>
+
     </div>
 
-    <div class="info-card">
-      <h3>Bethany Christian School</h3>
-      <p>Christian education centered upon Biblical truth.</p>
-    </div>
 
     <div class="info-card">
-      <h3>Bethany Stepping Stones Christian Daycare</h3>
-      <p>Christian childcare serving families in our community.</p>
+
+      <h3>
+        Youth Ministry
+      </h3>
+
+      <p>
+        Activities and opportunities
+        for our young people.
+      </p>
+
     </div>
 
-    <div class="info-card">
-      <h3>Homeless Shelter Ministry</h3>
-      <p>Serving those in need through Christian outreach.</p>
-    </div>
 
     <div class="info-card">
-      <h3>Prison Ministry</h3>
-      <p>Sharing the Gospel and Biblical encouragement.</p>
+
+      <h3>
+        Bethany Christian School
+      </h3>
+
+      <p>
+        Christian education centered
+        upon Biblical truth.
+      </p>
+
     </div>
+
+
+    <div class="info-card">
+
+      <h3>
+        Bethany Stepping Stones
+        Christian Daycare
+      </h3>
+
+      <p>
+        Christian childcare serving
+        families in our community.
+      </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <h3>
+        Homeless Shelter Ministry
+      </h3>
+
+      <p>
+        Serving those in need through
+        Christian outreach.
+      </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <h3>
+        Prison Ministry
+      </h3>
+
+      <p>
+        Sharing the Gospel and
+        Biblical encouragement.
+      </p>
+
+    </div>
+
 
   </div>
+
 </div>
+
 
 
 <!-- NEWSLETTER -->
 
-<div id="newsletterSection" class="section">
+<div
+  id="newsletterSection"
+  class="section"
+>
 
   <div class="section-header">
-    <button class="back-button" onclick="showHome()">‹</button>
-    <h2>Church Newsletter</h2>
+
+    <button
+      class="back-button"
+      onclick="showHome()"
+    >
+      ‹
+    </button>
+
+    <h2>
+      Church Newsletter
+    </h2>
+
   </div>
+
 
   <div class="section-content">
 
     <div class="info-card">
-      <h3>Bethany Baptist Church Newsletter</h3>
+
+      <h3>
+        Bethany Baptist Church Newsletter
+      </h3>
+
       <p>
-        The current church newsletter will be available here.
+        The current church newsletter
+        will be available here.
       </p>
+
     </div>
 
   </div>
+
 </div>
+
 
 
 <!-- PRAYER -->
 
-<div id="prayerSection" class="section">
+<div
+  id="prayerSection"
+  class="section"
+>
 
   <div class="section-header">
-    <button class="back-button" onclick="showHome()">‹</button>
-    <h2>Prayer Requests</h2>
+
+    <button
+      class="back-button"
+      onclick="showHome()"
+    >
+      ‹
+    </button>
+
+    <h2>
+      Prayer Requests
+    </h2>
+
   </div>
+
 
   <div class="section-content">
 
     <div class="info-card">
-      <h3>Prayer Requests</h3>
+
+      <h3>
+        Prayer Requests
+      </h3>
+
       <p>
-        A secure prayer request submission option can be added here later.
+        A secure prayer request submission
+        option can be added here later.
       </p>
+
     </div>
 
   </div>
+
 </div>
+
 
 
 <!-- CONTACT -->
 
-<div id="contactSection" class="section">
+<div
+  id="contactSection"
+  class="section"
+>
 
   <div class="section-header">
-    <button class="back-button" onclick="showHome()">‹</button>
-    <h2>Contact Us</h2>
+
+    <button
+      class="back-button"
+      onclick="showHome()"
+    >
+      ‹
+    </button>
+
+    <h2>
+      Contact Us
+    </h2>
+
   </div>
+
 
   <div class="section-content">
 
     <div class="info-card">
-      <h3>Bethany Baptist Church</h3>
-      <p>Thomasville, North Carolina</p>
+
+      <h3>
+        Bethany Baptist Church
+      </h3>
+
+      <p>
+        Thomasville, North Carolina
+      </p>
+
     </div>
 
   </div>
+
 </div>
+
 
 
 <!-- BUS -->
 
-<div id="busSection" class="section">
+<div
+  id="busSection"
+  class="section"
+>
 
   <div class="section-header">
-    <button class="back-button" onclick="showHome()">‹</button>
-    <h2>Bus Ministry</h2>
+
+    <button
+      class="back-button"
+      onclick="showHome()"
+    >
+      ‹
+    </button>
+
+    <h2>
+      Bus Ministry
+    </h2>
+
   </div>
+
 
   <div class="section-content">
 
     <div class="info-card">
-      <h3>Bethany Bus Ministry</h3>
+
+      <h3>
+        Bethany Bus Ministry
+      </h3>
+
       <p>
-        Bus visitation, activities and ministry announcements
+        Bus visitation, activities
+        and ministry announcements
         will be available here.
       </p>
+
     </div>
 
   </div>
+
 </div>
+
 
 
 <!-- GIVE -->
 
-<div id="giveSection" class="section">
+<div
+  id="giveSection"
+  class="section"
+>
 
   <div class="section-header">
-    <button class="back-button" onclick="showHome()">‹</button>
-    <h2>Give</h2>
+
+    <button
+      class="back-button"
+      onclick="showHome()"
+    >
+      ‹
+    </button>
+
+    <h2>
+      Give
+    </h2>
+
   </div>
+
 
   <div class="section-content">
 
     <div class="info-card">
-      <h3>Giving</h3>
+
+      <h3>
+        Giving
+      </h3>
+
       <p>
-        Church giving information can be connected here.
+        Church giving information
+        can be connected here.
       </p>
+
     </div>
 
   </div>
+
 </div>
 
 
-<!-- BOTTOM NAV -->
+
+<!-- =====================================
+     BOTTOM NAVIGATION
+===================================== -->
 
 <div class="bottom-nav">
 
-  <button class="nav-button" onclick="showHome()">
-    <span class="nav-icon">⌂</span>
-    <span class="nav-label">Home</span>
+
+  <button
+    class="nav-button"
+    onclick="showHome()"
+  >
+
+    <span class="nav-icon">
+      ⌂
+    </span>
+
+    <span class="nav-label">
+      Home
+    </span>
+
   </button>
 
-  <button class="nav-button" onclick="openCalendar()">
-    <span class="nav-icon">▣</span>
-    <span class="nav-label">Calendar</span>
+
+  <button
+    class="nav-button"
+    onclick="openCalendar()"
+  >
+
+    <span class="nav-icon">
+      ▣
+    </span>
+
+    <span class="nav-label">
+      Calendar
+    </span>
+
   </button>
 
-  <button class="nav-button" onclick="showSection('announcementsSection')">
-    <span class="nav-icon">●</span>
-    <span class="nav-label">Announcements</span>
+
+  <button
+    class="nav-button"
+    onclick="showSection('announcementsSection')"
+  >
+
+    <span class="nav-icon">
+      ●
+    </span>
+
+    <span class="nav-label">
+      Announcements
+    </span>
+
   </button>
 
-  <button class="nav-button" onclick="showSection('ministriesSection')">
-    <span class="nav-icon">•••</span>
-    <span class="nav-label">More</span>
+
+  <button
+    class="nav-button"
+    onclick="showSection('ministriesSection')"
+  >
+
+    <span class="nav-icon">
+      •••
+    </span>
+
+    <span class="nav-label">
+      More
+    </span>
+
   </button>
+
 
 </div>
 
 </div>
 
 
-<!-- FIREBASE -->
+
+<!-- =====================================
+     FIREBASE
+===================================== -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+
 
 <script>
 
-/* =========================
+
+/* =====================================
    MEMBER ACCESS
-========================= */
+===================================== */
 
 function checkCode() {
 
   var entered =
-    document.getElementById("memberCode").value.trim();
+    document
+      .getElementById("memberCode")
+      .value
+      .trim();
+
 
   if (entered === "0574") {
 
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("mainApp").style.display = "block";
+    document
+      .getElementById("loginScreen")
+      .style
+      .display = "none";
 
-    sessionStorage.setItem("bethanyMemberAccess","yes");
+
+    document
+      .getElementById("mainApp")
+      .style
+      .display = "block";
+
+
+    sessionStorage.setItem(
+      "bethanyMemberAccess",
+      "yes"
+    );
+
 
     window.scrollTo(0,0);
 
-  } else {
+  }
 
-    document.getElementById("errorMessage").textContent =
+  else {
+
+    document
+      .getElementById("errorMessage")
+      .textContent =
       "Incorrect access code. Please try again.";
 
-    document.getElementById("memberCode").value = "";
-    document.getElementById("memberCode").focus();
+
+    document
+      .getElementById("memberCode")
+      .value = "";
+
+
+    document
+      .getElementById("memberCode")
+      .focus();
 
   }
+
 }
 
 
-/* Allow ENTER key */
+
+/* ENTER KEY */
 
 document
   .getElementById("memberCode")
-  .addEventListener("keydown", function(event) {
+  .addEventListener(
+    "keydown",
+    function(event) {
 
-    if (event.key === "Enter") {
-      checkCode();
+      if (event.key === "Enter") {
+
+        checkCode();
+
+      }
+
     }
+  );
 
-  });
 
 
-/* Remember access while browser remains open */
+/* REMEMBER LOGIN DURING SESSION */
 
-if (sessionStorage.getItem("bethanyMemberAccess") === "yes") {
+if (
+  sessionStorage.getItem(
+    "bethanyMemberAccess"
+  ) === "yes"
+) {
 
-  document.getElementById("loginScreen").style.display = "none";
-  document.getElementById("mainApp").style.display = "block";
+  document
+    .getElementById("loginScreen")
+    .style
+    .display = "none";
+
+
+  document
+    .getElementById("mainApp")
+    .style
+    .display = "block";
 
 }
 
 
-/* =========================
-   APP NAVIGATION
-========================= */
+
+/* =====================================
+   NAVIGATION
+===================================== */
 
 function showHome() {
-  showSection("homeSection");
+
+  showSection(
+    "homeSection"
+  );
+
 }
+
 
 function showSection(sectionId) {
 
-  document.querySelectorAll(".section").forEach(function(section) {
-    section.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".section")
+    .forEach(function(section) {
 
-  var target = document.getElementById(sectionId);
+      section
+        .classList
+        .remove("active");
+
+    });
+
+
+  var target =
+    document
+      .getElementById(sectionId);
+
 
   if (target) {
-    target.classList.add("active");
+
+    target
+      .classList
+      .add("active");
+
     window.scrollTo(0,0);
+
   }
 
 }
 
 
-/* =========================
+
+/* =====================================
    CALENDAR
-========================= */
+===================================== */
 
 var allEvents = [];
 
-var today = new Date();
 
-var displayedYear = today.getFullYear();
-var displayedMonth = today.getMonth();
+var today =
+  new Date();
+
+
+var displayedYear =
+  today.getFullYear();
+
+
+var displayedMonth =
+  today.getMonth();
+
 
 
 function openCalendar() {
 
-  displayedYear = new Date().getFullYear();
-  displayedMonth = new Date().getMonth();
+  var now =
+    new Date();
 
-  showSection("calendarSection");
+
+  displayedYear =
+    now.getFullYear();
+
+
+  displayedMonth =
+    now.getMonth();
+
+
+  showSection(
+    "calendarSection"
+  );
+
+
   displayMonth();
 
 }
+
 
 
 function changeMonth(amount) {
 
   displayedMonth += amount;
 
+
   if (displayedMonth > 11) {
+
     displayedMonth = 0;
+
     displayedYear++;
+
   }
 
+
   if (displayedMonth < 0) {
+
     displayedMonth = 11;
+
     displayedYear--;
+
   }
+
 
   displayMonth();
 
 }
 
 
+
 function displayMonth() {
 
-  var monthTitle =
-    new Date(displayedYear, displayedMonth, 1)
-      .toLocaleString("en-US", {
-        month: "long",
-        year: "numeric"
-      });
 
-  document.getElementById("monthTitle").textContent =
+  var monthTitle =
+
+    new Date(
+      displayedYear,
+      displayedMonth,
+      1
+    )
+
+    .toLocaleString(
+      "en-US",
+      {
+
+        month: "long",
+
+        year: "numeric"
+
+      }
+    );
+
+
+  document
+    .getElementById("monthTitle")
+    .textContent =
     monthTitle;
 
 
-  var monthEvents = allEvents.filter(function(item) {
 
-    if (!item.date) return false;
+  var monthEvents =
 
-    var parts = item.date.split("-");
+    allEvents.filter(
+      function(item) {
 
-    return (
-      Number(parts[0]) === displayedYear &&
-      Number(parts[1]) - 1 === displayedMonth
+
+        if (!item.date) {
+
+          return false;
+
+        }
+
+
+        var parts =
+          item.date.split("-");
+
+
+        return (
+
+          Number(parts[0])
+            === displayedYear
+
+          &&
+
+          Number(parts[1]) - 1
+            === displayedMonth
+
+        );
+
+      }
     );
 
-  });
 
 
-  monthEvents.sort(function(a,b) {
-    return (a.date || "").localeCompare(b.date || "");
-  });
+  monthEvents.sort(
+    function(a,b) {
+
+      return
+        (a.date || "")
+        .localeCompare(
+          b.date || ""
+        );
+
+    }
+  );
 
 
-  renderEvents(monthEvents);
+  renderEvents(
+    monthEvents
+  );
 
 }
 
 
+
 function renderEvents(events) {
 
+
   var list =
-    document.getElementById("eventsList");
+    document
+      .getElementById(
+        "eventsList"
+      );
+
 
   var status =
-    document.getElementById("calendarStatus");
+    document
+      .getElementById(
+        "calendarStatus"
+      );
+
 
   list.innerHTML = "";
 
 
+
   if (!events.length) {
 
-    status.style.display = "block";
+
+    status.style.display =
+      "block";
+
+
     status.textContent =
       "No events are currently listed for this month.";
+
 
     return;
 
   }
 
 
-  status.style.display = "none";
+
+  status.style.display =
+    "none";
 
 
-  events.forEach(function(item) {
 
-    var parts = item.date.split("-");
-
-    var date = new Date(
-      Number(parts[0]),
-      Number(parts[1]) - 1,
-      Number(parts[2])
-    );
-
-    var month =
-      date.toLocaleString("en-US", {
-        month: "short"
-      });
-
-    var day = date.getDate();
+  events.forEach(
+    function(item) {
 
 
-    var card =
-      document.createElement("div");
-
-    card.className = "event-card";
+      var parts =
+        item.date.split("-");
 
 
-    var dateBox =
-      document.createElement("div");
+      var date =
+        new Date(
 
-    dateBox.className = "event-date";
+          Number(parts[0]),
 
+          Number(parts[1]) - 1,
 
-    var monthBox =
-      document.createElement("span");
+          Number(parts[2])
 
-    monthBox.className = "event-month";
-    monthBox.textContent = month;
-
-
-    var dayBox =
-      document.createElement("span");
-
-    dayBox.className = "event-day";
-    dayBox.textContent = day;
+        );
 
 
-    dateBox.appendChild(monthBox);
-    dateBox.appendChild(dayBox);
+      var month =
+
+        date.toLocaleString(
+          "en-US",
+          {
+
+            month: "short"
+
+          }
+        );
 
 
-    var info =
-      document.createElement("div");
-
-    info.className = "event-info";
+      var day =
+        date.getDate();
 
 
-    var title =
-      document.createElement("div");
 
-    title.className = "event-title";
-    title.textContent =
-      item.title || "Church Event";
-
-    info.appendChild(title);
+      var card =
+        document
+          .createElement(
+            "div"
+          );
 
 
-    if (item.time) {
+      card.className =
+        "event-card";
 
-      var time =
-        document.createElement("div");
 
-      time.className = "event-time";
-      time.textContent = item.time;
 
-      info.appendChild(time);
+      var dateBox =
+        document
+          .createElement(
+            "div"
+          );
+
+
+      dateBox.className =
+        "event-date";
+
+
+
+      var monthBox =
+        document
+          .createElement(
+            "span"
+          );
+
+
+      monthBox.className =
+        "event-month";
+
+
+      monthBox.textContent =
+        month;
+
+
+
+      var dayBox =
+        document
+          .createElement(
+            "span"
+          );
+
+
+      dayBox.className =
+        "event-day";
+
+
+      dayBox.textContent =
+        day;
+
+
+
+      dateBox.appendChild(
+        monthBox
+      );
+
+
+      dateBox.appendChild(
+        dayBox
+      );
+
+
+
+      var info =
+        document
+          .createElement(
+            "div"
+          );
+
+
+      info.className =
+        "event-info";
+
+
+
+      var title =
+        document
+          .createElement(
+            "div"
+          );
+
+
+      title.className =
+        "event-title";
+
+
+      title.textContent =
+        item.title ||
+        "Church Event";
+
+
+      info.appendChild(
+        title
+      );
+
+
+
+      if (item.time) {
+
+
+        var time =
+          document
+            .createElement(
+              "div"
+            );
+
+
+        time.className =
+          "event-time";
+
+
+        time.textContent =
+          item.time;
+
+
+        info.appendChild(
+          time
+        );
+
+      }
+
+
+
+      if (item.details) {
+
+
+        var details =
+          document
+            .createElement(
+              "div"
+            );
+
+
+        details.className =
+          "event-details";
+
+
+        details.textContent =
+          item.details;
+
+
+        info.appendChild(
+          details
+        );
+
+      }
+
+
+
+      card.appendChild(
+        dateBox
+      );
+
+
+      card.appendChild(
+        info
+      );
+
+
+      list.appendChild(
+        card
+      );
+
 
     }
-
-
-    if (item.details) {
-
-      var details =
-        document.createElement("div");
-
-      details.className = "event-details";
-      details.textContent = item.details;
-
-      info.appendChild(details);
-
-    }
-
-
-    card.appendChild(dateBox);
-    card.appendChild(info);
-
-    list.appendChild(card);
-
-  });
+  );
 
 }
 
 
-/* =========================
-   SAME FIREBASE CALENDAR
-   AS BETHANY WEBSITE
-========================= */
+
+/* =====================================
+   FIREBASE CALENDAR
+===================================== */
 
 var firebaseConfig = {
 
@@ -1193,62 +2273,113 @@ var firebaseConfig = {
 
   measurementId:
     "G-0TEG8LHPZC"
+
 };
 
 
-firebase.initializeApp(firebaseConfig);
+
+firebase.initializeApp(
+  firebaseConfig
+);
+
+
 
 var database =
   firebase.database();
 
+
+
 var eventsRef =
-  database.ref("events");
+  database.ref(
+    "events"
+  );
+
 
 
 eventsRef.on(
+
   "value",
 
   function(snapshot) {
 
+
     var data =
       snapshot.val() || {};
+
 
     allEvents = [];
 
 
-    Object.keys(data).forEach(function(key) {
 
-      if (!data[key]) return;
+    Object
+      .keys(data)
+      .forEach(
+        function(key) {
 
-      var item = data[key];
 
-      if (item.date) {
-        allEvents.push(item);
+          if (!data[key]) {
+
+            return;
+
+          }
+
+
+          var item =
+            data[key];
+
+
+          if (item.date) {
+
+            allEvents.push(
+              item
+            );
+
+          }
+
+
+        }
+      );
+
+
+
+    allEvents.sort(
+      function(a,b) {
+
+        return
+          (a.date || "")
+          .localeCompare(
+            b.date || ""
+          );
+
       }
+    );
 
-    });
-
-
-    allEvents.sort(function(a,b) {
-      return (a.date || "").localeCompare(b.date || "");
-    });
 
 
     displayMonth();
 
   },
 
+
   function(error) {
 
-    console.error(error);
 
-    document.getElementById(
-      "calendarStatus"
-    ).textContent =
+    console.error(
+      error
+    );
+
+
+    document
+      .getElementById(
+        "calendarStatus"
+      )
+      .textContent =
       "Unable to load the church calendar.";
 
   }
+
 );
+
 
 </script>
 
