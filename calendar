@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Bethany Baptist Church</title>
+
+<meta name="theme-color" content="#651d1d">
+<meta name="description" content="Bethany Baptist Church - Thomasville, North Carolina">
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#eee8dc;
+  color:#3d2925;
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+.app{
+  width:100%;
+  max-width:600px;
+  min-height:100vh;
+  margin:auto;
+  background:#fbf7ee;
+  padding-bottom:82px;
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  width:100%;
+  min-height:300px;
+  background:
+    linear-gradient(to bottom,rgba(0,0,0,.03),rgba(0,0,0,.20)),
+    url("Bethany Baptist Church Picture.png") center/cover no-repeat;
+}
+
+.hero-overlay{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:22px 18px;
+  color:white;
+  text-align:center;
+  background:linear-gradient(transparent,rgba(40,15,10,.82));
+}
+
+.hero-overlay h1{
+  margin:0;
+  font-size:31px;
+  letter-spacing:1px;
+  text-shadow:0 2px 5px rgba(0,0,0,.45);
+}
+
+.hero-overlay p{
+  margin:7px 0 0;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+/* VERSE */
+
+.verse{
+  padding:22px 25px 18px;
+  text-align:center;
+  background:#fffaf1;
+  border-bottom:1px solid #e3d8c7;
+}
+
+.verse-text{
+  margin:0;
+  font-size:17px;
+  font-style:italic;
+  line-height:1.55;
+}
+
+.verse-reference{
+  margin-top:7px;
+  color:#711f1f;
+  font-size:14px;
+  font-weight:bold;
+}
+
+/* HOME BUTTONS */
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  padding:16px;
+}
+
+.menu-button{
+  min-height:105px;
+  padding:15px 7px;
+  border:1px solid #ded1bd;
+  border-radius:12px;
+  background:#fffaf1;
+  color:#54201d;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.04);
+}
+
+.menu-button:hover{
+  background:#f5ecdf;
+}
+
+.menu-icon{
+  display:block;
+  margin-bottom:8px;
+  font-size:29px;
+}
+
+.menu-title{
+  font-size:14px;
+  line-height:1.2;
+}
+
+/* SECTION */
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+.section-header{
+  position:sticky;
+  top:0;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:17px 15px;
+  background:#651d1d;
+  color:white;
+}
+
+.back-button{
+  border:0;
+  background:transparent;
+  color:white;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.section-header h2{
+  margin:0;
+  font-size:23px;
+  font-weight:normal;
+}
+
+.section-content{
+  padding:17px;
+}
+
+/* CALENDAR */
+
+.calendar-status{
+  padding:30px;
+  color:#777;
+  text-align:center;
+}
+
+.event-card{
+  display:flex;
+  gap:13px;
+  margin-bottom:11px;
+  padding:14px;
+  border:1px solid #dfd4c4;
+  border-radius:10px;
+  background:white;
+  box-shadow:0 2px 6px rgba(0,0,0,.04);
+}
+
+.event-date{
+  flex:0 0 58px;
+  height:64px;
+  padding-top:7px;
+  border-radius:8px;
+  background:#f2e9da;
+  color:#651d1d;
+  text-align:center;
+}
+
+.event-month{
+  display:block;
+  font-size:12px;
+  font-weight:bold;
+  text-transform:uppercase;
+}
+
+.event-day{
+  display:block;
+  font-size:27px;
+  line-height:1.05;
+}
+
+.event-info{
+  flex:1;
+}
+
+.event-title{
+  margin:1px 0 5px;
+  color:#47251f;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.event-time{
+  color:#711f1f;
+  font-size:13px;
+}
+
+.event-details{
+  margin-top:4px;
+  color:#777;
+  font-size:13px;
+  line-height:1.4;
+}
+
+/* INFORMATION CARDS */
+
+.info-card{
+  margin-bottom:14px;
+  padding:20px;
+  border:1px solid #ded2c1;
+  border-radius:10px;
+  background:white;
+}
+
+.info-card h3{
+  margin:0 0 8px;
+  color:#651d1d;
+}
+
+.info-card p{
+  margin:0;
+  line-height:1.55;
+}
+
+/* FOOTER MESSAGE */
+
+.mission{
+  margin:4px 16px 18px;
+  padding:23px 15px;
+  background:#6a211e;
+  color:white;
+  text-align:center;
+  border-radius:12px;
+}
+
+.mission strong{
+  display:block;
+  margin-bottom:6px;
+  font-size:20px;
+  font-weight:normal;
+}
+
+.mission span{
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  z-index:20;
+  left:50%;
+  bottom:0;
+  width:100%;
+  max-width:600px;
+  transform:translateX(-50%);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+  background:#651d1d;
+  box-shadow:0 -3px 10px rgba(0,0,0,.15);
+}
+
+.nav-button{
+  border:0;
+  background:transparent;
+  color:#fff8ed;
+  text-align:center;
+  cursor:pointer;
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+.nav-icon{
+  display:block;
+  margin-bottom:3px;
+  font-size:21px;
+}
+
+.nav-label{
+  font-size:11px;
+}
+
+@media(max-width:390px){
+  .hero{
+    min-height:255px;
+  }
+
+  .hero-overlay h1{
+    font-size:25px;
+  }
+
+  .menu{
+    gap:7px;
+    padding:10px;
+  }
+
+  .menu-button{
+    min-height:94px;
+  }
+
+  .menu-title{
+    font-size:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- HOME -->
+<div id="homeSection" class="section active">
+
+  <div class="hero">
+    <div class="hero-overlay">
+      <h1>Bethany Baptist Church</h1>
+      <p>Thomasville, North Carolina</p>
+    </div>
+  </div>
+
+  <div class="verse">
+    <p class="verse-text">
+      “For the word of God is not bound.”
+    </p>
+    <div class="verse-reference">
+      2 Timothy 2:9 KJV
+    </div>
+  </div>
+
+  <div class="menu">
+
+    <button class="menu-button" onclick="showSection('calendarSection')">
+      <span class="menu-icon">📅</span>
+      <span class="menu-title">Calendar</span>
+    </button>
+
+    <button class="menu-button" onclick="showSection('announcementsSection')">
+      <span class="menu-icon">📢</span>
+      <span class="menu-title">Announcements</span>
+    </button>
+
+    <button class="menu-button" onclick="showSection('ministriesSection')">
+      <span class="menu-icon">👥</span>
+      <span class="menu-title">Ministries</span>
+    </button>
+
+    <button class="menu-button" onclick="showSection('prayerSection')">
+      <span class="menu-icon">🙏</span>
+      <span class="menu-title">Prayer Requests</span>
+    </button>
+
+    <button class="menu-button" onclick="showSection('giveSection')">
+      <span class="menu-icon">♥</span>
+      <span class="menu-title">Give</span>
+    </button>
+
+    <button class="menu-button" onclick="showSection('busSection')">
+      <span class="menu-icon">🚌</span>
+      <span class="menu-title">Bus Ministry</span>
+    </button>
+
+    <button class="menu-button" onclick="showSection('contactSection')">
+      <span class="menu-icon">☎</span>
+      <span class="menu-title">Contact Us</span>
+    </button>
+
+    <button class="menu-button" onclick="showSection('directionsSection')">
+      <span class="menu-icon">📍</span>
+      <span class="menu-title">Directions</span>
+    </button>
+
+    <button class="menu-button" onclick="showSection('newsletterSection')">
+      <span class="menu-icon">✉</span>
+      <span class="menu-title">Church Newsletter</span>
+    </button>
+
+  </div>
+
+  <div class="mission">
+    <strong>A Friendly Church with a Great Message</strong>
+    <span>Reaching Our Community for Christ</span>
+  </div>
+
+</div>
+
+
+<!-- CALENDAR -->
+<div id="calendarSection" class="section">
+
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Church Calendar</h2>
+  </div>
+
+  <div class="section-content">
+
+    <div id="calendarStatus" class="calendar-status">
+      Loading church events...
+    </div>
+
+    <div id="eventsList"></div>
+
+  </div>
+</div>
+
+
+<!-- ANNOUNCEMENTS -->
+<div id="announcementsSection" class="section">
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Announcements</h2>
+  </div>
+
+  <div class="section-content">
+    <div class="info-card">
+      <h3>Bethany Baptist Church</h3>
+      <p>Important church announcements will appear here.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- MINISTRIES -->
+<div id="ministriesSection" class="section">
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Ministries</h2>
+  </div>
+
+  <div class="section-content">
+    <div class="info-card">
+      <h3>Serving Our Community</h3>
+      <p>
+        Bethany Baptist Church ministries include our Christian school,
+        daycare, bus ministry, homeless shelter ministry, prison ministry,
+        youth ministry and more.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- PRAYER -->
+<div id="prayerSection" class="section">
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Prayer Requests</h2>
+  </div>
+
+  <div class="section-content">
+    <div class="info-card">
+      <h3>How Can We Pray for You?</h3>
+      <p>
+        Prayer request submission will be added here.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- GIVE -->
+<div id="giveSection" class="section">
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Give</h2>
+  </div>
+
+  <div class="section-content">
+    <div class="info-card">
+      <h3>Giving</h3>
+      <p>
+        Bethany Baptist Church giving information will be available here.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- BUS -->
+<div id="busSection" class="section">
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Bus Ministry</h2>
+  </div>
+
+  <div class="section-content">
+    <div class="info-card">
+      <h3>Bethany Bus Ministry</h3>
+      <p>
+        Information about bus routes, visitation and upcoming bus ministry
+        activities will appear here.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- CONTACT -->
+<div id="contactSection" class="section">
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Contact Us</h2>
+  </div>
+
+  <div class="section-content">
+    <div class="info-card">
+      <h3>Bethany Baptist Church</h3>
+      <p>
+        Thomasville, North Carolina
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- DIRECTIONS -->
+<div id="directionsSection" class="section">
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Directions</h2>
+  </div>
+
+  <div class="section-content">
+    <div class="info-card">
+      <h3>Visit Bethany</h3>
+      <p>
+        Directions and map information will be connected here.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- NEWSLETTER -->
+<div id="newsletterSection" class="section">
+  <div class="section-header">
+    <button class="back-button" onclick="showHome()">‹</button>
+    <h2>Church Newsletter</h2>
+  </div>
+
+  <div class="section-content">
+    <div class="info-card">
+      <h3>Bethany Newsletter</h3>
+      <p>
+        The current church newsletter will be available here.
+      </p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<div class="bottom-nav">
+
+  <button class="nav-button" onclick="showHome()">
+    <span class="nav-icon">⌂</span>
+    <span class="nav-label">Home</span>
+  </button>
+
+  <button class="nav-button" onclick="showSection('calendarSection')">
+    <span class="nav-icon">▣</span>
+    <span class="nav-label">Calendar</span>
+  </button>
+
+  <button class="nav-button" onclick="showSection('announcementsSection')">
+    <span class="nav-icon">●</span>
+    <span class="nav-label">Announcements</span>
+  </button>
+
+  <button class="nav-button" onclick="showSection('ministriesSection')">
+    <span class="nav-icon">•••</span>
+    <span class="nav-label">More</span>
+  </button>
+
+</div>
+
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+
+<script>
+
+function showHome(){
+  showSection("homeSection");
+}
+
+function showSection(sectionId){
+
+  document.querySelectorAll(".section").forEach(function(section){
+    section.classList.remove("active");
+  });
+
+  var target=document.getElementById(sectionId);
+
+  if(target){
+    target.classList.add("active");
+    window.scrollTo(0,0);
+  }
+}
+
+
+/* SAME FIREBASE CALENDAR AS BETHANY WEBSITE */
+
+var firebaseConfig={
+  apiKey:"AIzaSyB7CVFqwPbjLlH5vhvGKlMAH9gtBFnM458",
+  authDomain:"calendar-a6f0f.firebaseapp.com",
+  databaseURL:"https://calendar-a6f0f-default-rtdb.firebaseio.com",
+  projectId:"calendar-a6f0f",
+  storageBucket:"calendar-a6f0f.firebasestorage.app",
+  messagingSenderId:"41941951557",
+  appId:"1:41941951557:web:739ded386d42190c97ef2c",
+  measurementId:"G-0TEG8LHPZC"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+var database=firebase.database();
+var eventsRef=database.ref("events");
+
+eventsRef.on("value",function(snapshot){
+
+  var data=snapshot.val() || {};
+  var events=[];
+
+  Object.keys(data).forEach(function(key){
+
+    if(!data[key]) return;
+
+    var item=data[key];
+
+    if(item.date){
+      events.push(item);
+    }
+
+  });
+
+  events.sort(function(a,b){
+    return (a.date || "").localeCompare(b.date || "");
+  });
+
+  displayEvents(events);
+
+},function(error){
+
+  console.error(error);
+
+  document.getElementById("calendarStatus").textContent=
+    "Unable to load the church calendar.";
+
+});
+
+
+function displayEvents(events){
+
+  var list=document.getElementById("eventsList");
+  var status=document.getElementById("calendarStatus");
+
+  list.innerHTML="";
+
+  var now=new Date();
+  now.setHours(0,0,0,0);
+
+  var upcoming=events.filter(function(item){
+
+    var parts=item.date.split("-");
+
+    var eventDate=new Date(
+      Number(parts[0]),
+      Number(parts[1])-1,
+      Number(parts[2])
+    );
+
+    return eventDate>=now;
+
+  });
+
+
+  if(!upcoming.length){
+
+    status.style.display="block";
+    status.textContent="No upcoming events are currently listed.";
+    return;
+
+  }
+
+
+  status.style.display="none";
+
+
+  upcoming.forEach(function(item){
+
+    var parts=item.date.split("-");
+
+    var date=new Date(
+      Number(parts[0]),
+      Number(parts[1])-1,
+      Number(parts[2])
+    );
+
+    var month=date.toLocaleString("en-US",{month:"short"});
+    var day=date.getDate();
+
+
+    var card=document.createElement("div");
+    card.className="event-card";
+
+
+    var dateBox=document.createElement("div");
+    dateBox.className="event-date";
+
+
+    var monthBox=document.createElement("span");
+    monthBox.className="event-month";
+    monthBox.textContent=month;
+
+
+    var dayBox=document.createElement("span");
+    dayBox.className="event-day";
+    dayBox.textContent=day;
+
+
+    dateBox.appendChild(monthBox);
+    dateBox.appendChild(dayBox);
+
+
+    var info=document.createElement("div");
+    info.className="event-info";
+
+
+    var title=document.createElement("div");
+    title.className="event-title";
+    title.textContent=item.title || "Church Event";
+
+    info.appendChild(title);
+
+
+    if(item.time){
+
+      var time=document.createElement("div");
+      time.className="event-time";
+      time.textContent=item.time;
+
+      info.appendChild(time);
+    }
+
+
+    if(item.details){
+
+      var details=document.createElement("div");
+      details.className="event-details";
+      details.textContent=item.details;
+
+      info.appendChild(details);
+    }
+
+
+    card.appendChild(dateBox);
+    card.appendChild(info);
+
+    list.appendChild(card);
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
