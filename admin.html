@@ -33,7 +33,6 @@ textarea {
     background: #f8fbfd;
 }
 
-
 /* HEADER */
 
 .header {
@@ -55,6 +54,11 @@ textarea {
     letter-spacing: 2px;
 }
 
+.admin-user {
+    margin-top: 7px;
+    font-size: 12px;
+    opacity: .9;
+}
 
 /* CONTENT */
 
@@ -84,7 +88,6 @@ textarea {
     font-family: Georgia, serif;
 }
 
-
 /* FORMS */
 
 label {
@@ -112,6 +115,11 @@ textarea {
     resize: vertical;
 }
 
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
 
 /* BUTTONS */
 
@@ -162,7 +170,6 @@ textarea {
     cursor: pointer;
 }
 
-
 /* LOGIN */
 
 #loginArea {
@@ -195,23 +202,18 @@ textarea {
     text-align: center;
 }
 
-
 /* ADMIN */
 
 #adminArea {
     display: none;
 }
 
-.admin-user {
-    margin-top: 7px;
-    font-size: 12px;
-    opacity: .9;
-}
+/* RECORD CARDS */
 
-
-/* ASSIGNMENTS */
-
-.assignment-card {
+.manager-card,
+.assignment-card,
+.announcement-card,
+.prayer-card {
     margin-bottom: 12px;
     padding: 15px;
     border: 1px solid #d6e5f0;
@@ -219,17 +221,32 @@ textarea {
     background: #fbfdff;
 }
 
-.assignment-ministry {
+.manager-title,
+.assignment-ministry,
+.announcement-title,
+.prayer-name {
     color: #073b6f;
     font-family: Georgia, serif;
     font-size: 18px;
     font-weight: bold;
 }
 
-.assignment-date {
+.manager-meta,
+.assignment-date,
+.announcement-date,
+.prayer-date {
     margin-top: 5px;
     color: #07578f;
     font-weight: bold;
+}
+
+.manager-text,
+.announcement-message,
+.prayer-request {
+    margin-top: 8px;
+    color: #405c72;
+    line-height: 1.5;
+    white-space: pre-wrap;
 }
 
 .assignment-service {
@@ -249,7 +266,16 @@ textarea {
     line-height: 1.4;
 }
 
-.assignment-actions {
+.announcement-expiration {
+    margin-top: 7px;
+    color: #64798a;
+    font-size: 12px;
+}
+
+.manager-actions,
+.assignment-actions,
+.announcement-actions,
+.prayer-actions {
     display: flex;
     gap: 8px;
     margin-top: 13px;
@@ -261,23 +287,12 @@ textarea {
     text-align: center;
 }
 
-
-/* ANNOUNCEMENTS */
-.announcement-card{margin-bottom:12px;padding:15px;border:1px solid #d6e5f0;border-radius:12px;background:#fbfdff}
-.announcement-title{color:#073b6f;font-family:Georgia,serif;font-size:18px;font-weight:bold}
-.announcement-date{margin-top:5px;color:#07578f;font-weight:bold}
-.announcement-message{margin-top:8px;color:#405c72;line-height:1.5;white-space:pre-wrap}
-.announcement-expiration{margin-top:7px;color:#64798a;font-size:12px}
-.announcement-actions{display:flex;gap:8px;margin-top:13px}
-
-/* PRAYER REQUESTS */
-.prayer-card{margin-bottom:12px;padding:15px;border:1px solid #d6e5f0;border-radius:12px;background:#fbfdff}
-.prayer-name{color:#073b6f;font-family:Georgia,serif;font-size:18px;font-weight:bold}
-.prayer-date{margin-top:5px;color:#07578f;font-weight:bold}
-.prayer-request{margin-top:8px;color:#405c72;line-height:1.5;white-space:pre-wrap}
-.prayer-actions{display:flex;gap:8px;margin-top:13px}
-
-/* VERSE */
+.section-note {
+    margin: -7px 0 12px;
+    color: #61788e;
+    font-size: 13px;
+    line-height: 1.5;
+}
 
 .verse {
     padding: 5px 20px 30px;
@@ -293,6 +308,12 @@ textarea {
     margin-top: 5px;
     font-style: normal;
 }
+
+@media(max-width:520px) {
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 </head>
 
@@ -301,15 +322,10 @@ textarea {
 <div class="admin-app">
 
     <div class="header">
-
         <h1>Bethany Baptist Church</h1>
-
         <p>ADMIN CENTER</p>
 
-        <div
-            id="adminUser"
-            class="admin-user"
-        ></div>
+        <div id="adminUser" class="admin-user"></div>
 
         <button
             id="logoutButton"
@@ -319,9 +335,7 @@ textarea {
         >
             Sign Out
         </button>
-
     </div>
-
 
     <!-- LOGIN -->
 
@@ -332,13 +346,10 @@ textarea {
             <h2>Administrator Login</h2>
 
             <div class="login-note">
-                Sign in with your authorized Bethany
-                administrator account.
+                Sign in with your authorized Bethany administrator account.
             </div>
 
-            <label for="email">
-                Email Address
-            </label>
+            <label for="email">Email Address</label>
 
             <input
                 id="email"
@@ -347,10 +358,7 @@ textarea {
                 placeholder="Email address"
             >
 
-
-            <label for="password">
-                Password
-            </label>
+            <label for="password">Password</label>
 
             <input
                 id="password"
@@ -359,11 +367,7 @@ textarea {
                 placeholder="Password"
             >
 
-
-            <button
-                class="primary-button"
-                onclick="login()"
-            >
+            <button class="primary-button" onclick="login()">
                 SIGN IN
             </button>
 
@@ -373,23 +377,93 @@ textarea {
 
     </div>
 
-
-
     <!-- ADMIN AREA -->
 
     <div id="adminArea" class="content">
 
         <div id="successMessage"></div>
 
+        <!-- CALENDAR EVENTS -->
 
-        <!-- ADD ASSIGNMENT -->
+        <div class="card">
+
+            <h2 id="eventFormTitle">Add Calendar Event</h2>
+
+            <div class="section-note">
+                Events published here will appear automatically on the church calendar.
+            </div>
+
+            <label for="eventTitle">Event Title</label>
+
+            <input
+                id="eventTitle"
+                type="text"
+                placeholder="Example: Fall Revival"
+            >
+
+            <div class="two-column">
+
+                <div>
+                    <label for="eventDate">Date</label>
+                    <input id="eventDate" type="date">
+                </div>
+
+                <div>
+                    <label for="eventTime">Time</label>
+                    <input
+                        id="eventTime"
+                        type="text"
+                        placeholder="Example: 7:00 PM"
+                    >
+                </div>
+
+            </div>
+
+            <label for="eventDetails">Details</label>
+
+            <textarea
+                id="eventDetails"
+                placeholder="Enter any additional event information..."
+            ></textarea>
+
+            <button
+                id="publishEventButton"
+                class="primary-button"
+                onclick="saveEvent()"
+            >
+                PUBLISH EVENT
+            </button>
+
+            <button
+                id="cancelEventEditButton"
+                class="secondary-button"
+                onclick="cancelEventEdit()"
+                style="display:none;width:100%;margin-top:10px;"
+            >
+                Cancel Edit
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Calendar Events</h2>
+
+            <div id="eventList">
+                <div class="empty-message">
+                    Loading calendar events...
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MINISTRY ASSIGNMENTS -->
 
         <div class="card">
 
             <h2 id="formTitle">
                 Add Ministry Assignment
             </h2>
-
 
             <label for="ministry">
                 Ministry / Schedule
@@ -435,7 +509,6 @@ textarea {
 
             </select>
 
-
             <label for="assignmentDate">
                 Date
             </label>
@@ -444,7 +517,6 @@ textarea {
                 id="assignmentDate"
                 type="date"
             >
-
 
             <label for="service">
                 Service / Time
@@ -456,7 +528,6 @@ textarea {
                 placeholder="Example: Sunday Morning"
             >
 
-
             <label for="workers">
                 Assigned To
             </label>
@@ -467,7 +538,6 @@ textarea {
                 placeholder="Example: Sarah & Emily"
             >
 
-
             <label for="notes">
                 Notes
             </label>
@@ -477,7 +547,6 @@ textarea {
                 placeholder="Example: Please arrive by 10:15 AM"
             ></textarea>
 
-
             <button
                 id="publishButton"
                 class="primary-button"
@@ -486,31 +555,20 @@ textarea {
                 PUBLISH ASSIGNMENT
             </button>
 
-
             <button
                 id="cancelEditButton"
                 class="secondary-button"
                 onclick="cancelEdit()"
-                style="
-                    display:none;
-                    width:100%;
-                    margin-top:10px;
-                "
+                style="display:none;width:100%;margin-top:10px;"
             >
                 Cancel Edit
             </button>
 
         </div>
 
-
-
-        <!-- EXISTING ASSIGNMENTS -->
-
         <div class="card">
 
-            <h2>
-                Current Assignments
-            </h2>
+            <h2>Current Assignments</h2>
 
             <div id="assignmentList">
 
@@ -522,77 +580,398 @@ textarea {
 
         </div>
 
-        <!-- ANNOUNCEMENTS MANAGER -->
+        <!-- ANNOUNCEMENTS -->
+
         <div class="card">
-            <h2 id="announcementFormTitle">Add Announcement</h2>
 
-            <label for="announcementTitle">Announcement Title</label>
-            <input id="announcementTitle" type="text" placeholder="Example: Fall Revival">
+            <h2 id="announcementFormTitle">
+                Add Announcement
+            </h2>
 
-            <label for="announcementDate">Date</label>
-            <input id="announcementDate" type="date">
+            <label for="announcementTitle">
+                Announcement Title
+            </label>
 
-            <label for="announcementMessage">Announcement / Message</label>
-            <textarea id="announcementMessage" placeholder="Enter the announcement here..."></textarea>
+            <input
+                id="announcementTitle"
+                type="text"
+                placeholder="Example: Fall Revival"
+            >
 
-            <label for="announcementExpires">Expiration Date (Optional)</label>
-            <input id="announcementExpires" type="date">
+            <label for="announcementDate">
+                Date
+            </label>
 
-            <button id="publishAnnouncementButton" class="primary-button" onclick="saveAnnouncement()">
+            <input
+                id="announcementDate"
+                type="date"
+            >
+
+            <label for="announcementMessage">
+                Announcement / Message
+            </label>
+
+            <textarea
+                id="announcementMessage"
+                placeholder="Enter the announcement here..."
+            ></textarea>
+
+            <label for="announcementExpires">
+                Expiration Date (Optional)
+            </label>
+
+            <input
+                id="announcementExpires"
+                type="date"
+            >
+
+            <button
+                id="publishAnnouncementButton"
+                class="primary-button"
+                onclick="saveAnnouncement()"
+            >
                 PUBLISH ANNOUNCEMENT
             </button>
 
-            <button id="cancelAnnouncementEditButton" class="secondary-button"
+            <button
+                id="cancelAnnouncementEditButton"
+                class="secondary-button"
                 onclick="cancelAnnouncementEdit()"
-                style="display:none;width:100%;margin-top:10px;">
+                style="display:none;width:100%;margin-top:10px;"
+            >
                 Cancel Edit
             </button>
+
         </div>
 
         <div class="card">
+
             <h2>Current Announcements</h2>
+
             <div id="announcementList">
-                <div class="empty-message">Loading announcements...</div>
+
+                <div class="empty-message">
+                    Loading announcements...
+                </div>
+
             </div>
+
         </div>
 
-        <!-- PRAYER REQUESTS MANAGER -->
+        <!-- NEWSLETTER -->
+
         <div class="card">
-            <h2 id="prayerFormTitle">Add Prayer Request</h2>
 
-            <label for="prayerName">Name / Title</label>
-            <input id="prayerName" type="text" placeholder="Example: Please pray for the Smith family">
+            <h2 id="newsletterFormTitle">
+                Add Church Newsletter
+            </h2>
 
-            <label for="prayerDate">Date</label>
-            <input id="prayerDate" type="date">
+            <div class="section-note">
+                Enter the web address for the newsletter so members can open it from the app.
+            </div>
 
-            <label for="prayerRequest">Prayer Request</label>
-            <textarea id="prayerRequest" placeholder="Enter the approved prayer request here..."></textarea>
+            <label for="newsletterTitle">
+                Newsletter Title
+            </label>
 
-            <button id="publishPrayerButton" class="primary-button" onclick="savePrayerRequest()">
+            <input
+                id="newsletterTitle"
+                type="text"
+                placeholder="Example: October 2026 Newsletter"
+            >
+
+            <label for="newsletterDate">
+                Issue Date
+            </label>
+
+            <input
+                id="newsletterDate"
+                type="date"
+            >
+
+            <label for="newsletterUrl">
+                Newsletter Link
+            </label>
+
+            <input
+                id="newsletterUrl"
+                type="url"
+                placeholder="https://..."
+            >
+
+            <label for="newsletterNote">
+                Description (Optional)
+            </label>
+
+            <textarea
+                id="newsletterNote"
+                placeholder="Example: October church newsletter and revival information."
+            ></textarea>
+
+            <button
+                id="publishNewsletterButton"
+                class="primary-button"
+                onclick="saveNewsletter()"
+            >
+                PUBLISH NEWSLETTER
+            </button>
+
+            <button
+                id="cancelNewsletterEditButton"
+                class="secondary-button"
+                onclick="cancelNewsletterEdit()"
+                style="display:none;width:100%;margin-top:10px;"
+            >
+                Cancel Edit
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Church Newsletters</h2>
+
+            <div id="newsletterList">
+
+                <div class="empty-message">
+                    Loading newsletters...
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PRAYER REQUESTS -->
+
+        <div class="card">
+
+            <h2 id="prayerFormTitle">
+                Add Prayer Request
+            </h2>
+
+            <label for="prayerName">
+                Name / Title
+            </label>
+
+            <input
+                id="prayerName"
+                type="text"
+                placeholder="Example: Please pray for the Smith family"
+            >
+
+            <label for="prayerDate">
+                Date
+            </label>
+
+            <input
+                id="prayerDate"
+                type="date"
+            >
+
+            <label for="prayerRequest">
+                Prayer Request
+            </label>
+
+            <textarea
+                id="prayerRequest"
+                placeholder="Enter the approved prayer request here..."
+            ></textarea>
+
+            <button
+                id="publishPrayerButton"
+                class="primary-button"
+                onclick="savePrayerRequest()"
+            >
                 PUBLISH PRAYER REQUEST
             </button>
 
-            <button id="cancelPrayerEditButton" class="secondary-button"
+            <button
+                id="cancelPrayerEditButton"
+                class="secondary-button"
                 onclick="cancelPrayerEdit()"
-                style="display:none;width:100%;margin-top:10px;">
+                style="display:none;width:100%;margin-top:10px;"
+            >
                 Cancel Edit
             </button>
+
         </div>
 
         <div class="card">
+
             <h2>Current Prayer Requests</h2>
+
             <div class="login-note">
                 Only post requests that are appropriate to share with church members.
                 Avoid private medical details, addresses, phone numbers, or other confidential information.
             </div>
+
             <div id="prayerList">
-                <div class="empty-message">Loading prayer requests...</div>
+
+                <div class="empty-message">
+                    Loading prayer requests...
+                </div>
+
             </div>
+
+        </div>
+
+        <!-- BIRTHDAYS & ANNIVERSARIES -->
+
+        <div class="card">
+
+            <h2 id="celebrationFormTitle">
+                Add Birthday or Anniversary
+            </h2>
+
+            <div class="section-note">
+                No year is needed. Birthdays and wedding anniversaries repeat every year.
+            </div>
+
+            <label for="celebrationType">
+                Type
+            </label>
+
+            <select id="celebrationType">
+
+                <option value="birthday">
+                    Birthday
+                </option>
+
+                <option value="anniversary">
+                    Wedding Anniversary
+                </option>
+
+            </select>
+
+            <label for="celebrationName">
+                Name / Names
+            </label>
+
+            <input
+                id="celebrationName"
+                type="text"
+                placeholder="Example: Sarah Smith or Tom & Mary Smith"
+            >
+
+            <div class="two-column">
+
+                <div>
+
+                    <label for="celebrationMonth">
+                        Month
+                    </label>
+
+                    <select id="celebrationMonth">
+
+                        <option value="">
+                            Select month...
+                        </option>
+
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label for="celebrationDay">
+                        Day
+                    </label>
+
+                    <select id="celebrationDay">
+
+                        <option value="">
+                            Select day...
+                        </option>
+
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button
+                id="publishCelebrationButton"
+                class="primary-button"
+                onclick="saveCelebration()"
+            >
+                PUBLISH BIRTHDAY / ANNIVERSARY
+            </button>
+
+            <button
+                id="cancelCelebrationEditButton"
+                class="secondary-button"
+                onclick="cancelCelebrationEdit()"
+                style="display:none;width:100%;margin-top:10px;"
+            >
+                Cancel Edit
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Birthdays & Anniversaries</h2>
+
+            <div class="section-note">
+                On behalf of Bethany Baptist Church, Happy Birthday and Happy Anniversary!
+            </div>
+
+            <div id="celebrationList">
+
+                <div class="empty-message">
+                    Loading birthdays and anniversaries...
+                </div>
+
+            </div>
+
         </div>
 
     </div>
-
 
     <div class="verse">
 
@@ -606,16 +985,11 @@ textarea {
 
 </div>
 
-
-
 <!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
-
 
 <script>
 
@@ -643,17 +1017,15 @@ const firebaseConfig = {
 
     appId:
     "1:41941951557:web:739ded386d42190c97ef2c"
-
 };
-
 
 firebase.initializeApp(firebaseConfig);
 
-const auth =
-    firebase.auth();
+const auth = firebase.auth();
+const database = firebase.database();
 
-const database =
-    firebase.database();
+const eventsRef =
+    database.ref("events");
 
 const assignmentsRef =
     database.ref("assignments");
@@ -661,94 +1033,124 @@ const assignmentsRef =
 const announcementsRef =
     database.ref("announcements");
 
+const newsletterRef =
+    database.ref("newsletter");
+
 const prayerRequestsRef =
     database.ref("prayerRequests");
 
+const birthdaysRef =
+    database.ref("birthdays");
+
+const anniversariesRef =
+    database.ref("anniversaries");
+
+let editingEventId = null;
+let events = {};
 
 let editingId = null;
-
 let assignments = {};
 
 let editingAnnouncementId = null;
-
 let announcements = {};
 
-let editingPrayerId = null;
+let editingNewsletterId = null;
+let newsletters = {};
 
+let editingPrayerId = null;
 let prayerRequests = {};
 
-
+let editingCelebration = null;
+let birthdays = {};
+let anniversaries = {};
 
 /* AUTHENTICATION */
 
-auth.onAuthStateChanged(function(user) {
+auth.onAuthStateChanged(
+function(user) {
 
     if (user) {
 
-        document.getElementById("loginArea")
-        .style.display = "none";
+        document.getElementById(
+            "loginArea"
+        ).style.display =
+            "none";
 
-        document.getElementById("adminArea")
-        .style.display = "block";
+        document.getElementById(
+            "adminArea"
+        ).style.display =
+            "block";
 
-        document.getElementById("logoutButton")
-        .style.display = "inline-block";
+        document.getElementById(
+            "logoutButton"
+        ).style.display =
+            "inline-block";
 
-        document.getElementById("adminUser")
-        .textContent = user.email;
+        document.getElementById(
+            "adminUser"
+        ).textContent =
+            user.email;
 
+        loadEvents();
         loadAssignments();
         loadAnnouncements();
+        loadNewsletters();
         loadPrayerRequests();
+        loadCelebrations();
 
+    } else {
+
+        document.getElementById(
+            "loginArea"
+        ).style.display =
+            "block";
+
+        document.getElementById(
+            "adminArea"
+        ).style.display =
+            "none";
+
+        document.getElementById(
+            "logoutButton"
+        ).style.display =
+            "none";
+
+        document.getElementById(
+            "adminUser"
+        ).textContent =
+            "";
     }
-
-    else {
-
-        document.getElementById("loginArea")
-        .style.display = "block";
-
-        document.getElementById("adminArea")
-        .style.display = "none";
-
-        document.getElementById("logoutButton")
-        .style.display = "none";
-
-        document.getElementById("adminUser")
-        .textContent = "";
-
-    }
-
 });
-
-
 
 function login() {
 
     const email =
-        document.getElementById("email")
-        .value.trim();
+        document.getElementById(
+            "email"
+        ).value.trim();
 
     const password =
-        document.getElementById("password")
-        .value;
+        document.getElementById(
+            "password"
+        ).value;
 
-
-    document.getElementById("errorMessage")
-    .textContent = "";
-
+    document.getElementById(
+        "errorMessage"
+    ).textContent =
+        "";
 
     if (!email || !password) {
 
-        document.getElementById("errorMessage")
-        .textContent =
-        "Please enter your email address and password.";
+        document.getElementById(
+            "errorMessage"
+        ).textContent =
+            "Please enter your email address and password.";
 
         return;
     }
 
-
-    auth.signInWithEmailAndPassword(
+    auth
+    .signInWithEmailAndPassword(
         email,
         password
     )
@@ -756,43 +1158,418 @@ function login() {
 
         console.error(error);
 
-        document.getElementById("errorMessage")
-        .textContent =
-        "Unable to sign in. Please check your email and password.";
-
+        document.getElementById(
+            "errorMessage"
+        ).textContent =
+            "Unable to sign in. Please check your email and password.";
     });
-
 }
-
-
 
 function logout() {
-
     auth.signOut();
-
 }
 
+/* =========================
+   CALENDAR EVENTS
+========================= */
 
+function saveEvent() {
 
-/* SAVE ASSIGNMENT */
+    const title =
+        document.getElementById(
+            "eventTitle"
+        ).value.trim();
+
+    const date =
+        document.getElementById(
+            "eventDate"
+        ).value;
+
+    const time =
+        document.getElementById(
+            "eventTime"
+        ).value.trim();
+
+    const details =
+        document.getElementById(
+            "eventDetails"
+        ).value.trim();
+
+    if (!title) {
+        alert(
+            "Please enter an event title."
+        );
+        return;
+    }
+
+    if (!date) {
+        alert(
+            "Please select an event date."
+        );
+        return;
+    }
+
+    const data = {
+        title: title,
+        date: date,
+        time: time,
+        details: details,
+        updatedAt:
+            firebase.database
+            .ServerValue.TIMESTAMP
+    };
+
+    let request;
+
+    if (editingEventId) {
+
+        request =
+            eventsRef
+            .child(editingEventId)
+            .update(data);
+
+    } else {
+
+        data.createdAt =
+            firebase.database
+            .ServerValue.TIMESTAMP;
+
+        request =
+            eventsRef.push(data);
+    }
+
+    request
+    .then(function() {
+
+        showSuccess(
+            editingEventId
+            ? "Calendar event updated successfully."
+            : "Calendar event published successfully."
+        );
+
+        resetEventForm();
+
+    })
+    .catch(function(error) {
+
+        console.error(error);
+
+        alert(
+            "The calendar event could not be saved."
+        );
+    });
+}
+
+function loadEvents() {
+
+    eventsRef.off();
+
+    eventsRef.on(
+        "value",
+        function(snapshot) {
+
+            events =
+                snapshot.val() || {};
+
+            renderEvents();
+        },
+        function(error) {
+
+            console.error(error);
+
+            document.getElementById(
+                "eventList"
+            ).innerHTML =
+                '<div class="empty-message">Unable to load calendar events.</div>';
+        }
+    );
+}
+
+function renderEvents() {
+
+    const list =
+        document.getElementById(
+            "eventList"
+        );
+
+    list.innerHTML = "";
+
+    const items =
+        Object.keys(events)
+        .map(function(id) {
+
+            return {
+                id: id,
+                ...events[id]
+            };
+        });
+
+    items.sort(function(a,b) {
+
+        return (
+            a.date || ""
+        ).localeCompare(
+            b.date || ""
+        );
+    });
+
+    if (!items.length) {
+
+        list.innerHTML =
+            '<div class="empty-message">No calendar events have been added yet.</div>';
+
+        return;
+    }
+
+    items.forEach(function(item) {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "manager-card";
+
+        const title =
+            document.createElement(
+                "div"
+            );
+
+        title.className =
+            "manager-title";
+
+        title.textContent =
+            item.title ||
+            "Church Event";
+
+        card.appendChild(title);
+
+        const meta =
+            document.createElement(
+                "div"
+            );
+
+        meta.className =
+            "manager-meta";
+
+        meta.textContent =
+            formatDisplayDate(
+                item.date
+            )
+            +
+            (
+                item.time
+                ? " • " +
+                  item.time
+                : ""
+            );
+
+        card.appendChild(meta);
+
+        if (item.details) {
+
+            const details =
+                document.createElement(
+                    "div"
+                );
+
+            details.className =
+                "manager-text";
+
+            details.textContent =
+                item.details;
+
+            card.appendChild(
+                details
+            );
+        }
+
+        card.appendChild(
+            actionButtons(
+                function() {
+                    editEvent(
+                        item.id
+                    );
+                },
+                function() {
+                    deleteEvent(
+                        item.id
+                    );
+                }
+            )
+        );
+
+        list.appendChild(card);
+    });
+}
+
+function editEvent(id) {
+
+    const item =
+        events[id];
+
+    if (!item) return;
+
+    editingEventId =
+        id;
+
+    document.getElementById(
+        "eventTitle"
+    ).value =
+        item.title || "";
+
+    document.getElementById(
+        "eventDate"
+    ).value =
+        item.date || "";
+
+    document.getElementById(
+        "eventTime"
+    ).value =
+        item.time || "";
+
+    document.getElementById(
+        "eventDetails"
+    ).value =
+        item.details || "";
+
+    document.getElementById(
+        "eventFormTitle"
+    ).textContent =
+        "Edit Calendar Event";
+
+    document.getElementById(
+        "publishEventButton"
+    ).textContent =
+        "SAVE EVENT";
+
+    document.getElementById(
+        "cancelEventEditButton"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "eventFormTitle"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function deleteEvent(id) {
+
+    const item =
+        events[id];
+
+    if (!item) return;
+
+    if (
+        !confirm(
+            'Delete the event "' +
+            (item.title ||
+            "Church Event") +
+            '"?'
+        )
+    ) {
+        return;
+    }
+
+    eventsRef
+    .child(id)
+    .remove()
+    .then(function() {
+
+        showSuccess(
+            "Calendar event deleted."
+        );
+
+        if (
+            editingEventId === id
+        ) {
+            resetEventForm();
+        }
+    })
+    .catch(function(error) {
+
+        console.error(error);
+
+        alert(
+            "The calendar event could not be deleted."
+        );
+    });
+}
+
+function cancelEventEdit() {
+    resetEventForm();
+}
+
+function resetEventForm() {
+
+    editingEventId = null;
+
+    document.getElementById(
+        "eventTitle"
+    ).value = "";
+
+    document.getElementById(
+        "eventDate"
+    ).value = "";
+
+    document.getElementById(
+        "eventTime"
+    ).value = "";
+
+    document.getElementById(
+        "eventDetails"
+    ).value = "";
+
+    document.getElementById(
+        "eventFormTitle"
+    ).textContent =
+        "Add Calendar Event";
+
+    document.getElementById(
+        "publishEventButton"
+    ).textContent =
+        "PUBLISH EVENT";
+
+    document.getElementById(
+        "cancelEventEditButton"
+    ).style.display =
+        "none";
+}
+
+/* =========================
+   ASSIGNMENTS
+========================= */
 
 function saveAssignment() {
 
     const ministry =
-        document.getElementById("ministry").value;
+        document.getElementById(
+            "ministry"
+        ).value;
 
     const date =
-        document.getElementById("assignmentDate").value;
+        document.getElementById(
+            "assignmentDate"
+        ).value;
 
     const service =
-        document.getElementById("service").value.trim();
+        document.getElementById(
+            "service"
+        ).value.trim();
 
     const workers =
-        document.getElementById("workers").value.trim();
+        document.getElementById(
+            "workers"
+        ).value.trim();
 
     const notes =
-        document.getElementById("notes").value.trim();
-
+        document.getElementById(
+            "notes"
+        ).value.trim();
 
     if (!ministry) {
 
@@ -803,7 +1580,6 @@ function saveAssignment() {
         return;
     }
 
-
     if (!date) {
 
         alert(
@@ -812,7 +1588,6 @@ function saveAssignment() {
 
         return;
     }
-
 
     if (!workers) {
 
@@ -823,31 +1598,26 @@ function saveAssignment() {
         return;
     }
 
-
     const assignmentData = {
 
         ministry: ministry,
-
         date: date,
-
         service: service,
-
         workers: workers,
-
         notes: notes,
 
         updatedAt:
-            firebase.database.ServerValue.TIMESTAMP
-
+            firebase.database
+            .ServerValue.TIMESTAMP
     };
-
 
     if (editingId) {
 
         assignmentsRef
         .child(editingId)
-        .update(assignmentData)
-
+        .update(
+            assignmentData
+        )
         .then(function() {
 
             showSuccess(
@@ -855,9 +1625,7 @@ function saveAssignment() {
             );
 
             resetForm();
-
         })
-
         .catch(function(error) {
 
             console.error(error);
@@ -865,20 +1633,18 @@ function saveAssignment() {
             alert(
                 "The assignment could not be updated."
             );
-
         });
 
-    }
-
-    else {
+    } else {
 
         assignmentData.createdAt =
-            firebase.database.ServerValue.TIMESTAMP;
-
+            firebase.database
+            .ServerValue.TIMESTAMP;
 
         assignmentsRef
-        .push(assignmentData)
-
+        .push(
+            assignmentData
+        )
         .then(function() {
 
             showSuccess(
@@ -886,9 +1652,7 @@ function saveAssignment() {
             );
 
             resetForm();
-
         })
-
         .catch(function(error) {
 
             console.error(error);
@@ -896,21 +1660,13 @@ function saveAssignment() {
             alert(
                 "The assignment could not be published."
             );
-
         });
-
     }
-
 }
-
-
-
-/* LOAD ASSIGNMENTS */
 
 function loadAssignments() {
 
     assignmentsRef.off();
-
 
     assignmentsRef.on(
         "value",
@@ -920,9 +1676,7 @@ function loadAssignments() {
                 snapshot.val() || {};
 
             renderAssignments();
-
         },
-
         function(error) {
 
             console.error(error);
@@ -930,18 +1684,10 @@ function loadAssignments() {
             document.getElementById(
                 "assignmentList"
             ).innerHTML =
-                '<div class="empty-message">' +
-                'Unable to load assignments.' +
-                '</div>';
-
+                '<div class="empty-message">Unable to load assignments.</div>';
         }
     );
-
 }
-
-
-
-/* DISPLAY ASSIGNMENTS */
 
 function renderAssignments() {
 
@@ -950,9 +1696,7 @@ function renderAssignments() {
             "assignmentList"
         );
 
-
     list.innerHTML = "";
-
 
     const items =
         Object.keys(assignments)
@@ -962,66 +1706,75 @@ function renderAssignments() {
                 id: id,
                 ...assignments[id]
             };
-
         });
-
 
     items.sort(function(a,b) {
 
-        return (a.date || "")
-        .localeCompare(b.date || "");
-
+        return (
+            a.date || ""
+        ).localeCompare(
+            b.date || ""
+        );
     });
-
 
     if (!items.length) {
 
         list.innerHTML =
-            '<div class="empty-message">' +
-            'No ministry assignments have been added yet.' +
-            '</div>';
+            '<div class="empty-message">No ministry assignments have been added yet.</div>';
 
         return;
     }
 
-
     items.forEach(function(item) {
 
         const card =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         card.className =
             "assignment-card";
 
-
         const ministry =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         ministry.className =
             "assignment-ministry";
 
         ministry.textContent =
-            ministryName(item.ministry);
-
+            ministryName(
+                item.ministry
+            );
 
         const date =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         date.className =
             "assignment-date";
 
         date.textContent =
-            formatDisplayDate(item.date);
+            formatDisplayDate(
+                item.date
+            );
 
+        card.appendChild(
+            ministry
+        );
 
-        card.appendChild(ministry);
-        card.appendChild(date);
-
+        card.appendChild(
+            date
+        );
 
         if (item.service) {
 
             const service =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             service.className =
                 "assignment-service";
@@ -1029,13 +1782,15 @@ function renderAssignments() {
             service.textContent =
                 item.service;
 
-            card.appendChild(service);
-
+            card.appendChild(
+                service
+            );
         }
 
-
         const workers =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         workers.className =
             "assignment-workers";
@@ -1044,13 +1799,16 @@ function renderAssignments() {
             "Assigned: " +
             (item.workers || "");
 
-        card.appendChild(workers);
-
+        card.appendChild(
+            workers
+        );
 
         if (item.notes) {
 
             const notes =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             notes.className =
                 "assignment-notes";
@@ -1058,157 +1816,124 @@ function renderAssignments() {
             notes.textContent =
                 item.notes;
 
-            card.appendChild(notes);
-
+            card.appendChild(
+                notes
+            );
         }
 
+        card.appendChild(
+            actionButtons(
+                function() {
+                    editAssignment(
+                        item.id
+                    );
+                },
+                function() {
+                    deleteAssignment(
+                        item.id
+                    );
+                }
+            )
+        );
 
-        const actions =
-            document.createElement("div");
-
-        actions.className =
-            "assignment-actions";
-
-
-        const editButton =
-            document.createElement("button");
-
-        editButton.className =
-            "secondary-button";
-
-        editButton.textContent =
-            "Edit";
-
-        editButton.onclick =
-            function() {
-                editAssignment(item.id);
-            };
-
-
-        const deleteButton =
-            document.createElement("button");
-
-        deleteButton.className =
-            "delete-button";
-
-        deleteButton.textContent =
-            "Delete";
-
-        deleteButton.onclick =
-            function() {
-                deleteAssignment(item.id);
-            };
-
-
-        actions.appendChild(editButton);
-        actions.appendChild(deleteButton);
-
-        card.appendChild(actions);
-
-        list.appendChild(card);
-
+        list.appendChild(
+            card
+        );
     });
-
 }
-
-
-
-/* EDIT */
 
 function editAssignment(id) {
 
     const item =
         assignments[id];
 
-    if (!item) {
-        return;
-    }
+    if (!item) return;
 
+    editingId =
+        id;
 
-    editingId = id;
-
-
-    document.getElementById("ministry").value =
+    document.getElementById(
+        "ministry"
+    ).value =
         item.ministry || "";
 
-    document.getElementById("assignmentDate").value =
+    document.getElementById(
+        "assignmentDate"
+    ).value =
         item.date || "";
 
-    document.getElementById("service").value =
+    document.getElementById(
+        "service"
+    ).value =
         item.service || "";
 
-    document.getElementById("workers").value =
+    document.getElementById(
+        "workers"
+    ).value =
         item.workers || "";
 
-    document.getElementById("notes").value =
+    document.getElementById(
+        "notes"
+    ).value =
         item.notes || "";
 
-
-    document.getElementById("formTitle")
-    .textContent =
+    document.getElementById(
+        "formTitle"
+    ).textContent =
         "Edit Ministry Assignment";
 
-
-    document.getElementById("publishButton")
-    .textContent =
+    document.getElementById(
+        "publishButton"
+    ).textContent =
         "SAVE CHANGES";
 
-
-    document.getElementById("cancelEditButton")
-    .style.display =
+    document.getElementById(
+        "cancelEditButton"
+    ).style.display =
         "block";
 
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    document.getElementById(
+        "formTitle"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
     });
-
 }
-
-
-
-/* DELETE */
 
 function deleteAssignment(id) {
 
     const item =
         assignments[id];
 
-    if (!item) {
-        return;
-    }
+    if (!item) return;
 
-
-    const answer =
-        confirm(
+    if (
+        !confirm(
             "Delete this " +
-            ministryName(item.ministry) +
+            ministryName(
+                item.ministry
+            ) +
             " assignment?"
-        );
-
-
-    if (!answer) {
+        )
+    ) {
         return;
     }
-
 
     assignmentsRef
     .child(id)
     .remove()
-
     .then(function() {
 
         showSuccess(
             "Assignment deleted."
         );
 
-        if (editingId === id) {
+        if (
+            editingId === id
+        ) {
             resetForm();
         }
-
     })
-
     .catch(function(error) {
 
         console.error(error);
@@ -1216,198 +1941,417 @@ function deleteAssignment(id) {
         alert(
             "The assignment could not be deleted."
         );
-
     });
-
 }
-
-
-
-/* CANCEL EDIT */
 
 function cancelEdit() {
-
     resetForm();
-
 }
-
-
-
-/* RESET FORM */
 
 function resetForm() {
 
     editingId = null;
 
-    document.getElementById("ministry").value =
-        "";
+    document.getElementById(
+        "ministry"
+    ).value = "";
 
-    document.getElementById("assignmentDate").value =
-        "";
+    document.getElementById(
+        "assignmentDate"
+    ).value = "";
 
-    document.getElementById("service").value =
-        "";
+    document.getElementById(
+        "service"
+    ).value = "";
 
-    document.getElementById("workers").value =
-        "";
+    document.getElementById(
+        "workers"
+    ).value = "";
 
-    document.getElementById("notes").value =
-        "";
+    document.getElementById(
+        "notes"
+    ).value = "";
 
-
-    document.getElementById("formTitle")
-    .textContent =
+    document.getElementById(
+        "formTitle"
+    ).textContent =
         "Add Ministry Assignment";
 
-
-    document.getElementById("publishButton")
-    .textContent =
+    document.getElementById(
+        "publishButton"
+    ).textContent =
         "PUBLISH ASSIGNMENT";
 
-
-    document.getElementById("cancelEditButton")
-    .style.display =
+    document.getElementById(
+        "cancelEditButton"
+    ).style.display =
         "none";
-
 }
 
-
-
-
-/* ANNOUNCEMENTS */
+/* =========================
+   ANNOUNCEMENTS
+========================= */
 
 function saveAnnouncement() {
-    const title = document.getElementById("announcementTitle").value.trim();
-    const date = document.getElementById("announcementDate").value;
-    const message = document.getElementById("announcementMessage").value.trim();
-    const expires = document.getElementById("announcementExpires").value;
 
-    if (!title) { alert("Please enter an announcement title."); return; }
-    if (!date) { alert("Please select the announcement date."); return; }
-    if (!message) { alert("Please enter the announcement message."); return; }
+    const title =
+        document.getElementById(
+            "announcementTitle"
+        ).value.trim();
+
+    const date =
+        document.getElementById(
+            "announcementDate"
+        ).value;
+
+    const message =
+        document.getElementById(
+            "announcementMessage"
+        ).value.trim();
+
+    const expires =
+        document.getElementById(
+            "announcementExpires"
+        ).value;
+
+    if (!title) {
+        alert(
+            "Please enter an announcement title."
+        );
+        return;
+    }
+
+    if (!date) {
+        alert(
+            "Please select the announcement date."
+        );
+        return;
+    }
+
+    if (!message) {
+        alert(
+            "Please enter the announcement message."
+        );
+        return;
+    }
 
     const data = {
+
         title: title,
         date: date,
         message: message,
         expires: expires,
-        updatedAt: firebase.database.ServerValue.TIMESTAMP
+
+        updatedAt:
+            firebase.database
+            .ServerValue.TIMESTAMP
     };
 
-    const request = editingAnnouncementId
-        ? announcementsRef.child(editingAnnouncementId).update(data)
-        : announcementsRef.push({...data, createdAt: firebase.database.ServerValue.TIMESTAMP});
+    let request;
 
-    request.then(function() {
-        showSuccess(editingAnnouncementId ? "Announcement updated successfully." : "Announcement published successfully.");
+    if (
+        editingAnnouncementId
+    ) {
+
+        request =
+            announcementsRef
+            .child(
+                editingAnnouncementId
+            )
+            .update(data);
+
+    } else {
+
+        data.createdAt =
+            firebase.database
+            .ServerValue.TIMESTAMP;
+
+        request =
+            announcementsRef
+            .push(data);
+    }
+
+    request
+    .then(function() {
+
+        showSuccess(
+            editingAnnouncementId
+            ? "Announcement updated successfully."
+            : "Announcement published successfully."
+        );
+
         resetAnnouncementForm();
-    }).catch(function(error) {
+    })
+    .catch(function(error) {
+
         console.error(error);
-        alert("The announcement could not be saved.");
+
+        alert(
+            "The announcement could not be saved."
+        );
     });
 }
 
 function loadAnnouncements() {
+
     announcementsRef.off();
-    announcementsRef.on("value", function(snapshot) {
-        announcements = snapshot.val() || {};
-        renderAnnouncements();
-    }, function(error) {
-        console.error(error);
-        document.getElementById("announcementList").innerHTML =
-            '<div class="empty-message">Unable to load announcements.</div>';
-    });
+
+    announcementsRef.on(
+        "value",
+        function(snapshot) {
+
+            announcements =
+                snapshot.val() || {};
+
+            renderAnnouncements();
+        },
+        function(error) {
+
+            console.error(error);
+
+            document.getElementById(
+                "announcementList"
+            ).innerHTML =
+                '<div class="empty-message">Unable to load announcements.</div>';
+        }
+    );
 }
 
 function renderAnnouncements() {
-    const list = document.getElementById("announcementList");
+
+    const list =
+        document.getElementById(
+            "announcementList"
+        );
+
     list.innerHTML = "";
 
-    const items = Object.keys(announcements).map(function(id) {
-        return {id:id, ...announcements[id]};
-    });
+    const items =
+        Object.keys(
+            announcements
+        )
+        .map(function(id) {
+
+            return {
+                id: id,
+                ...announcements[id]
+            };
+        });
 
     items.sort(function(a,b) {
-        return (b.date || "").localeCompare(a.date || "");
+
+        return (
+            b.date || ""
+        ).localeCompare(
+            a.date || ""
+        );
     });
 
     if (!items.length) {
-        list.innerHTML = '<div class="empty-message">No announcements have been added yet.</div>';
+
+        list.innerHTML =
+            '<div class="empty-message">No announcements have been added yet.</div>';
+
         return;
     }
 
     items.forEach(function(item) {
-        const card = document.createElement("div");
-        card.className = "announcement-card";
 
-        const title = document.createElement("div");
-        title.className = "announcement-title";
-        title.textContent = item.title || "Church Announcement";
-        card.appendChild(title);
+        const card =
+            document.createElement(
+                "div"
+            );
 
-        const date = document.createElement("div");
-        date.className = "announcement-date";
-        date.textContent = formatDisplayDate(item.date);
-        card.appendChild(date);
+        card.className =
+            "announcement-card";
 
-        const message = document.createElement("div");
-        message.className = "announcement-message";
-        message.textContent = item.message || "";
-        card.appendChild(message);
+        const title =
+            document.createElement(
+                "div"
+            );
+
+        title.className =
+            "announcement-title";
+
+        title.textContent =
+            item.title ||
+            "Church Announcement";
+
+        card.appendChild(
+            title
+        );
+
+        const date =
+            document.createElement(
+                "div"
+            );
+
+        date.className =
+            "announcement-date";
+
+        date.textContent =
+            formatDisplayDate(
+                item.date
+            );
+
+        card.appendChild(
+            date
+        );
+
+        const message =
+            document.createElement(
+                "div"
+            );
+
+        message.className =
+            "announcement-message";
+
+        message.textContent =
+            item.message || "";
+
+        card.appendChild(
+            message
+        );
 
         if (item.expires) {
-            const exp = document.createElement("div");
-            exp.className = "announcement-expiration";
-            exp.textContent = "Expires: " + formatDisplayDate(item.expires);
-            card.appendChild(exp);
+
+            const expiration =
+                document.createElement(
+                    "div"
+                );
+
+            expiration.className =
+                "announcement-expiration";
+
+            expiration.textContent =
+                "Expires: " +
+                formatDisplayDate(
+                    item.expires
+                );
+
+            card.appendChild(
+                expiration
+            );
         }
 
-        const actions = document.createElement("div");
-        actions.className = "announcement-actions";
+        card.appendChild(
+            actionButtons(
+                function() {
+                    editAnnouncement(
+                        item.id
+                    );
+                },
+                function() {
+                    deleteAnnouncement(
+                        item.id
+                    );
+                }
+            )
+        );
 
-        const edit = document.createElement("button");
-        edit.className = "secondary-button";
-        edit.textContent = "Edit";
-        edit.onclick = function(){ editAnnouncement(item.id); };
-
-        const del = document.createElement("button");
-        del.className = "delete-button";
-        del.textContent = "Delete";
-        del.onclick = function(){ deleteAnnouncement(item.id); };
-
-        actions.appendChild(edit);
-        actions.appendChild(del);
-        card.appendChild(actions);
-        list.appendChild(card);
+        list.appendChild(
+            card
+        );
     });
 }
 
 function editAnnouncement(id) {
-    const item = announcements[id];
+
+    const item =
+        announcements[id];
+
     if (!item) return;
 
-    editingAnnouncementId = id;
-    document.getElementById("announcementTitle").value = item.title || "";
-    document.getElementById("announcementDate").value = item.date || "";
-    document.getElementById("announcementMessage").value = item.message || "";
-    document.getElementById("announcementExpires").value = item.expires || "";
-    document.getElementById("announcementFormTitle").textContent = "Edit Announcement";
-    document.getElementById("publishAnnouncementButton").textContent = "SAVE ANNOUNCEMENT";
-    document.getElementById("cancelAnnouncementEditButton").style.display = "block";
-    document.getElementById("announcementFormTitle").scrollIntoView({behavior:"smooth",block:"start"});
+    editingAnnouncementId =
+        id;
+
+    document.getElementById(
+        "announcementTitle"
+    ).value =
+        item.title || "";
+
+    document.getElementById(
+        "announcementDate"
+    ).value =
+        item.date || "";
+
+    document.getElementById(
+        "announcementMessage"
+    ).value =
+        item.message || "";
+
+    document.getElementById(
+        "announcementExpires"
+    ).value =
+        item.expires || "";
+
+    document.getElementById(
+        "announcementFormTitle"
+    ).textContent =
+        "Edit Announcement";
+
+    document.getElementById(
+        "publishAnnouncementButton"
+    ).textContent =
+        "SAVE ANNOUNCEMENT";
+
+    document.getElementById(
+        "cancelAnnouncementEditButton"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "announcementFormTitle"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 function deleteAnnouncement(id) {
-    const item = announcements[id];
-    if (!item) return;
-    if (!confirm('Delete the announcement "' + (item.title || "Church Announcement") + '"?')) return;
 
-    announcementsRef.child(id).remove().then(function() {
-        showSuccess("Announcement deleted.");
-        if (editingAnnouncementId === id) resetAnnouncementForm();
-    }).catch(function(error) {
+    const item =
+        announcements[id];
+
+    if (!item) return;
+
+    if (
+        !confirm(
+            'Delete the announcement "' +
+            (
+                item.title ||
+                "Church Announcement"
+            )
+            +
+            '"?'
+        )
+    ) {
+        return;
+    }
+
+    announcementsRef
+    .child(id)
+    .remove()
+    .then(function() {
+
+        showSuccess(
+            "Announcement deleted."
+        );
+
+        if (
+            editingAnnouncementId ===
+            id
+        ) {
+            resetAnnouncementForm();
+        }
+    })
+    .catch(function(error) {
+
         console.error(error);
-        alert("The announcement could not be deleted.");
+
+        alert(
+            "The announcement could not be deleted."
+        );
     });
 }
 
@@ -1416,142 +2360,777 @@ function cancelAnnouncementEdit() {
 }
 
 function resetAnnouncementForm() {
-    editingAnnouncementId = null;
-    document.getElementById("announcementTitle").value = "";
-    document.getElementById("announcementDate").value = "";
-    document.getElementById("announcementMessage").value = "";
-    document.getElementById("announcementExpires").value = "";
-    document.getElementById("announcementFormTitle").textContent = "Add Announcement";
-    document.getElementById("publishAnnouncementButton").textContent = "PUBLISH ANNOUNCEMENT";
-    document.getElementById("cancelAnnouncementEditButton").style.display = "none";
+
+    editingAnnouncementId =
+        null;
+
+    document.getElementById(
+        "announcementTitle"
+    ).value = "";
+
+    document.getElementById(
+        "announcementDate"
+    ).value = "";
+
+    document.getElementById(
+        "announcementMessage"
+    ).value = "";
+
+    document.getElementById(
+        "announcementExpires"
+    ).value = "";
+
+    document.getElementById(
+        "announcementFormTitle"
+    ).textContent =
+        "Add Announcement";
+
+    document.getElementById(
+        "publishAnnouncementButton"
+    ).textContent =
+        "PUBLISH ANNOUNCEMENT";
+
+    document.getElementById(
+        "cancelAnnouncementEditButton"
+    ).style.display =
+        "none";
 }
 
+/* =========================
+   NEWSLETTER
+========================= */
 
+function saveNewsletter() {
 
-/* PRAYER REQUESTS */
+    const title =
+        document.getElementById(
+            "newsletterTitle"
+        ).value.trim();
 
-function savePrayerRequest() {
-    const name = document.getElementById("prayerName").value.trim();
-    const date = document.getElementById("prayerDate").value;
-    const requestText = document.getElementById("prayerRequest").value.trim();
+    const date =
+        document.getElementById(
+            "newsletterDate"
+        ).value;
 
-    if (!name) { alert("Please enter a name or title."); return; }
-    if (!date) { alert("Please select the prayer request date."); return; }
-    if (!requestText) { alert("Please enter the prayer request."); return; }
+    const url =
+        document.getElementById(
+            "newsletterUrl"
+        ).value.trim();
+
+    const note =
+        document.getElementById(
+            "newsletterNote"
+        ).value.trim();
+
+    if (!title) {
+        alert(
+            "Please enter a newsletter title."
+        );
+        return;
+    }
+
+    if (!date) {
+        alert(
+            "Please select the newsletter issue date."
+        );
+        return;
+    }
+
+    if (!url) {
+        alert(
+            "Please enter the newsletter link."
+        );
+        return;
+    }
 
     const data = {
-        name: name,
+
+        title: title,
         date: date,
-        request: requestText,
-        updatedAt: firebase.database.ServerValue.TIMESTAMP
+        url: url,
+        note: note,
+
+        updatedAt:
+            firebase.database
+            .ServerValue.TIMESTAMP
     };
 
-    const request = editingPrayerId
-        ? prayerRequestsRef.child(editingPrayerId).update(data)
-        : prayerRequestsRef.push({...data, createdAt: firebase.database.ServerValue.TIMESTAMP});
+    let request;
 
-    request.then(function() {
-        showSuccess(editingPrayerId ? "Prayer request updated successfully." : "Prayer request published successfully.");
-        resetPrayerForm();
-    }).catch(function(error) {
+    if (
+        editingNewsletterId
+    ) {
+
+        request =
+            newsletterRef
+            .child(
+                editingNewsletterId
+            )
+            .update(data);
+
+    } else {
+
+        data.createdAt =
+            firebase.database
+            .ServerValue.TIMESTAMP;
+
+        request =
+            newsletterRef
+            .push(data);
+    }
+
+    request
+    .then(function() {
+
+        showSuccess(
+            editingNewsletterId
+            ? "Newsletter updated successfully."
+            : "Newsletter published successfully."
+        );
+
+        resetNewsletterForm();
+    })
+    .catch(function(error) {
+
         console.error(error);
-        alert("The prayer request could not be saved.");
+
+        alert(
+            "The newsletter could not be saved."
+        );
     });
 }
 
-function loadPrayerRequests() {
-    prayerRequestsRef.off();
-    prayerRequestsRef.on("value", function(snapshot) {
-        prayerRequests = snapshot.val() || {};
-        renderPrayerRequests();
-    }, function(error) {
-        console.error(error);
-        document.getElementById("prayerList").innerHTML =
-            '<div class="empty-message">Unable to load prayer requests.</div>';
-    });
+function loadNewsletters() {
+
+    newsletterRef.off();
+
+    newsletterRef.on(
+        "value",
+        function(snapshot) {
+
+            newsletters =
+                snapshot.val() || {};
+
+            renderNewsletters();
+        },
+        function(error) {
+
+            console.error(error);
+
+            document.getElementById(
+                "newsletterList"
+            ).innerHTML =
+                '<div class="empty-message">Unable to load newsletters.</div>';
+        }
+    );
 }
 
-function renderPrayerRequests() {
-    const list = document.getElementById("prayerList");
+function renderNewsletters() {
+
+    const list =
+        document.getElementById(
+            "newsletterList"
+        );
+
     list.innerHTML = "";
 
-    const items = Object.keys(prayerRequests).map(function(id) {
-        return {id:id, ...prayerRequests[id]};
-    });
+    const items =
+        Object.keys(
+            newsletters
+        )
+        .map(function(id) {
+
+            return {
+                id: id,
+                ...newsletters[id]
+            };
+        });
 
     items.sort(function(a,b) {
-        return (b.date || "").localeCompare(a.date || "");
+
+        return (
+            b.date || ""
+        ).localeCompare(
+            a.date || ""
+        );
     });
 
     if (!items.length) {
-        list.innerHTML = '<div class="empty-message">No prayer requests have been added yet.</div>';
+
+        list.innerHTML =
+            '<div class="empty-message">No newsletters have been added yet.</div>';
+
         return;
     }
 
     items.forEach(function(item) {
-        const card = document.createElement("div");
-        card.className = "prayer-card";
 
-        const name = document.createElement("div");
-        name.className = "prayer-name";
-        name.textContent = item.name || "Prayer Request";
-        card.appendChild(name);
+        const card =
+            document.createElement(
+                "div"
+            );
 
-        const date = document.createElement("div");
-        date.className = "prayer-date";
-        date.textContent = formatDisplayDate(item.date);
-        card.appendChild(date);
+        card.className =
+            "manager-card";
 
-        const text = document.createElement("div");
-        text.className = "prayer-request";
-        text.textContent = item.request || "";
-        card.appendChild(text);
+        const title =
+            document.createElement(
+                "div"
+            );
 
-        const actions = document.createElement("div");
-        actions.className = "prayer-actions";
+        title.className =
+            "manager-title";
 
-        const edit = document.createElement("button");
-        edit.className = "secondary-button";
-        edit.textContent = "Edit";
-        edit.onclick = function(){ editPrayerRequest(item.id); };
+        title.textContent =
+            item.title ||
+            "Church Newsletter";
 
-        const del = document.createElement("button");
-        del.className = "delete-button";
-        del.textContent = "Delete";
-        del.onclick = function(){ deletePrayerRequest(item.id); };
+        card.appendChild(
+            title
+        );
 
-        actions.appendChild(edit);
-        actions.appendChild(del);
-        card.appendChild(actions);
-        list.appendChild(card);
+        const meta =
+            document.createElement(
+                "div"
+            );
+
+        meta.className =
+            "manager-meta";
+
+        meta.textContent =
+            formatDisplayDate(
+                item.date
+            );
+
+        card.appendChild(
+            meta
+        );
+
+        if (item.note) {
+
+            const note =
+                document.createElement(
+                    "div"
+                );
+
+            note.className =
+                "manager-text";
+
+            note.textContent =
+                item.note;
+
+            card.appendChild(
+                note
+            );
+        }
+
+        if (item.url) {
+
+            const link =
+                document.createElement(
+                    "div"
+                );
+
+            link.className =
+                "manager-text";
+
+            link.textContent =
+                item.url;
+
+            card.appendChild(
+                link
+            );
+        }
+
+        card.appendChild(
+            actionButtons(
+                function() {
+                    editNewsletter(
+                        item.id
+                    );
+                },
+                function() {
+                    deleteNewsletter(
+                        item.id
+                    );
+                }
+            )
+        );
+
+        list.appendChild(
+            card
+        );
+    });
+}
+
+function editNewsletter(id) {
+
+    const item =
+        newsletters[id];
+
+    if (!item) return;
+
+    editingNewsletterId =
+        id;
+
+    document.getElementById(
+        "newsletterTitle"
+    ).value =
+        item.title || "";
+
+    document.getElementById(
+        "newsletterDate"
+    ).value =
+        item.date || "";
+
+    document.getElementById(
+        "newsletterUrl"
+    ).value =
+        item.url || "";
+
+    document.getElementById(
+        "newsletterNote"
+    ).value =
+        item.note || "";
+
+    document.getElementById(
+        "newsletterFormTitle"
+    ).textContent =
+        "Edit Church Newsletter";
+
+    document.getElementById(
+        "publishNewsletterButton"
+    ).textContent =
+        "SAVE NEWSLETTER";
+
+    document.getElementById(
+        "cancelNewsletterEditButton"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "newsletterFormTitle"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function deleteNewsletter(id) {
+
+    const item =
+        newsletters[id];
+
+    if (!item) return;
+
+    if (
+        !confirm(
+            'Delete the newsletter "' +
+            (
+                item.title ||
+                "Church Newsletter"
+            )
+            +
+            '"?'
+        )
+    ) {
+        return;
+    }
+
+    newsletterRef
+    .child(id)
+    .remove()
+    .then(function() {
+
+        showSuccess(
+            "Newsletter deleted."
+        );
+
+        if (
+            editingNewsletterId ===
+            id
+        ) {
+            resetNewsletterForm();
+        }
+    })
+    .catch(function(error) {
+
+        console.error(error);
+
+        alert(
+            "The newsletter could not be deleted."
+        );
+    });
+}
+
+function cancelNewsletterEdit() {
+    resetNewsletterForm();
+}
+
+function resetNewsletterForm() {
+
+    editingNewsletterId =
+        null;
+
+    document.getElementById(
+        "newsletterTitle"
+    ).value = "";
+
+    document.getElementById(
+        "newsletterDate"
+    ).value = "";
+
+    document.getElementById(
+        "newsletterUrl"
+    ).value = "";
+
+    document.getElementById(
+        "newsletterNote"
+    ).value = "";
+
+    document.getElementById(
+        "newsletterFormTitle"
+    ).textContent =
+        "Add Church Newsletter";
+
+    document.getElementById(
+        "publishNewsletterButton"
+    ).textContent =
+        "PUBLISH NEWSLETTER";
+
+    document.getElementById(
+        "cancelNewsletterEditButton"
+    ).style.display =
+        "none";
+}
+
+/* =========================
+   PRAYER REQUESTS
+========================= */
+
+function savePrayerRequest() {
+
+    const name =
+        document.getElementById(
+            "prayerName"
+        ).value.trim();
+
+    const date =
+        document.getElementById(
+            "prayerDate"
+        ).value;
+
+    const requestText =
+        document.getElementById(
+            "prayerRequest"
+        ).value.trim();
+
+    if (!name) {
+
+        alert(
+            "Please enter a name or title."
+        );
+
+        return;
+    }
+
+    if (!date) {
+
+        alert(
+            "Please select the prayer request date."
+        );
+
+        return;
+    }
+
+    if (!requestText) {
+
+        alert(
+            "Please enter the prayer request."
+        );
+
+        return;
+    }
+
+    const data = {
+
+        name: name,
+        date: date,
+        request: requestText,
+
+        updatedAt:
+            firebase.database
+            .ServerValue.TIMESTAMP
+    };
+
+    let request;
+
+    if (
+        editingPrayerId
+    ) {
+
+        request =
+            prayerRequestsRef
+            .child(
+                editingPrayerId
+            )
+            .update(data);
+
+    } else {
+
+        data.createdAt =
+            firebase.database
+            .ServerValue.TIMESTAMP;
+
+        request =
+            prayerRequestsRef
+            .push(data);
+    }
+
+    request
+    .then(function() {
+
+        showSuccess(
+            editingPrayerId
+            ? "Prayer request updated successfully."
+            : "Prayer request published successfully."
+        );
+
+        resetPrayerForm();
+    })
+    .catch(function(error) {
+
+        console.error(error);
+
+        alert(
+            "The prayer request could not be saved."
+        );
+    });
+}
+
+function loadPrayerRequests() {
+
+    prayerRequestsRef.off();
+
+    prayerRequestsRef.on(
+        "value",
+        function(snapshot) {
+
+            prayerRequests =
+                snapshot.val() || {};
+
+            renderPrayerRequests();
+        },
+        function(error) {
+
+            console.error(error);
+
+            document.getElementById(
+                "prayerList"
+            ).innerHTML =
+                '<div class="empty-message">Unable to load prayer requests.</div>';
+        }
+    );
+}
+
+function renderPrayerRequests() {
+
+    const list =
+        document.getElementById(
+            "prayerList"
+        );
+
+    list.innerHTML = "";
+
+    const items =
+        Object.keys(
+            prayerRequests
+        )
+        .map(function(id) {
+
+            return {
+                id: id,
+                ...prayerRequests[id]
+            };
+        });
+
+    items.sort(function(a,b) {
+
+        return (
+            b.date || ""
+        ).localeCompare(
+            a.date || ""
+        );
+    });
+
+    if (!items.length) {
+
+        list.innerHTML =
+            '<div class="empty-message">No prayer requests have been added yet.</div>';
+
+        return;
+    }
+
+    items.forEach(function(item) {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "prayer-card";
+
+        const name =
+            document.createElement(
+                "div"
+            );
+
+        name.className =
+            "prayer-name";
+
+        name.textContent =
+            item.name ||
+            "Prayer Request";
+
+        card.appendChild(
+            name
+        );
+
+        const date =
+            document.createElement(
+                "div"
+            );
+
+        date.className =
+            "prayer-date";
+
+        date.textContent =
+            formatDisplayDate(
+                item.date
+            );
+
+        card.appendChild(
+            date
+        );
+
+        const text =
+            document.createElement(
+                "div"
+            );
+
+        text.className =
+            "prayer-request";
+
+        text.textContent =
+            item.request || "";
+
+        card.appendChild(
+            text
+        );
+
+        card.appendChild(
+            actionButtons(
+                function() {
+                    editPrayerRequest(
+                        item.id
+                    );
+                },
+                function() {
+                    deletePrayerRequest(
+                        item.id
+                    );
+                }
+            )
+        );
+
+        list.appendChild(
+            card
+        );
     });
 }
 
 function editPrayerRequest(id) {
-    const item = prayerRequests[id];
+
+    const item =
+        prayerRequests[id];
+
     if (!item) return;
 
-    editingPrayerId = id;
-    document.getElementById("prayerName").value = item.name || "";
-    document.getElementById("prayerDate").value = item.date || "";
-    document.getElementById("prayerRequest").value = item.request || "";
-    document.getElementById("prayerFormTitle").textContent = "Edit Prayer Request";
-    document.getElementById("publishPrayerButton").textContent = "SAVE PRAYER REQUEST";
-    document.getElementById("cancelPrayerEditButton").style.display = "block";
-    document.getElementById("prayerFormTitle").scrollIntoView({behavior:"smooth",block:"start"});
+    editingPrayerId =
+        id;
+
+    document.getElementById(
+        "prayerName"
+    ).value =
+        item.name || "";
+
+    document.getElementById(
+        "prayerDate"
+    ).value =
+        item.date || "";
+
+    document.getElementById(
+        "prayerRequest"
+    ).value =
+        item.request || "";
+
+    document.getElementById(
+        "prayerFormTitle"
+    ).textContent =
+        "Edit Prayer Request";
+
+    document.getElementById(
+        "publishPrayerButton"
+    ).textContent =
+        "SAVE PRAYER REQUEST";
+
+    document.getElementById(
+        "cancelPrayerEditButton"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "prayerFormTitle"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 function deletePrayerRequest(id) {
-    const item = prayerRequests[id];
-    if (!item) return;
-    if (!confirm("Delete this prayer request?")) return;
 
-    prayerRequestsRef.child(id).remove().then(function() {
-        showSuccess("Prayer request deleted.");
-        if (editingPrayerId === id) resetPrayerForm();
-    }).catch(function(error) {
+    if (
+        !confirm(
+            "Delete this prayer request?"
+        )
+    ) {
+        return;
+    }
+
+    prayerRequestsRef
+    .child(id)
+    .remove()
+    .then(function() {
+
+        showSuccess(
+            "Prayer request deleted."
+        );
+
+        if (
+            editingPrayerId ===
+            id
+        ) {
+            resetPrayerForm();
+        }
+    })
+    .catch(function(error) {
+
         console.error(error);
-        alert("The prayer request could not be deleted.");
+
+        alert(
+            "The prayer request could not be deleted."
+        );
     });
 }
 
@@ -1560,45 +3139,587 @@ function cancelPrayerEdit() {
 }
 
 function resetPrayerForm() {
-    editingPrayerId = null;
-    document.getElementById("prayerName").value = "";
-    document.getElementById("prayerDate").value = "";
-    document.getElementById("prayerRequest").value = "";
-    document.getElementById("prayerFormTitle").textContent = "Add Prayer Request";
-    document.getElementById("publishPrayerButton").textContent = "PUBLISH PRAYER REQUEST";
-    document.getElementById("cancelPrayerEditButton").style.display = "none";
+
+    editingPrayerId =
+        null;
+
+    document.getElementById(
+        "prayerName"
+    ).value = "";
+
+    document.getElementById(
+        "prayerDate"
+    ).value = "";
+
+    document.getElementById(
+        "prayerRequest"
+    ).value = "";
+
+    document.getElementById(
+        "prayerFormTitle"
+    ).textContent =
+        "Add Prayer Request";
+
+    document.getElementById(
+        "publishPrayerButton"
+    ).textContent =
+        "PUBLISH PRAYER REQUEST";
+
+    document.getElementById(
+        "cancelPrayerEditButton"
+    ).style.display =
+        "none";
 }
 
+/* =========================
+   BIRTHDAYS & ANNIVERSARIES
+========================= */
 
-/* SUCCESS */
+function saveCelebration() {
 
-function showSuccess(message) {
-
-    const box =
+    const type =
         document.getElementById(
-            "successMessage"
+            "celebrationType"
+        ).value;
+
+    const name =
+        document.getElementById(
+            "celebrationName"
+        ).value.trim();
+
+    const month =
+        document.getElementById(
+            "celebrationMonth"
+        ).value;
+
+    const day =
+        document.getElementById(
+            "celebrationDay"
+        ).value;
+
+    if (!name) {
+
+        alert(
+            "Please enter the name or names."
         );
 
+        return;
+    }
 
-    box.textContent =
-        message;
+    if (!month || !day) {
 
-    box.style.display =
-        "block";
+        alert(
+            "Please select the month and day."
+        );
 
+        return;
+    }
 
-    setTimeout(function() {
+    const data = {
 
-        box.style.display =
-            "none";
+        name: name,
+        month: Number(month),
+        day: Number(day),
 
-    }, 3500);
+        updatedAt:
+            firebase.database
+            .ServerValue.TIMESTAMP
+    };
 
+    const targetRef =
+        type ===
+        "anniversary"
+        ? anniversariesRef
+        : birthdaysRef;
+
+    if (
+        editingCelebration
+    ) {
+
+        const oldType =
+            editingCelebration.type;
+
+        const oldId =
+            editingCelebration.id;
+
+        const oldRef =
+            oldType ===
+            "anniversary"
+            ? anniversariesRef
+            : birthdaysRef;
+
+        if (
+            oldType === type
+        ) {
+
+            targetRef
+            .child(oldId)
+            .update(data)
+            .then(function() {
+
+                showSuccess(
+                    "Birthday / anniversary updated successfully."
+                );
+
+                resetCelebrationForm();
+            })
+            .catch(function(error) {
+
+                console.error(error);
+
+                alert(
+                    "The birthday or anniversary could not be saved."
+                );
+            });
+
+        } else {
+
+            data.createdAt =
+                firebase.database
+                .ServerValue.TIMESTAMP;
+
+            targetRef
+            .push(data)
+            .then(function() {
+
+                return oldRef
+                    .child(oldId)
+                    .remove();
+            })
+            .then(function() {
+
+                showSuccess(
+                    "Birthday / anniversary updated successfully."
+                );
+
+                resetCelebrationForm();
+            })
+            .catch(function(error) {
+
+                console.error(error);
+
+                alert(
+                    "The birthday or anniversary could not be saved."
+                );
+            });
+        }
+
+    } else {
+
+        data.createdAt =
+            firebase.database
+            .ServerValue.TIMESTAMP;
+
+        targetRef
+        .push(data)
+        .then(function() {
+
+            showSuccess(
+                type ===
+                "anniversary"
+                ? "Wedding anniversary published successfully."
+                : "Birthday published successfully."
+            );
+
+            resetCelebrationForm();
+        })
+        .catch(function(error) {
+
+            console.error(error);
+
+            alert(
+                "The birthday or anniversary could not be saved."
+            );
+        });
+    }
 }
 
+function loadCelebrations() {
 
+    birthdaysRef.off();
+    anniversariesRef.off();
 
-/* MINISTRY NAMES */
+    birthdaysRef.on(
+        "value",
+        function(snapshot) {
+
+            birthdays =
+                snapshot.val() || {};
+
+            renderCelebrations();
+        }
+    );
+
+    anniversariesRef.on(
+        "value",
+        function(snapshot) {
+
+            anniversaries =
+                snapshot.val() || {};
+
+            renderCelebrations();
+        }
+    );
+}
+
+function renderCelebrations() {
+
+    const list =
+        document.getElementById(
+            "celebrationList"
+        );
+
+    list.innerHTML = "";
+
+    let items = [];
+
+    Object.keys(
+        birthdays
+    )
+    .forEach(function(id) {
+
+        items.push({
+            id: id,
+            type: "birthday",
+            ...birthdays[id]
+        });
+    });
+
+    Object.keys(
+        anniversaries
+    )
+    .forEach(function(id) {
+
+        items.push({
+            id: id,
+            type: "anniversary",
+            ...anniversaries[id]
+        });
+    });
+
+    items.sort(function(a,b) {
+
+        return (
+            Number(a.month) -
+            Number(b.month)
+        )
+        ||
+        (
+            Number(a.day) -
+            Number(b.day)
+        )
+        ||
+        (
+            a.name || ""
+        )
+        .localeCompare(
+            b.name || ""
+        );
+    });
+
+    if (!items.length) {
+
+        list.innerHTML =
+            '<div class="empty-message">No birthdays or anniversaries have been added yet.</div>';
+
+        return;
+    }
+
+    items.forEach(function(item) {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "manager-card";
+
+        const title =
+            document.createElement(
+                "div"
+            );
+
+        title.className =
+            "manager-title";
+
+        title.textContent =
+            item.name || "";
+
+        card.appendChild(
+            title
+        );
+
+        const meta =
+            document.createElement(
+                "div"
+            );
+
+        meta.className =
+            "manager-meta";
+
+        meta.textContent =
+            (
+                item.type ===
+                "anniversary"
+                ? "Wedding Anniversary"
+                : "Birthday"
+            )
+            +
+            " • "
+            +
+            monthName(
+                Number(
+                    item.month
+                )
+            )
+            +
+            " "
+            +
+            item.day;
+
+        card.appendChild(
+            meta
+        );
+
+        card.appendChild(
+            actionButtons(
+                function() {
+
+                    editCelebration(
+                        item.type,
+                        item.id
+                    );
+                },
+                function() {
+
+                    deleteCelebration(
+                        item.type,
+                        item.id
+                    );
+                }
+            )
+        );
+
+        list.appendChild(
+            card
+        );
+    });
+}
+
+function editCelebration(
+    type,
+    id
+) {
+
+    const source =
+        type ===
+        "anniversary"
+        ? anniversaries
+        : birthdays;
+
+    const item =
+        source[id];
+
+    if (!item) return;
+
+    editingCelebration = {
+        type: type,
+        id: id
+    };
+
+    document.getElementById(
+        "celebrationType"
+    ).value =
+        type;
+
+    document.getElementById(
+        "celebrationName"
+    ).value =
+        item.name || "";
+
+    document.getElementById(
+        "celebrationMonth"
+    ).value =
+        String(
+            item.month || ""
+        );
+
+    document.getElementById(
+        "celebrationDay"
+    ).value =
+        String(
+            item.day || ""
+        );
+
+    document.getElementById(
+        "celebrationFormTitle"
+    ).textContent =
+        "Edit Birthday or Anniversary";
+
+    document.getElementById(
+        "publishCelebrationButton"
+    ).textContent =
+        "SAVE BIRTHDAY / ANNIVERSARY";
+
+    document.getElementById(
+        "cancelCelebrationEditButton"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "celebrationFormTitle"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function deleteCelebration(
+    type,
+    id
+) {
+
+    const targetRef =
+        type ===
+        "anniversary"
+        ? anniversariesRef
+        : birthdaysRef;
+
+    if (
+        !confirm(
+            "Delete this birthday or anniversary?"
+        )
+    ) {
+        return;
+    }
+
+    targetRef
+    .child(id)
+    .remove()
+    .then(function() {
+
+        showSuccess(
+            "Birthday / anniversary deleted."
+        );
+
+        if (
+            editingCelebration &&
+            editingCelebration.id ===
+            id &&
+            editingCelebration.type ===
+            type
+        ) {
+            resetCelebrationForm();
+        }
+    })
+    .catch(function(error) {
+
+        console.error(error);
+
+        alert(
+            "The birthday or anniversary could not be deleted."
+        );
+    });
+}
+
+function cancelCelebrationEdit() {
+    resetCelebrationForm();
+}
+
+function resetCelebrationForm() {
+
+    editingCelebration =
+        null;
+
+    document.getElementById(
+        "celebrationType"
+    ).value =
+        "birthday";
+
+    document.getElementById(
+        "celebrationName"
+    ).value = "";
+
+    document.getElementById(
+        "celebrationMonth"
+    ).value = "";
+
+    document.getElementById(
+        "celebrationDay"
+    ).value = "";
+
+    document.getElementById(
+        "celebrationFormTitle"
+    ).textContent =
+        "Add Birthday or Anniversary";
+
+    document.getElementById(
+        "publishCelebrationButton"
+    ).textContent =
+        "PUBLISH BIRTHDAY / ANNIVERSARY";
+
+    document.getElementById(
+        "cancelCelebrationEditButton"
+    ).style.display =
+        "none";
+}
+
+/* =========================
+   HELPERS
+========================= */
+
+function actionButtons(
+    editFunction,
+    deleteFunction
+) {
+
+    const actions =
+        document.createElement(
+            "div"
+        );
+
+    actions.className =
+        "manager-actions";
+
+    const edit =
+        document.createElement(
+            "button"
+        );
+
+    edit.className =
+        "secondary-button";
+
+    edit.textContent =
+        "Edit";
+
+    edit.onclick =
+        editFunction;
+
+    const del =
+        document.createElement(
+            "button"
+        );
+
+    del.className =
+        "delete-button";
+
+    del.textContent =
+        "Delete";
+
+    del.onclick =
+        deleteFunction;
+
+    actions.appendChild(
+        edit
+    );
+
+    actions.appendChild(
+        del
+    );
+
+    return actions;
+}
 
 function ministryName(value) {
 
@@ -1627,29 +3748,47 @@ function ministryName(value) {
 
         youth:
             "Youth Ministry"
-
     };
 
-
-    return names[value] ||
-        "Ministry Assignment";
-
+    return (
+        names[value] ||
+        "Ministry Assignment"
+    );
 }
 
+function monthName(month) {
 
+    if (
+        !month ||
+        month < 1 ||
+        month > 12
+    ) {
+        return "";
+    }
 
-/* DATE DISPLAY */
+    return new Date(
+        2026,
+        month - 1,
+        1
+    )
+    .toLocaleDateString(
+        "en-US",
+        {
+            month: "long"
+        }
+    );
+}
 
-function formatDisplayDate(dateString) {
+function formatDisplayDate(
+    dateString
+) {
 
     if (!dateString) {
         return "";
     }
 
-
     const parts =
         dateString.split("-");
-
 
     const date =
         new Date(
@@ -1657,7 +3796,6 @@ function formatDisplayDate(dateString) {
             Number(parts[1]) - 1,
             Number(parts[2])
         );
-
 
     return date.toLocaleDateString(
         "en-US",
@@ -1668,22 +3806,46 @@ function formatDisplayDate(dateString) {
             year: "numeric"
         }
     );
-
 }
 
+function showSuccess(message) {
 
+    const box =
+        document.getElementById(
+            "successMessage"
+        );
+
+    box.textContent =
+        message;
+
+    box.style.display =
+        "block";
+
+    setTimeout(
+        function() {
+
+            box.style.display =
+                "none";
+        },
+        3500
+    );
+}
 
 /* PASSWORD ENTER KEY */
 
-document.getElementById("password")
+document.getElementById(
+    "password"
+)
 .addEventListener(
     "keydown",
     function(event) {
 
-        if (event.key === "Enter") {
+        if (
+            event.key ===
+            "Enter"
+        ) {
             login();
         }
-
     }
 );
 
