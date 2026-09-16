@@ -381,6 +381,45 @@ button {
 
 
 
+
+/* ANNOUNCEMENTS */
+
+.announcement-card {
+    margin-bottom: 12px;
+    padding: 17px;
+    border: 1px solid #d6e5f0;
+    border-radius: 13px;
+    background: white;
+    box-shadow: 0 3px 9px rgba(20,70,110,.05);
+}
+
+.announcement-title {
+    color: #073b6f;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.announcement-date {
+    margin-top: 5px;
+    color: #07578f;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.announcement-message {
+    margin-top: 10px;
+    color: #405c72;
+    line-height: 1.55;
+    white-space: pre-wrap;
+}
+
+.announcement-empty {
+    padding: 25px 10px;
+    color: #718597;
+    text-align: center;
+}
+
 /* MINISTRY ASSIGNMENTS */
 
 .assignment-card {
@@ -1045,7 +1084,11 @@ button {
     <div class="section-content">
         <div class="info-card">
             <h3>Church Announcements</h3>
-            <p>Current church announcements will appear here.</p>
+            <p>Current Bethany Baptist Church announcements appear below.</p>
+        </div>
+
+        <div id="announcementList" class="announcement-empty">
+            Loading announcements...
         </div>
     </div>
 </div>
@@ -1407,6 +1450,11 @@ const assignmentsRef =
 
 let allAssignments = [];
 
+const announcementsRef =
+    database.ref("announcements");
+
+let allAnnouncements = [];
+
 
 
 
@@ -1436,6 +1484,202 @@ eventsRef.on("value", function(snapshot) {
 });
 
 
+
+
+
+/* ANNOUNCEMENTS */
+
+announcementsRef.on(
+    "value",
+    function(snapshot) {
+
+        const data =
+            snapshot.val() || {};
+
+        allAnnouncements = [];
+
+        Object.keys(data).forEach(function(key) {
+
+            const item = data[key];
+
+            if (item && item.title && item.message) {
+
+                allAnnouncements.push({
+                    id: key,
+                    ...item
+                });
+
+            }
+
+        });
+
+        allAnnouncements.sort(function(a,b) {
+
+            const dateCompare =
+                (b.date || "")
+                .localeCompare(a.date || "");
+
+            if (dateCompare !== 0) {
+                return dateCompare;
+            }
+
+            return (b.createdAt || 0) -
+                (a.createdAt || 0);
+
+        });
+
+        renderAnnouncements();
+
+    },
+    function(error) {
+
+        console.log(
+            "Announcements could not be loaded:",
+            error
+        );
+
+        const container =
+            document.getElementById(
+                "announcementList"
+            );
+
+        if (container) {
+            container.className =
+                "announcement-empty";
+
+            container.textContent =
+                "Announcements could not be loaded.";
+        }
+
+    }
+);
+
+
+function renderAnnouncements() {
+
+    const container =
+        document.getElementById(
+            "announcementList"
+        );
+
+    if (!container) {
+        return;
+    }
+
+
+    const today =
+        formatDate(new Date());
+
+
+    const activeItems =
+        allAnnouncements.filter(
+            function(item) {
+
+                return !item.expires ||
+                    item.expires >= today;
+
+            }
+        );
+
+
+    container.innerHTML = "";
+    container.className = "";
+
+
+    if (!activeItems.length) {
+
+        container.className =
+            "announcement-empty";
+
+        container.textContent =
+            "There are no current announcements.";
+
+        return;
+    }
+
+
+    activeItems.forEach(function(item) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "announcement-card";
+
+
+        const title =
+            document.createElement("div");
+
+        title.className =
+            "announcement-title";
+
+        title.textContent =
+            item.title || "Church Announcement";
+
+        card.appendChild(title);
+
+
+        if (item.date) {
+
+            const date =
+                document.createElement("div");
+
+            date.className =
+                "announcement-date";
+
+            date.textContent =
+                formatAnnouncementDate(item.date);
+
+            card.appendChild(date);
+
+        }
+
+
+        const message =
+            document.createElement("div");
+
+        message.className =
+            "announcement-message";
+
+        message.textContent =
+            item.message || "";
+
+        card.appendChild(message);
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+function formatAnnouncementDate(dateString) {
+
+    if (!dateString) {
+        return "";
+    }
+
+    const parts =
+        dateString.split("-");
+
+    const date =
+        new Date(
+            Number(parts[0]),
+            Number(parts[1]) - 1,
+            Number(parts[2])
+        );
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        }
+    );
+
+}
 
 
 /* MINISTRY ASSIGNMENTS */
