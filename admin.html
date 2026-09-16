@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bethany Baptist Church Admin Center</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #eef5fa;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #17324d;
+}
+
+.admin-app {
+    width: 100%;
+    max-width: 650px;
+    min-height: 100vh;
+    margin: auto;
+    background: #f8fbfd;
+}
+
+.header {
+    padding: 25px 20px;
+    background: linear-gradient(135deg,#063765,#07578f);
+    color: white;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 27px;
+}
+
+.header p {
+    margin: 7px 0 0;
+    font-size: 13px;
+    opacity: .9;
+}
+
+.content {
+    padding: 18px;
+}
+
+.card {
+    margin-bottom: 18px;
+    padding: 20px;
+    border: 1px solid #d5e5f0;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(20,70,110,.07);
+}
+
+.card h2 {
+    margin: 0 0 18px;
+    color: #073b6f;
+    font-family: Georgia, serif;
+    font-size: 22px;
+}
+
+label {
+    display: block;
+    margin: 15px 0 6px;
+    color: #294e6b;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bcd2e2;
+    border-radius: 9px;
+    background: white;
+    color: #17324d;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.publish-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: 0;
+    border-radius: 10px;
+    background: #07518a;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.publish-button:hover {
+    background: #063e6a;
+}
+
+.notice {
+    padding: 14px;
+    border-radius: 10px;
+    background: #e8f3fa;
+    color: #34566f;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.verse {
+    padding: 5px 15px 30px;
+    color: #45657e;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.verse strong {
+    display: block;
+    margin-top: 5px;
+    font-style: normal;
+}
+</style>
+</head>
+
+<body>
+
+<div class="admin-app">
+
+    <div class="header">
+        <h1>Bethany Baptist Church</h1>
+        <p>ADMIN CENTER</p>
+    </div>
+
+    <div class="content">
+
+        <div class="card">
+
+            <h2>Add Ministry Assignment</h2>
+
+            <label for="ministry">
+                Ministry / Schedule
+            </label>
+
+            <select id="ministry">
+
+                <option value="">
+                    Select a ministry...
+                </option>
+
+                <option value="bus">
+                    Bus Ministry
+                </option>
+
+                <option value="nursery">
+                    Church Nursery Schedule
+                </option>
+
+                <option value="shelter">
+                    Shelter Meals
+                </option>
+
+                <option value="security">
+                    Security Schedule
+                </option>
+
+                <option value="childrensChurch">
+                    Children's Church Schedule
+                </option>
+
+                <option value="ladies">
+                    Ladies Ministry
+                </option>
+
+                <option value="kingsKids">
+                    King's Kids
+                </option>
+
+                <option value="youth">
+                    Youth Ministry
+                </option>
+
+            </select>
+
+
+            <label for="assignmentDate">
+                Date
+            </label>
+
+            <input
+                id="assignmentDate"
+                type="date"
+            >
+
+
+            <label for="service">
+                Service / Time
+            </label>
+
+            <input
+                id="service"
+                type="text"
+                placeholder="Example: Sunday Morning"
+            >
+
+
+            <label for="workers">
+                Assigned To
+            </label>
+
+            <input
+                id="workers"
+                type="text"
+                placeholder="Example: Sarah & Emily"
+            >
+
+
+            <label for="notes">
+                Notes
+            </label>
+
+            <textarea
+                id="notes"
+                placeholder="Example: Please arrive by 10:15 AM"
+            ></textarea>
+
+
+            <button
+                class="publish-button"
+                type="button"
+            >
+                PUBLISH ASSIGNMENT
+            </button>
+
+        </div>
+
+
+        <div class="notice">
+            <strong>Next:</strong>
+            We will connect this form to Firebase so that
+            clicking Publish actually sends the assignment
+            to the Bethany Member App.
+        </div>
+
+    </div>
+
+
+    <div class="verse">
+        “Let all things be done decently and in order.”
+
+        <strong>
+            1 Corinthians 14:40 KJV
+        </strong>
+    </div>
+
+</div>
+
+</body>
+</html>
