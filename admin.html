@@ -270,6 +270,13 @@ textarea {
 .announcement-expiration{margin-top:7px;color:#64798a;font-size:12px}
 .announcement-actions{display:flex;gap:8px;margin-top:13px}
 
+/* PRAYER REQUESTS */
+.prayer-card{margin-bottom:12px;padding:15px;border:1px solid #d6e5f0;border-radius:12px;background:#fbfdff}
+.prayer-name{color:#073b6f;font-family:Georgia,serif;font-size:18px;font-weight:bold}
+.prayer-date{margin-top:5px;color:#07578f;font-weight:bold}
+.prayer-request{margin-top:8px;color:#405c72;line-height:1.5;white-space:pre-wrap}
+.prayer-actions{display:flex;gap:8px;margin-top:13px}
+
 /* VERSE */
 
 .verse {
@@ -549,6 +556,41 @@ textarea {
             </div>
         </div>
 
+        <!-- PRAYER REQUESTS MANAGER -->
+        <div class="card">
+            <h2 id="prayerFormTitle">Add Prayer Request</h2>
+
+            <label for="prayerName">Name / Title</label>
+            <input id="prayerName" type="text" placeholder="Example: Please pray for the Smith family">
+
+            <label for="prayerDate">Date</label>
+            <input id="prayerDate" type="date">
+
+            <label for="prayerRequest">Prayer Request</label>
+            <textarea id="prayerRequest" placeholder="Enter the approved prayer request here..."></textarea>
+
+            <button id="publishPrayerButton" class="primary-button" onclick="savePrayerRequest()">
+                PUBLISH PRAYER REQUEST
+            </button>
+
+            <button id="cancelPrayerEditButton" class="secondary-button"
+                onclick="cancelPrayerEdit()"
+                style="display:none;width:100%;margin-top:10px;">
+                Cancel Edit
+            </button>
+        </div>
+
+        <div class="card">
+            <h2>Current Prayer Requests</h2>
+            <div class="login-note">
+                Only post requests that are appropriate to share with church members.
+                Avoid private medical details, addresses, phone numbers, or other confidential information.
+            </div>
+            <div id="prayerList">
+                <div class="empty-message">Loading prayer requests...</div>
+            </div>
+        </div>
+
     </div>
 
 
@@ -619,6 +661,9 @@ const assignmentsRef =
 const announcementsRef =
     database.ref("announcements");
 
+const prayerRequestsRef =
+    database.ref("prayerRequests");
+
 
 let editingId = null;
 
@@ -627,6 +672,10 @@ let assignments = {};
 let editingAnnouncementId = null;
 
 let announcements = {};
+
+let editingPrayerId = null;
+
+let prayerRequests = {};
 
 
 
@@ -650,6 +699,7 @@ auth.onAuthStateChanged(function(user) {
 
         loadAssignments();
         loadAnnouncements();
+        loadPrayerRequests();
 
     }
 
@@ -1374,6 +1424,149 @@ function resetAnnouncementForm() {
     document.getElementById("announcementFormTitle").textContent = "Add Announcement";
     document.getElementById("publishAnnouncementButton").textContent = "PUBLISH ANNOUNCEMENT";
     document.getElementById("cancelAnnouncementEditButton").style.display = "none";
+}
+
+
+
+/* PRAYER REQUESTS */
+
+function savePrayerRequest() {
+    const name = document.getElementById("prayerName").value.trim();
+    const date = document.getElementById("prayerDate").value;
+    const requestText = document.getElementById("prayerRequest").value.trim();
+
+    if (!name) { alert("Please enter a name or title."); return; }
+    if (!date) { alert("Please select the prayer request date."); return; }
+    if (!requestText) { alert("Please enter the prayer request."); return; }
+
+    const data = {
+        name: name,
+        date: date,
+        request: requestText,
+        updatedAt: firebase.database.ServerValue.TIMESTAMP
+    };
+
+    const request = editingPrayerId
+        ? prayerRequestsRef.child(editingPrayerId).update(data)
+        : prayerRequestsRef.push({...data, createdAt: firebase.database.ServerValue.TIMESTAMP});
+
+    request.then(function() {
+        showSuccess(editingPrayerId ? "Prayer request updated successfully." : "Prayer request published successfully.");
+        resetPrayerForm();
+    }).catch(function(error) {
+        console.error(error);
+        alert("The prayer request could not be saved.");
+    });
+}
+
+function loadPrayerRequests() {
+    prayerRequestsRef.off();
+    prayerRequestsRef.on("value", function(snapshot) {
+        prayerRequests = snapshot.val() || {};
+        renderPrayerRequests();
+    }, function(error) {
+        console.error(error);
+        document.getElementById("prayerList").innerHTML =
+            '<div class="empty-message">Unable to load prayer requests.</div>';
+    });
+}
+
+function renderPrayerRequests() {
+    const list = document.getElementById("prayerList");
+    list.innerHTML = "";
+
+    const items = Object.keys(prayerRequests).map(function(id) {
+        return {id:id, ...prayerRequests[id]};
+    });
+
+    items.sort(function(a,b) {
+        return (b.date || "").localeCompare(a.date || "");
+    });
+
+    if (!items.length) {
+        list.innerHTML = '<div class="empty-message">No prayer requests have been added yet.</div>';
+        return;
+    }
+
+    items.forEach(function(item) {
+        const card = document.createElement("div");
+        card.className = "prayer-card";
+
+        const name = document.createElement("div");
+        name.className = "prayer-name";
+        name.textContent = item.name || "Prayer Request";
+        card.appendChild(name);
+
+        const date = document.createElement("div");
+        date.className = "prayer-date";
+        date.textContent = formatDisplayDate(item.date);
+        card.appendChild(date);
+
+        const text = document.createElement("div");
+        text.className = "prayer-request";
+        text.textContent = item.request || "";
+        card.appendChild(text);
+
+        const actions = document.createElement("div");
+        actions.className = "prayer-actions";
+
+        const edit = document.createElement("button");
+        edit.className = "secondary-button";
+        edit.textContent = "Edit";
+        edit.onclick = function(){ editPrayerRequest(item.id); };
+
+        const del = document.createElement("button");
+        del.className = "delete-button";
+        del.textContent = "Delete";
+        del.onclick = function(){ deletePrayerRequest(item.id); };
+
+        actions.appendChild(edit);
+        actions.appendChild(del);
+        card.appendChild(actions);
+        list.appendChild(card);
+    });
+}
+
+function editPrayerRequest(id) {
+    const item = prayerRequests[id];
+    if (!item) return;
+
+    editingPrayerId = id;
+    document.getElementById("prayerName").value = item.name || "";
+    document.getElementById("prayerDate").value = item.date || "";
+    document.getElementById("prayerRequest").value = item.request || "";
+    document.getElementById("prayerFormTitle").textContent = "Edit Prayer Request";
+    document.getElementById("publishPrayerButton").textContent = "SAVE PRAYER REQUEST";
+    document.getElementById("cancelPrayerEditButton").style.display = "block";
+    document.getElementById("prayerFormTitle").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function deletePrayerRequest(id) {
+    const item = prayerRequests[id];
+    if (!item) return;
+    if (!confirm("Delete this prayer request?")) return;
+
+    prayerRequestsRef.child(id).remove().then(function() {
+        showSuccess("Prayer request deleted.");
+        if (editingPrayerId === id) resetPrayerForm();
+    }).catch(function(error) {
+        console.error(error);
+        alert("The prayer request could not be deleted.");
+    });
+}
+
+function cancelPrayerEdit() {
+    resetPrayerForm();
+}
+
+function resetPrayerForm() {
+    editingPrayerId = null;
+    document.getElementById("prayerName").value = "";
+    document.getElementById("prayerDate").value = "";
+    document.getElementById("prayerRequest").value = "";
+    document.getElementById("prayerFormTitle").textContent = "Add Prayer Request";
+    document.getElementById("publishPrayerButton").textContent = "PUBLISH PRAYER REQUEST";
+    document.getElementById("cancelPrayerEditButton").style.display = "none";
 }
 
 
