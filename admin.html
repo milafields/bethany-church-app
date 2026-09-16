@@ -262,6 +262,14 @@ textarea {
 }
 
 
+/* ANNOUNCEMENTS */
+.announcement-card{margin-bottom:12px;padding:15px;border:1px solid #d6e5f0;border-radius:12px;background:#fbfdff}
+.announcement-title{color:#073b6f;font-family:Georgia,serif;font-size:18px;font-weight:bold}
+.announcement-date{margin-top:5px;color:#07578f;font-weight:bold}
+.announcement-message{margin-top:8px;color:#405c72;line-height:1.5;white-space:pre-wrap}
+.announcement-expiration{margin-top:7px;color:#64798a;font-size:12px}
+.announcement-actions{display:flex;gap:8px;margin-top:13px}
+
 /* VERSE */
 
 .verse {
@@ -507,6 +515,40 @@ textarea {
 
         </div>
 
+        <!-- ANNOUNCEMENTS MANAGER -->
+        <div class="card">
+            <h2 id="announcementFormTitle">Add Announcement</h2>
+
+            <label for="announcementTitle">Announcement Title</label>
+            <input id="announcementTitle" type="text" placeholder="Example: Fall Revival">
+
+            <label for="announcementDate">Date</label>
+            <input id="announcementDate" type="date">
+
+            <label for="announcementMessage">Announcement / Message</label>
+            <textarea id="announcementMessage" placeholder="Enter the announcement here..."></textarea>
+
+            <label for="announcementExpires">Expiration Date (Optional)</label>
+            <input id="announcementExpires" type="date">
+
+            <button id="publishAnnouncementButton" class="primary-button" onclick="saveAnnouncement()">
+                PUBLISH ANNOUNCEMENT
+            </button>
+
+            <button id="cancelAnnouncementEditButton" class="secondary-button"
+                onclick="cancelAnnouncementEdit()"
+                style="display:none;width:100%;margin-top:10px;">
+                Cancel Edit
+            </button>
+        </div>
+
+        <div class="card">
+            <h2>Current Announcements</h2>
+            <div id="announcementList">
+                <div class="empty-message">Loading announcements...</div>
+            </div>
+        </div>
+
     </div>
 
 
@@ -574,10 +616,17 @@ const database =
 const assignmentsRef =
     database.ref("assignments");
 
+const announcementsRef =
+    database.ref("announcements");
+
 
 let editingId = null;
 
 let assignments = {};
+
+let editingAnnouncementId = null;
+
+let announcements = {};
 
 
 
@@ -600,6 +649,7 @@ auth.onAuthStateChanged(function(user) {
         .textContent = user.email;
 
         loadAssignments();
+        loadAnnouncements();
 
     }
 
@@ -1171,6 +1221,160 @@ function resetForm() {
 
 }
 
+
+
+
+/* ANNOUNCEMENTS */
+
+function saveAnnouncement() {
+    const title = document.getElementById("announcementTitle").value.trim();
+    const date = document.getElementById("announcementDate").value;
+    const message = document.getElementById("announcementMessage").value.trim();
+    const expires = document.getElementById("announcementExpires").value;
+
+    if (!title) { alert("Please enter an announcement title."); return; }
+    if (!date) { alert("Please select the announcement date."); return; }
+    if (!message) { alert("Please enter the announcement message."); return; }
+
+    const data = {
+        title: title,
+        date: date,
+        message: message,
+        expires: expires,
+        updatedAt: firebase.database.ServerValue.TIMESTAMP
+    };
+
+    const request = editingAnnouncementId
+        ? announcementsRef.child(editingAnnouncementId).update(data)
+        : announcementsRef.push({...data, createdAt: firebase.database.ServerValue.TIMESTAMP});
+
+    request.then(function() {
+        showSuccess(editingAnnouncementId ? "Announcement updated successfully." : "Announcement published successfully.");
+        resetAnnouncementForm();
+    }).catch(function(error) {
+        console.error(error);
+        alert("The announcement could not be saved.");
+    });
+}
+
+function loadAnnouncements() {
+    announcementsRef.off();
+    announcementsRef.on("value", function(snapshot) {
+        announcements = snapshot.val() || {};
+        renderAnnouncements();
+    }, function(error) {
+        console.error(error);
+        document.getElementById("announcementList").innerHTML =
+            '<div class="empty-message">Unable to load announcements.</div>';
+    });
+}
+
+function renderAnnouncements() {
+    const list = document.getElementById("announcementList");
+    list.innerHTML = "";
+
+    const items = Object.keys(announcements).map(function(id) {
+        return {id:id, ...announcements[id]};
+    });
+
+    items.sort(function(a,b) {
+        return (b.date || "").localeCompare(a.date || "");
+    });
+
+    if (!items.length) {
+        list.innerHTML = '<div class="empty-message">No announcements have been added yet.</div>';
+        return;
+    }
+
+    items.forEach(function(item) {
+        const card = document.createElement("div");
+        card.className = "announcement-card";
+
+        const title = document.createElement("div");
+        title.className = "announcement-title";
+        title.textContent = item.title || "Church Announcement";
+        card.appendChild(title);
+
+        const date = document.createElement("div");
+        date.className = "announcement-date";
+        date.textContent = formatDisplayDate(item.date);
+        card.appendChild(date);
+
+        const message = document.createElement("div");
+        message.className = "announcement-message";
+        message.textContent = item.message || "";
+        card.appendChild(message);
+
+        if (item.expires) {
+            const exp = document.createElement("div");
+            exp.className = "announcement-expiration";
+            exp.textContent = "Expires: " + formatDisplayDate(item.expires);
+            card.appendChild(exp);
+        }
+
+        const actions = document.createElement("div");
+        actions.className = "announcement-actions";
+
+        const edit = document.createElement("button");
+        edit.className = "secondary-button";
+        edit.textContent = "Edit";
+        edit.onclick = function(){ editAnnouncement(item.id); };
+
+        const del = document.createElement("button");
+        del.className = "delete-button";
+        del.textContent = "Delete";
+        del.onclick = function(){ deleteAnnouncement(item.id); };
+
+        actions.appendChild(edit);
+        actions.appendChild(del);
+        card.appendChild(actions);
+        list.appendChild(card);
+    });
+}
+
+function editAnnouncement(id) {
+    const item = announcements[id];
+    if (!item) return;
+
+    editingAnnouncementId = id;
+    document.getElementById("announcementTitle").value = item.title || "";
+    document.getElementById("announcementDate").value = item.date || "";
+    document.getElementById("announcementMessage").value = item.message || "";
+    document.getElementById("announcementExpires").value = item.expires || "";
+    document.getElementById("announcementFormTitle").textContent = "Edit Announcement";
+    document.getElementById("publishAnnouncementButton").textContent = "SAVE ANNOUNCEMENT";
+    document.getElementById("cancelAnnouncementEditButton").style.display = "block";
+    document.getElementById("announcementFormTitle").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function deleteAnnouncement(id) {
+    const item = announcements[id];
+    if (!item) return;
+    if (!confirm('Delete the announcement "' + (item.title || "Church Announcement") + '"?')) return;
+
+    announcementsRef.child(id).remove().then(function() {
+        showSuccess("Announcement deleted.");
+        if (editingAnnouncementId === id) resetAnnouncementForm();
+    }).catch(function(error) {
+        console.error(error);
+        alert("The announcement could not be deleted.");
+    });
+}
+
+function cancelAnnouncementEdit() {
+    resetAnnouncementForm();
+}
+
+function resetAnnouncementForm() {
+    editingAnnouncementId = null;
+    document.getElementById("announcementTitle").value = "";
+    document.getElementById("announcementDate").value = "";
+    document.getElementById("announcementMessage").value = "";
+    document.getElementById("announcementExpires").value = "";
+    document.getElementById("announcementFormTitle").textContent = "Add Announcement";
+    document.getElementById("publishAnnouncementButton").textContent = "PUBLISH ANNOUNCEMENT";
+    document.getElementById("cancelAnnouncementEditButton").style.display = "none";
+}
 
 
 /* SUCCESS */
