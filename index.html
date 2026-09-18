@@ -573,7 +573,8 @@ button {
     border-radius: 12px;
     background: white;
 }
-    .event-date {
+
+.event-date {
     flex: 0 0 55px;
     padding: 7px 3px;
     border-radius: 9px;
@@ -847,7 +848,6 @@ button {
 
     </div>
 </div>
-
 <!-- CALENDAR -->
 
 <div id="calendarSection" class="section">
@@ -881,27 +881,52 @@ button {
 
         <div class="calendar-navigation">
 
-            <button class="calendar-arrow" onclick="previousPeriod()">‹</button>
+            <button
+                class="calendar-arrow"
+                onclick="previousPeriod()"
+            >
+                ‹
+            </button>
 
-            <div id="calendarPeriod" class="calendar-period"></div>
+            <div
+                id="calendarPeriod"
+                class="calendar-period"
+            ></div>
 
-            <button class="calendar-arrow" onclick="nextPeriod()">›</button>
+            <button
+                class="calendar-arrow"
+                onclick="nextPeriod()"
+            >
+                ›
+            </button>
 
         </div>
 
-        <button class="today-button" onclick="goToday()">Today</button>
+        <button
+            class="today-button"
+            onclick="goToday()"
+        >
+            Today
+        </button>
 
         <div id="calendarDisplay"></div>
 
     </div>
 </div>
 
+
 <!-- ANNOUNCEMENTS -->
 
 <div id="announcementsSection" class="section">
 
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Announcements</h2>
     </div>
 
@@ -909,238 +934,506 @@ button {
 
         <div class="info-card">
             <h3>Church Announcements</h3>
-            <p>Current Bethany Baptist Church announcements appear below.</p>
+            <p>
+                Current Bethany Baptist Church
+                announcements appear below.
+            </p>
         </div>
 
-        <div id="announcementList" class="announcement-empty">
+        <div
+            id="announcementList"
+            class="announcement-empty"
+        >
             Loading announcements...
         </div>
 
     </div>
 </div>
 
+
 <!-- NEWSLETTER -->
 
 <div id="newsletterSection" class="section">
 
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Church Newsletter</h2>
+
     </div>
 
     <div class="section-content">
 
         <div class="info-card">
+
             <h3>Church Newsletter</h3>
-            <p>Current and recent Bethany Baptist Church newsletters appear below.</p>
+
+            <p>
+                Current and recent Bethany Baptist Church
+                newsletters appear below.
+            </p>
+
         </div>
 
-        <div id="newsletterList" class="assignment-empty">
+        <div
+            id="newsletterList"
+            class="assignment-empty"
+        >
             Loading newsletters...
         </div>
 
     </div>
 </div>
 
-<!-- PRAYER -->
+
+<!-- PRAYER REQUESTS -->
 
 <div id="prayerSection" class="section">
 
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Prayer Requests</h2>
+
     </div>
 
     <div class="section-content">
 
         <div class="info-card">
+
             <h3>Prayer Requests</h3>
-            <p>Approved Bethany Baptist Church prayer requests appear below.</p>
+
+            <p>
+                Approved Bethany Baptist Church
+                prayer requests appear below.
+            </p>
+
         </div>
 
-        <div id="prayerList" class="assignment-empty">
+        <div
+            id="prayerList"
+            class="assignment-empty"
+        >
             Loading prayer requests...
         </div>
 
     </div>
 </div>
 
-<!-- MINISTRY SECTIONS -->
+
+<!-- BUS MINISTRY -->
 
 <div id="busSection" class="section">
+
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Bus Ministry</h2>
+
     </div>
+
     <div class="section-content">
+
         <div class="info-card">
+
             <h3>Bus Ministry</h3>
-            <p>Current and upcoming assignments appear below.</p>
+
+            <p>
+                Current and upcoming assignments
+                appear below.
+            </p>
+
         </div>
-        <div id="busAssignments" class="assignment-empty">
+
+        <div
+            id="busAssignments"
+            class="assignment-empty"
+        >
             Loading assignments...
         </div>
+
     </div>
 </div>
+
+
+<!-- NURSERY -->
 
 <div id="nurserySection" class="section">
+
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Nursery Schedule</h2>
+
     </div>
+
     <div class="section-content">
+
         <div class="info-card">
+
             <h3>Church Nursery Schedule</h3>
-            <p>Current and upcoming assignments appear below.</p>
+
+            <p>
+                Current and upcoming assignments
+                appear below.
+            </p>
+
         </div>
-        <div id="nurseryAssignments" class="assignment-empty">
+
+        <div
+            id="nurseryAssignments"
+            class="assignment-empty"
+        >
             Loading assignments...
         </div>
+
     </div>
 </div>
+
+
+<!-- SHELTER MEALS -->
 
 <div id="shelterSection" class="section">
+
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Shelter Meals</h2>
+
     </div>
+
     <div class="section-content">
+
         <div class="info-card">
+
             <h3>Shelter Meal Schedule</h3>
-            <p>Current and upcoming assignments appear below.</p>
+
+            <p>
+                Current and upcoming assignments
+                appear below.
+            </p>
+
         </div>
-        <div id="shelterAssignments" class="assignment-empty">
+
+        <div
+            id="shelterAssignments"
+            class="assignment-empty"
+        >
             Loading assignments...
         </div>
+
     </div>
 </div>
+
+
+<!-- SECURITY -->
 
 <div id="securitySection" class="section">
+
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Security Schedule</h2>
+
     </div>
+
     <div class="section-content">
+
         <div class="info-card">
+
             <h3>Security Team</h3>
-            <p>Current and upcoming assignments appear below.</p>
+
+            <p>
+                Current and upcoming assignments
+                appear below.
+            </p>
+
         </div>
-        <div id="securityAssignments" class="assignment-empty">
+
+        <div
+            id="securityAssignments"
+            class="assignment-empty"
+        >
             Loading assignments...
         </div>
+
     </div>
 </div>
+
+
+<!-- CHILDREN'S CHURCH -->
 
 <div id="childrensChurchSection" class="section">
+
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Children's Church</h2>
+
     </div>
+
     <div class="section-content">
+
         <div class="info-card">
+
             <h3>Children's Church Schedule</h3>
-            <p>Current and upcoming assignments appear below.</p>
+
+            <p>
+                Current and upcoming assignments
+                appear below.
+            </p>
+
         </div>
-        <div id="childrensChurchAssignments" class="assignment-empty">
+
+        <div
+            id="childrensChurchAssignments"
+            class="assignment-empty"
+        >
             Loading assignments...
         </div>
+
     </div>
 </div>
+
+
+<!-- LADIES MINISTRY -->
+
 <div id="ladiesSection" class="section">
+
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Ladies Ministry</h2>
+
     </div>
+
     <div class="section-content">
+
         <div class="info-card">
+
             <h3>Ladies Ministry</h3>
-            <p>Current and upcoming assignments appear below.</p>
+
+            <p>
+                Current and upcoming assignments
+                appear below.
+            </p>
+
         </div>
-        <div id="ladiesAssignments" class="assignment-empty">
+
+        <div
+            id="ladiesAssignments"
+            class="assignment-empty"
+        >
             Loading assignments...
         </div>
+
     </div>
 </div>
+
+
+<!-- KING'S KIDS -->
 
 <div id="kingsKidsSection" class="section">
+
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>King's Kids</h2>
+
     </div>
+
     <div class="section-content">
+
         <div class="info-card">
+
             <h3>King's Kids</h3>
-            <p>Current and upcoming assignments appear below.</p>
+
+            <p>
+                Current and upcoming assignments
+                appear below.
+            </p>
+
         </div>
-        <div id="kingsKidsAssignments" class="assignment-empty">
+
+        <div
+            id="kingsKidsAssignments"
+            class="assignment-empty"
+        >
             Loading assignments...
         </div>
+
     </div>
 </div>
+
+
+<!-- YOUTH MINISTRY -->
 
 <div id="youthSection" class="section">
+
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Youth Ministry</h2>
+
     </div>
+
     <div class="section-content">
+
         <div class="info-card">
+
             <h3>Youth Ministry</h3>
-            <p>Current and upcoming assignments appear below.</p>
+
+            <p>
+                Current and upcoming assignments
+                appear below.
+            </p>
+
         </div>
-        <div id="youthAssignments" class="assignment-empty">
+
+        <div
+            id="youthAssignments"
+            class="assignment-empty"
+        >
             Loading assignments...
         </div>
+
     </div>
 </div>
 
-<!-- BIRTHDAYS -->
+
+<!-- BIRTHDAYS & ANNIVERSARIES -->
 
 <div id="birthdaysSection" class="section">
 
     <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
+
+        <button
+            class="back-button"
+            onclick="showHome()"
+        >
+            ‹
+        </button>
+
         <h2>Birthdays & Anniversaries</h2>
+
     </div>
 
     <div class="section-content">
 
         <div class="info-card">
+
             <p>
                 <strong>
                     On behalf of Bethany Baptist Church,
                     Happy Birthday and Happy Anniversary!
                 </strong>
             </p>
+
         </div>
 
-        <div id="celebrationList" class="assignment-empty">
+        <div
+            id="celebrationList"
+            class="assignment-empty"
+        >
             Loading birthdays & anniversaries...
         </div>
 
     </div>
 </div>
 
-<!-- BOTTOM NAV -->
+
+<!-- BOTTOM NAVIGATION -->
 
 <div class="bottom-nav">
 
-    <button class="nav-button" onclick="showHome()">
+    <button
+        class="nav-button"
+        onclick="showHome()"
+    >
         <span class="nav-icon">⌂</span>
         <span class="nav-label">Home</span>
     </button>
 
-    <button class="nav-button" onclick="openCalendar()">
+    <button
+        class="nav-button"
+        onclick="openCalendar()"
+    >
         <span class="nav-icon">▣</span>
         <span class="nav-label">Calendar</span>
     </button>
 
-    <button class="nav-button" onclick="showSection('announcementsSection')">
+    <button
+        class="nav-button"
+        onclick="showSection('announcementsSection')"
+    >
         <span class="nav-icon">●</span>
         <span class="nav-label">Announcements</span>
     </button>
 
-    <button class="nav-button" onclick="showSection('nurserySection')">
+    <button
+        class="nav-button"
+        onclick="showSection('nurserySection')"
+    >
         <span class="nav-icon">•••</span>
         <span class="nav-label">Schedules</span>
     </button>
@@ -1149,6 +1442,7 @@ button {
 
 </div>
 
+
 <!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
@@ -1156,8 +1450,7 @@ button {
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-messaging-compat.js"></script>
 
 <script>
-
-/* =========================================
+    /* =========================================
    MEMBER ACCESS
 ========================================= */
 
@@ -1190,6 +1483,7 @@ function checkCode() {
     }
 }
 
+
 function openApp() {
 
     document.getElementById(
@@ -1203,6 +1497,7 @@ function openApp() {
     updateNotificationButton();
 }
 
+
 document.getElementById(
     "memberCode"
 ).addEventListener(
@@ -1214,6 +1509,7 @@ document.getElementById(
         }
     }
 );
+
 
 if (
     sessionStorage.getItem(
@@ -1241,13 +1537,19 @@ function showSection(id) {
 
     document.getElementById(
         id
-    ).classList.add("active");
+    ).classList.add(
+        "active"
+    );
 
     window.scrollTo(0,0);
 }
 
+
 function showHome() {
-    showSection("homeSection");
+
+    showSection(
+        "homeSection"
+    );
 }
 
 
@@ -1279,12 +1581,15 @@ const firebaseConfig = {
         "1:41941951557:web:739ded386d42190c97ef2c"
 };
 
+
 firebase.initializeApp(
     firebaseConfig
 );
 
+
 const database =
     firebase.database();
+
 
 const eventsRef =
     database.ref("events");
@@ -1315,7 +1620,9 @@ const anniversariesRef =
 const VAPID_KEY =
     "BJDxa06__6F-iFGdhhcFFe6zLt7kB2X1byTfqmRxD_1JkSsX1LrnkzPTo26e1h6cL3mGftPQgzYMygUL6N1LZns";
 
+
 let messaging = null;
+
 
 try {
 
@@ -1354,6 +1661,7 @@ async function enableNotifications() {
             "notificationStatus"
         );
 
+
     if (
         !("Notification" in window) ||
         !("serviceWorker" in navigator) ||
@@ -1366,15 +1674,18 @@ async function enableNotifications() {
         return;
     }
 
+
     button.disabled = true;
 
     status.textContent =
         "Setting up notifications...";
 
+
     try {
 
         const permission =
             await Notification.requestPermission();
+
 
         if (
             permission !== "granted"
@@ -1388,21 +1699,25 @@ async function enableNotifications() {
             return;
         }
 
+
         /*
-        Make sure the Bethany service worker
-        is registered before asking Firebase
-        for this device's notification token.
+        Register the Bethany service worker
+        before requesting the Firebase
+        notification token.
         */
 
         const registration =
             await navigator.serviceWorker.register(
                 "./service-worker.js",
                 {
-                    updateViaCache:"none"
+                    updateViaCache:
+                        "none"
                 }
             );
 
+
         await registration.update();
+
 
         const token =
             await messaging.getToken({
@@ -1414,46 +1729,46 @@ async function enableNotifications() {
                     registration
             });
 
+
         if (!token) {
 
             status.textContent =
-                "Notifications could not be registered. Please try again.";
+                "ERROR: Firebase did not return a notification token.";
 
             button.disabled = false;
 
             return;
         }
 
-        /*
-        Save this device's token locally.
-
-        We are intentionally NOT placing
-        notification server credentials in
-        this public GitHub app.
-        */
 
         localStorage.setItem(
             "bethanyNotificationToken",
             token
         );
 
+
         localStorage.setItem(
             "bethanyNotificationsEnabled",
             "yes"
         );
 
+
         status.textContent =
             "✓ Notifications are turned on.";
+
 
         button.textContent =
             "✓ NOTIFICATIONS ON";
 
+
         button.disabled = true;
+
 
         console.log(
             "Bethany notification token:",
             token
         );
+
 
     } catch(error) {
 
@@ -1462,8 +1777,22 @@ async function enableNotifications() {
             error
         );
 
+
+        /*
+        IMPORTANT:
+        Show the actual Firebase error
+        directly on the phone so we can
+        determine why registration failed.
+        */
+
         status.textContent =
-            "Notifications could not be turned on. Please try again.";
+            "ERROR: " +
+            (
+                error.message ||
+                error.code ||
+                String(error)
+            );
+
 
         button.disabled = false;
     }
@@ -1486,12 +1815,14 @@ function updateNotificationButton() {
             "notificationStatus"
         );
 
+
     if (
         !button ||
         !status
     ) {
         return;
     }
+
 
     if (
         !("Notification" in window)
@@ -1504,6 +1835,7 @@ function updateNotificationButton() {
 
         return;
     }
+
 
     if (
         Notification.permission ===
@@ -1520,6 +1852,7 @@ function updateNotificationButton() {
 
         status.textContent =
             "You are set to receive church notifications.";
+
 
     } else if (
         Notification.permission ===
@@ -1551,20 +1884,18 @@ if (messaging) {
                 payload
             );
 
+
             const title =
                 payload.notification?.title ||
                 payload.data?.title ||
                 "Bethany Baptist Church";
+
 
             const body =
                 payload.notification?.body ||
                 payload.data?.body ||
                 "You have a new church notification.";
 
-            /*
-            When the app is already open,
-            display the incoming notification.
-            */
 
             if (
                 Notification.permission ===
@@ -1578,8 +1909,13 @@ if (messaging) {
                         title,
                         {
                             body: body,
-                            icon: "./icon-192.png",
-                            badge: "./icon-192.png",
+
+                            icon:
+                                "./icon-192.png",
+
+                            badge:
+                                "./icon-192.png",
+
                             data: {
                                 url:
                                     payload.data?.url ||
@@ -1620,35 +1956,36 @@ eventsRef.on(
             snapshot.val() || {};
 
         const today =
-            formatDate(new Date());
+            formatDate(
+                new Date()
+            );
 
         allEvents = [];
 
+
         Object.keys(
             data
-        ).forEach(function(key) {
+        ).forEach(
+            function(key) {
 
-            const item =
-                data[key];
+                const item =
+                    data[key];
 
-            /*
-            Past events remain stored
-            in Firebase but are not
-            displayed in the member app.
-            */
 
-            if (
-                item &&
-                item.date &&
-                item.date >= today
-            ) {
+                if (
+                    item &&
+                    item.date &&
+                    item.date >= today
+                ) {
 
-                allEvents.push({
-                    id:key,
-                    ...item
-                });
+                    allEvents.push({
+                        id:key,
+                        ...item
+                    });
+                }
             }
-        });
+        );
+
 
         allEvents.sort(
             function(a,b) {
@@ -1660,6 +1997,7 @@ eventsRef.on(
                 );
             }
         );
+
 
         renderCalendar();
     },
@@ -1687,27 +2025,242 @@ announcementsRef.on(
 
         allAnnouncements = [];
 
+
         Object.keys(
             data
-        ).forEach(function(key) {
+        ).forEach(
+            function(key) {
 
-            const item =
-                data[key];
+                const item =
+                    data[key];
 
-            if (
-                item &&
-                item.title &&
-                item.message
-            ) {
 
-                allAnnouncements.push({
-                    id:key,
-                    ...item
-                });
+                if (
+                    item &&
+                    item.title &&
+                    item.message
+                ) {
+
+                    allAnnouncements.push({
+                        id:key,
+                        ...item
+                    });
+                }
             }
-        });
+        );
+
 
         allAnnouncements.sort(
+            function(a,b) {
+
+                const dateCompare =
+                    (b.date || "")
+                    .localeCompare(
+                        a.date || ""
+                    );
+
+
+                if (
+                    dateCompare !== 0
+                ) {
+
+                    return dateCompare;
+                }
+
+
+                return (
+                    b.createdAt || 0
+                ) -
+                (
+                    a.createdAt || 0
+                );
+            }
+        );
+
+
+        renderAnnouncements();
+    },
+
+    function(error) {
+
+        console.log(
+            "Announcements could not be loaded:",
+            error
+        );
+
+
+        const container =
+            document.getElementById(
+                "announcementList"
+            );
+
+
+        if (container) {
+
+            container.textContent =
+                "Announcements could not be loaded.";
+        }
+    }
+);
+
+
+function renderAnnouncements() {
+
+    const container =
+        document.getElementById(
+            "announcementList"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const today =
+        formatDate(
+            new Date()
+        );
+
+
+    const activeItems =
+        allAnnouncements.filter(
+            function(item) {
+
+                return (
+                    !item.expires ||
+                    item.expires >= today
+                );
+            }
+        );
+
+
+    container.innerHTML = "";
+
+    container.className = "";
+
+
+    if (
+        !activeItems.length
+    ) {
+
+        container.className =
+            "announcement-empty";
+
+        container.textContent =
+            "There are no current announcements.";
+
+        return;
+    }
+
+
+    activeItems.forEach(
+        function(item) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "announcement-card";
+
+
+            const title =
+                document.createElement(
+                    "div"
+                );
+
+            title.className =
+                "announcement-title";
+
+            title.textContent =
+                item.title ||
+                "Church Announcement";
+
+            card.appendChild(
+                title
+            );
+
+
+            if (item.date) {
+
+                const date =
+                    document.createElement(
+                        "div"
+                    );
+
+                date.className =
+                    "announcement-date";
+
+                date.textContent =
+                    formatAssignmentDate(
+                        item.date
+                    );
+
+                card.appendChild(
+                    date
+                );
+            }
+
+
+            const message =
+                document.createElement(
+                    "div"
+                );
+
+            message.className =
+                "announcement-message";
+
+            message.textContent =
+                item.message || "";
+
+            card.appendChild(
+                message
+            );
+
+
+            container.appendChild(
+                card
+            );
+        }
+    );
+}
+    /* =========================================
+   PRAYER REQUESTS
+========================================= */
+
+prayerRequestsRef.on(
+    "value",
+    function(snapshot) {
+
+        const data =
+            snapshot.val() || {};
+
+        allPrayerRequests = [];
+
+
+        Object.keys(data).forEach(
+            function(key) {
+
+                const item =
+                    data[key];
+
+                if (
+                    item &&
+                    item.request
+                ) {
+
+                    allPrayerRequests.push({
+                        id:key,
+                        ...item
+                    });
+                }
+            }
+        );
+
+
+        allPrayerRequests.sort(
             function(a,b) {
 
                 const dateCompare =
@@ -1731,180 +2284,6 @@ announcementsRef.on(
             }
         );
 
-        renderAnnouncements();
-    },
-
-    function(error) {
-
-        console.log(
-            "Announcements could not be loaded:",
-            error
-        );
-
-        const container =
-            document.getElementById(
-                "announcementList"
-            );
-
-        if (container) {
-
-            container.textContent =
-                "Announcements could not be loaded.";
-        }
-    }
-);
-
-
-function renderAnnouncements() {
-
-    const container =
-        document.getElementById(
-            "announcementList"
-        );
-
-    if (!container) return;
-
-    const today =
-        formatDate(new Date());
-
-    const activeItems =
-        allAnnouncements.filter(
-            function(item) {
-
-                return (
-                    !item.expires ||
-                    item.expires >= today
-                );
-            }
-        );
-
-    container.innerHTML = "";
-    container.className = "";
-
-    if (
-        !activeItems.length
-    ) {
-
-        container.className =
-            "announcement-empty";
-
-        container.textContent =
-            "There are no current announcements.";
-
-        return;
-    }
-
-    activeItems.forEach(
-        function(item) {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-            card.className =
-                "announcement-card";
-
-            const title =
-                document.createElement(
-                    "div"
-                );
-
-            title.className =
-                "announcement-title";
-
-            title.textContent =
-                item.title ||
-                "Church Announcement";
-
-            card.appendChild(title);
-
-            if (item.date) {
-
-                const date =
-                    document.createElement(
-                        "div"
-                    );
-
-                date.className =
-                    "announcement-date";
-
-                date.textContent =
-                    formatAssignmentDate(
-                        item.date
-                    );
-
-                card.appendChild(date);
-            }
-
-            const message =
-                document.createElement(
-                    "div"
-                );
-
-            message.className =
-                "announcement-message";
-
-            message.textContent =
-                item.message || "";
-
-            card.appendChild(message);
-
-            container.appendChild(card);
-        }
-    );
-}
-    /* =========================================
-   PRAYER REQUESTS
-========================================= */
-
-prayerRequestsRef.on(
-    "value",
-    function(snapshot) {
-
-        const data =
-            snapshot.val() || {};
-
-        allPrayerRequests = [];
-
-        Object.keys(data).forEach(
-            function(key) {
-
-                const item = data[key];
-
-                if (
-                    item &&
-                    item.request
-                ) {
-
-                    allPrayerRequests.push({
-                        id: key,
-                        ...item
-                    });
-                }
-            }
-        );
-
-        allPrayerRequests.sort(
-            function(a,b) {
-
-                const dateCompare =
-                    (b.date || "")
-                    .localeCompare(
-                        a.date || ""
-                    );
-
-                if (dateCompare !== 0) {
-                    return dateCompare;
-                }
-
-                return (
-                    b.createdAt || 0
-                ) - (
-                    a.createdAt || 0
-                );
-            }
-        );
 
         renderPrayerRequests();
     },
@@ -1937,21 +2316,29 @@ function renderPrayerRequests() {
             "prayerList"
         );
 
-    if (!container) return;
+
+    if (!container) {
+        return;
+    }
+
 
     container.innerHTML = "";
     container.className = "";
 
-    if (!allPrayerRequests.length) {
+
+    if (
+        !allPrayerRequests.length
+    ) {
 
         container.className =
             "assignment-empty";
 
         container.textContent =
-            "There are no prayer requests posted at this time.";
+            "There are no prayer requests at this time.";
 
         return;
     }
+
 
     allPrayerRequests.forEach(
         function(item) {
@@ -1963,6 +2350,7 @@ function renderPrayerRequests() {
 
             card.className =
                 "live-card";
+
 
             const title =
                 document.createElement(
@@ -1976,25 +2364,29 @@ function renderPrayerRequests() {
                 item.name ||
                 "Prayer Request";
 
-            card.appendChild(title);
+            card.appendChild(
+                title
+            );
 
 
             if (item.date) {
 
-                const date =
+                const meta =
                     document.createElement(
                         "div"
                     );
 
-                date.className =
+                meta.className =
                     "live-meta";
 
-                date.textContent =
+                meta.textContent =
                     formatAssignmentDate(
                         item.date
                     );
 
-                card.appendChild(date);
+                card.appendChild(
+                    meta
+                );
             }
 
 
@@ -2009,9 +2401,14 @@ function renderPrayerRequests() {
             request.textContent =
                 item.request || "";
 
-            card.appendChild(request);
+            card.appendChild(
+                request
+            );
 
-            container.appendChild(card);
+
+            container.appendChild(
+                card
+            );
         }
     );
 }
@@ -2030,11 +2427,13 @@ newsletterRef.on(
 
         allNewsletters = [];
 
+
         Object.keys(data).forEach(
             function(key) {
 
                 const item =
                     data[key];
+
 
                 if (
                     item &&
@@ -2050,26 +2449,18 @@ newsletterRef.on(
             }
         );
 
+
         allNewsletters.sort(
             function(a,b) {
 
-                const dateCompare =
-                    (b.date || "")
-                    .localeCompare(
-                        a.date || ""
-                    );
-
-                if (dateCompare !== 0) {
-                    return dateCompare;
-                }
-
                 return (
-                    b.createdAt || 0
-                ) - (
-                    a.createdAt || 0
+                    b.date || ""
+                ).localeCompare(
+                    a.date || ""
                 );
             }
         );
+
 
         renderNewsletters();
     },
@@ -2102,21 +2493,29 @@ function renderNewsletters() {
             "newsletterList"
         );
 
-    if (!container) return;
+
+    if (!container) {
+        return;
+    }
+
 
     container.innerHTML = "";
     container.className = "";
 
-    if (!allNewsletters.length) {
+
+    if (
+        !allNewsletters.length
+    ) {
 
         container.className =
             "assignment-empty";
 
         container.textContent =
-            "There are no newsletters posted at this time.";
+            "There are no newsletters available.";
 
         return;
     }
+
 
     allNewsletters.forEach(
         function(item) {
@@ -2142,25 +2541,29 @@ function renderNewsletters() {
                 item.title ||
                 "Church Newsletter";
 
-            card.appendChild(title);
+            card.appendChild(
+                title
+            );
 
 
             if (item.date) {
 
-                const date =
+                const meta =
                     document.createElement(
                         "div"
                     );
 
-                date.className =
+                meta.className =
                     "live-meta";
 
-                date.textContent =
+                meta.textContent =
                     formatAssignmentDate(
                         item.date
                     );
 
-                card.appendChild(date);
+                card.appendChild(
+                    meta
+                );
             }
 
 
@@ -2177,7 +2580,9 @@ function renderNewsletters() {
                 note.textContent =
                     item.note;
 
-                card.appendChild(note);
+                card.appendChild(
+                    note
+                );
             }
 
 
@@ -2196,14 +2601,19 @@ function renderNewsletters() {
                 "_blank";
 
             link.rel =
-                "noopener";
+                "noopener noreferrer";
 
             link.textContent =
                 "OPEN NEWSLETTER";
 
-            card.appendChild(link);
+            card.appendChild(
+                link
+            );
 
-            container.appendChild(card);
+
+            container.appendChild(
+                card
+            );
         }
     );
 }
@@ -2213,6 +2623,34 @@ function renderNewsletters() {
    MINISTRY ASSIGNMENTS
 ========================================= */
 
+const ministryContainers = {
+
+    bus:
+        "busAssignments",
+
+    nursery:
+        "nurseryAssignments",
+
+    shelter:
+        "shelterAssignments",
+
+    security:
+        "securityAssignments",
+
+    childrensChurch:
+        "childrensChurchAssignments",
+
+    ladies:
+        "ladiesAssignments",
+
+    kingsKids:
+        "kingsKidsAssignments",
+
+    youth:
+        "youthAssignments"
+};
+
+
 assignmentsRef.on(
     "value",
     function(snapshot) {
@@ -2221,9 +2659,12 @@ assignmentsRef.on(
             snapshot.val() || {};
 
         const today =
-            formatDate(new Date());
+            formatDate(
+                new Date()
+            );
 
         allAssignments = [];
+
 
         Object.keys(data).forEach(
             function(key) {
@@ -2231,11 +2672,6 @@ assignmentsRef.on(
                 const item =
                     data[key];
 
-                /*
-                Assignments disappear from
-                the member app after their
-                scheduled date.
-                */
 
                 if (
                     item &&
@@ -2251,6 +2687,7 @@ assignmentsRef.on(
             }
         );
 
+
         allAssignments.sort(
             function(a,b) {
 
@@ -2260,9 +2697,13 @@ assignmentsRef.on(
                         b.date || ""
                     );
 
-                if (dateCompare !== 0) {
+                if (
+                    dateCompare !== 0
+                ) {
+
                     return dateCompare;
                 }
+
 
                 return (
                     a.service || ""
@@ -2272,7 +2713,8 @@ assignmentsRef.on(
             }
         );
 
-        renderAllMinistryAssignments();
+
+        renderAssignments();
     },
 
     function(error) {
@@ -2281,175 +2723,226 @@ assignmentsRef.on(
             "Assignments could not be loaded:",
             error
         );
+
+        Object.values(
+            ministryContainers
+        ).forEach(
+            function(containerId) {
+
+                const container =
+                    document.getElementById(
+                        containerId
+                    );
+
+                if (container) {
+
+                    container.textContent =
+                        "Assignments could not be loaded.";
+                }
+            }
+        );
     }
 );
 
 
-function renderAllMinistryAssignments() {
+function renderAssignments() {
 
-    renderMinistryAssignments(
-        "bus",
-        "busAssignments"
+    Object.values(
+        ministryContainers
+    ).forEach(
+        function(containerId) {
+
+            const container =
+                document.getElementById(
+                    containerId
+                );
+
+            if (container) {
+
+                container.innerHTML = "";
+
+                container.className =
+                    "";
+            }
+        }
     );
 
-    renderMinistryAssignments(
-        "nursery",
-        "nurseryAssignments"
-    );
 
-    renderMinistryAssignments(
-        "shelter",
-        "shelterAssignments"
-    );
+    Object.keys(
+        ministryContainers
+    ).forEach(
+        function(ministry) {
 
-    renderMinistryAssignments(
-        "security",
-        "securityAssignments"
-    );
+            const container =
+                document.getElementById(
+                    ministryContainers[ministry]
+                );
 
-    renderMinistryAssignments(
-        "childrensChurch",
-        "childrensChurchAssignments"
-    );
 
-    renderMinistryAssignments(
-        "ladies",
-        "ladiesAssignments"
-    );
+            if (!container) {
+                return;
+            }
 
-    renderMinistryAssignments(
-        "kingsKids",
-        "kingsKidsAssignments"
-    );
 
-    renderMinistryAssignments(
-        "youth",
-        "youthAssignments"
+            const items =
+                allAssignments.filter(
+                    function(item) {
+
+                        return (
+                            item.ministry ===
+                            ministry
+                        );
+                    }
+                );
+
+
+            if (
+                !items.length
+            ) {
+
+                container.className =
+                    "assignment-empty";
+
+                container.textContent =
+                    "There are no upcoming assignments.";
+
+                return;
+            }
+
+
+            items.forEach(
+                function(item) {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+                    card.className =
+                        "assignment-card";
+
+
+                    const date =
+                        document.createElement(
+                            "div"
+                        );
+
+                    date.className =
+                        "assignment-date";
+
+                    date.textContent =
+                        formatAssignmentDate(
+                            item.date
+                        );
+
+                    card.appendChild(
+                        date
+                    );
+
+
+                    if (item.service) {
+
+                        const service =
+                            document.createElement(
+                                "div"
+                            );
+
+                        service.className =
+                            "assignment-service";
+
+                        service.textContent =
+                            item.service;
+
+                        card.appendChild(
+                            service
+                        );
+                    }
+
+
+                    if (item.workers) {
+
+                        const workers =
+                            document.createElement(
+                                "div"
+                            );
+
+                        workers.className =
+                            "assignment-workers";
+
+                        workers.textContent =
+                            item.workers;
+
+                        card.appendChild(
+                            workers
+                        );
+                    }
+
+
+                    if (item.notes) {
+
+                        const notes =
+                            document.createElement(
+                                "div"
+                            );
+
+                        notes.className =
+                            "assignment-notes";
+
+                        notes.textContent =
+                            item.notes;
+
+                        card.appendChild(
+                            notes
+                        );
+                    }
+
+
+                    container.appendChild(
+                        card
+                    );
+                }
+            );
+        }
     );
 }
 
 
-function renderMinistryAssignments(
-    ministry,
-    containerId
+/* =========================================
+   ASSIGNMENT DATE FORMAT
+========================================= */
+
+function formatAssignmentDate(
+    dateString
 ) {
 
-    const container =
-        document.getElementById(
-            containerId
-        );
-
-    if (!container) return;
-
-
-    const items =
-        allAssignments.filter(
-            function(item) {
-
-                return (
-                    item.ministry ===
-                    ministry
-                );
-            }
-        );
-
-
-    container.innerHTML = "";
-    container.className = "";
-
-
-    if (!items.length) {
-
-        container.className =
-            "assignment-empty";
-
-        container.textContent =
-            "There are no upcoming assignments posted.";
-
-        return;
+    if (!dateString) {
+        return "";
     }
 
 
-    items.forEach(
-        function(item) {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-            card.className =
-                "assignment-card";
+    const date =
+        parseLocalDate(
+            dateString
+        );
 
 
-            const date =
-                document.createElement(
-                    "div"
-                );
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
 
-            date.className =
-                "assignment-date";
-
-            date.textContent =
-                formatAssignmentDate(
-                    item.date
-                );
-
-            card.appendChild(date);
+        return dateString;
+    }
 
 
-            if (item.service) {
-
-                const service =
-                    document.createElement(
-                        "div"
-                    );
-
-                service.className =
-                    "assignment-service";
-
-                service.textContent =
-                    item.service;
-
-                card.appendChild(service);
-            }
-
-
-            if (item.workers) {
-
-                const workers =
-                    document.createElement(
-                        "div"
-                    );
-
-                workers.className =
-                    "assignment-workers";
-
-                workers.textContent =
-                    item.workers;
-
-                card.appendChild(workers);
-            }
-
-
-            if (item.notes) {
-
-                const notes =
-                    document.createElement(
-                        "div"
-                    );
-
-                notes.className =
-                    "assignment-notes";
-
-                notes.textContent =
-                    item.notes;
-
-                card.appendChild(notes);
-            }
-
-
-            container.appendChild(card);
+    return date.toLocaleDateString(
+        undefined,
+        {
+            weekday:"long",
+            month:"long",
+            day:"numeric",
+            year:"numeric"
         }
     );
 }
@@ -2506,7 +2999,10 @@ function renderCelebrations() {
             "celebrationList"
         );
 
-    if (!container) return;
+
+    if (!container) {
+        return;
+    }
 
 
     const items = [];
@@ -2520,6 +3016,7 @@ function renderCelebrations() {
             const item =
                 allBirthdays[key];
 
+
             if (
                 item &&
                 item.name &&
@@ -2528,9 +3025,22 @@ function renderCelebrations() {
             ) {
 
                 items.push({
-                    id:key,
-                    type:"Birthday",
-                    ...item
+
+                    type:
+                        "Birthday",
+
+                    name:
+                        item.name,
+
+                    month:
+                        Number(
+                            item.month
+                        ),
+
+                    day:
+                        Number(
+                            item.day
+                        )
                 });
             }
         }
@@ -2545,6 +3055,7 @@ function renderCelebrations() {
             const item =
                 allAnniversaries[key];
 
+
             if (
                 item &&
                 item.name &&
@@ -2553,9 +3064,22 @@ function renderCelebrations() {
             ) {
 
                 items.push({
-                    id:key,
-                    type:"Wedding Anniversary",
-                    ...item
+
+                    type:
+                        "Anniversary",
+
+                    name:
+                        item.name,
+
+                    month:
+                        Number(
+                            item.month
+                        ),
+
+                    day:
+                        Number(
+                            item.day
+                        )
                 });
             }
         }
@@ -2565,27 +3089,27 @@ function renderCelebrations() {
     items.sort(
         function(a,b) {
 
-            const monthDifference =
-                Number(a.month) -
-                Number(b.month);
-
             if (
-                monthDifference !== 0
+                a.month !==
+                b.month
             ) {
 
-                return monthDifference;
+                return (
+                    a.month -
+                    b.month
+                );
             }
 
 
-            const dayDifference =
-                Number(a.day) -
-                Number(b.day);
-
             if (
-                dayDifference !== 0
+                a.day !==
+                b.day
             ) {
 
-                return dayDifference;
+                return (
+                    a.day -
+                    b.day
+                );
             }
 
 
@@ -2602,13 +3126,15 @@ function renderCelebrations() {
     container.className = "";
 
 
-    if (!items.length) {
+    if (
+        !items.length
+    ) {
 
         container.className =
             "assignment-empty";
 
         container.textContent =
-            "No birthdays or anniversaries have been posted.";
+            "There are no birthdays or anniversaries listed.";
 
         return;
     }
@@ -2620,19 +3146,13 @@ function renderCelebrations() {
     items.forEach(
         function(item) {
 
-            const month =
-                Number(
-                    item.month
-                );
-
-
             if (
-                month !==
+                item.month !==
                 currentMonth
             ) {
 
                 currentMonth =
-                    month;
+                    item.month;
 
 
                 const heading =
@@ -2643,10 +3163,23 @@ function renderCelebrations() {
                 heading.className =
                     "month-heading";
 
-                heading.textContent =
-                    getMonthName(
-                        month
+
+                const monthDate =
+                    new Date(
+                        2026,
+                        item.month - 1,
+                        1
                     );
+
+
+                heading.textContent =
+                    monthDate.toLocaleDateString(
+                        undefined,
+                        {
+                            month:"long"
+                        }
+                    );
+
 
                 container.appendChild(
                     heading
@@ -2671,10 +3204,27 @@ function renderCelebrations() {
             title.className =
                 "live-title";
 
-            title.textContent =
-                item.name;
 
-            card.appendChild(title);
+            if (
+                item.type ===
+                "Birthday"
+            ) {
+
+                title.textContent =
+                    "Birthday: " +
+                    item.name;
+
+            } else {
+
+                title.textContent =
+                    "Anniversary: " +
+                    item.name;
+            }
+
+
+            card.appendChild(
+                title
+            );
 
 
             const meta =
@@ -2685,84 +3235,33 @@ function renderCelebrations() {
             meta.className =
                 "live-meta";
 
+
+            const date =
+                new Date(
+                    2026,
+                    item.month - 1,
+                    item.day
+                );
+
+
             meta.textContent =
-                item.type +
-                " • " +
-                getMonthName(
-                    Number(item.month)
-                ) +
-                " " +
-                Number(item.day);
-
-            card.appendChild(meta);
-
-            container.appendChild(card);
-        }
-    );
-}
+                date.toLocaleDateString(
+                    undefined,
+                    {
+                        month:"long",
+                        day:"numeric"
+                    }
+                );
 
 
-function getMonthName(month) {
-
-    const names = [
-        "",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
-
-    return (
-        names[month] ||
-        ""
-    );
-}
+            card.appendChild(
+                meta
+            );
 
 
-function formatAssignmentDate(
-    dateString
-) {
-
-    if (!dateString) {
-        return "";
-    }
-
-
-    const parts =
-        dateString.split("-");
-
-
-    if (
-        parts.length !== 3
-    ) {
-
-        return dateString;
-    }
-
-
-    const date =
-        new Date(
-            Number(parts[0]),
-            Number(parts[1]) - 1,
-            Number(parts[2])
-        );
-
-
-    return date.toLocaleDateString(
-        "en-US",
-        {
-            weekday:"long",
-            month:"long",
-            day:"numeric",
-            year:"numeric"
+            container.appendChild(
+                card
+            );
         }
     );
 }
@@ -2771,21 +3270,12 @@ function formatAssignmentDate(
 ========================================= */
 
 let calendarView = "month";
-let calendarDate = new Date();
 
-calendarDate.setHours(
-    12,0,0,0
-);
+let calendarDate =
+    new Date();
 
 
 function openCalendar() {
-
-    calendarDate =
-        new Date();
-
-    calendarDate.setHours(
-        12,0,0,0
-    );
 
     showSection(
         "calendarSection"
@@ -2795,27 +3285,55 @@ function openCalendar() {
 }
 
 
-function setCalendarView(view) {
+/* =========================================
+   CHANGE CALENDAR VIEW
+========================================= */
 
-    calendarView = view;
+function setCalendarView(
+    view
+) {
 
-    document.getElementById(
-        "monthViewButton"
-    ).classList.toggle(
-        "active",
-        view === "month"
-    );
+    calendarView =
+        view;
 
-    document.getElementById(
-        "weekViewButton"
-    ).classList.toggle(
-        "active",
-        view === "week"
-    );
+
+    const monthButton =
+        document.getElementById(
+            "monthViewButton"
+        );
+
+
+    const weekButton =
+        document.getElementById(
+            "weekViewButton"
+        );
+
+
+    if (
+        monthButton &&
+        weekButton
+    ) {
+
+        monthButton.classList.toggle(
+            "active",
+            view === "month"
+        );
+
+
+        weekButton.classList.toggle(
+            "active",
+            view === "week"
+        );
+    }
+
 
     renderCalendar();
 }
 
+
+/* =========================================
+   PREVIOUS PERIOD
+========================================= */
 
 function previousPeriod() {
 
@@ -2824,20 +3342,31 @@ function previousPeriod() {
         "month"
     ) {
 
-        calendarDate.setMonth(
-            calendarDate.getMonth() - 1
-        );
+        calendarDate =
+            new Date(
+                calendarDate.getFullYear(),
+                calendarDate.getMonth() - 1,
+                1
+            );
 
     } else {
 
-        calendarDate.setDate(
-            calendarDate.getDate() - 7
-        );
+        calendarDate =
+            new Date(
+                calendarDate.getFullYear(),
+                calendarDate.getMonth(),
+                calendarDate.getDate() - 7
+            );
     }
+
 
     renderCalendar();
 }
 
+
+/* =========================================
+   NEXT PERIOD
+========================================= */
 
 function nextPeriod() {
 
@@ -2846,33 +3375,44 @@ function nextPeriod() {
         "month"
     ) {
 
-        calendarDate.setMonth(
-            calendarDate.getMonth() + 1
-        );
+        calendarDate =
+            new Date(
+                calendarDate.getFullYear(),
+                calendarDate.getMonth() + 1,
+                1
+            );
 
     } else {
 
-        calendarDate.setDate(
-            calendarDate.getDate() + 7
-        );
+        calendarDate =
+            new Date(
+                calendarDate.getFullYear(),
+                calendarDate.getMonth(),
+                calendarDate.getDate() + 7
+            );
     }
+
 
     renderCalendar();
 }
 
+
+/* =========================================
+   TODAY
+========================================= */
 
 function goToday() {
 
     calendarDate =
         new Date();
 
-    calendarDate.setHours(
-        12,0,0,0
-    );
-
     renderCalendar();
 }
 
+
+/* =========================================
+   RENDER CALENDAR
+========================================= */
 
 function renderCalendar() {
 
@@ -2881,10 +3421,12 @@ function renderCalendar() {
             "calendarDisplay"
         );
 
+
     const period =
         document.getElementById(
             "calendarPeriod"
         );
+
 
     if (
         !display ||
@@ -2896,17 +3438,17 @@ function renderCalendar() {
 
     if (
         calendarView ===
-        "week"
+        "month"
     ) {
 
-        renderWeekCalendar(
+        renderMonthView(
             display,
             period
         );
 
     } else {
 
-        renderMonthCalendar(
+        renderWeekView(
             display,
             period
         );
@@ -2918,33 +3460,41 @@ function renderCalendar() {
    MONTH VIEW
 ========================================= */
 
-function renderMonthCalendar(
+function renderMonthView(
     display,
     period
 ) {
 
+    display.innerHTML = "";
+
+
     const year =
         calendarDate.getFullYear();
+
 
     const month =
         calendarDate.getMonth();
 
 
-    period.textContent =
+    const monthDate =
         new Date(
             year,
             month,
             1
-        ).toLocaleDateString(
-            "en-US",
-            {
-                month:"long",
-                year:"numeric"
-            }
         );
 
 
-    display.innerHTML = "";
+    period.textContent =
+        monthDate.toLocaleDateString(
+            undefined,
+            {
+                month:
+                    "long",
+
+                year:
+                    "numeric"
+            }
+        );
 
 
     const grid =
@@ -2952,11 +3502,12 @@ function renderMonthCalendar(
             "div"
         );
 
+
     grid.className =
         "month-grid";
 
 
-    [
+    const weekdayNames = [
         "SUN",
         "MON",
         "TUE",
@@ -2964,7 +3515,10 @@ function renderMonthCalendar(
         "THU",
         "FRI",
         "SAT"
-    ].forEach(
+    ];
+
+
+    weekdayNames.forEach(
         function(day) {
 
             const heading =
@@ -3007,15 +3561,17 @@ function renderMonthCalendar(
         i++
     ) {
 
-        const blank =
+        const empty =
             document.createElement(
                 "div"
             );
 
-        blank.className =
+        empty.className =
             "calendar-day empty";
 
-        grid.appendChild(blank);
+        grid.appendChild(
+            empty
+        );
     }
 
 
@@ -3035,13 +3591,14 @@ function renderMonthCalendar(
             new Date(
                 year,
                 month,
-                day,
-                12
+                day
             );
 
 
         const dateString =
-            formatDate(date);
+            formatDate(
+                date
+            );
 
 
         const dayEvents =
@@ -3061,8 +3618,10 @@ function renderMonthCalendar(
                 "button"
             );
 
+
         cell.type =
             "button";
+
 
         cell.className =
             "calendar-day";
@@ -3084,13 +3643,18 @@ function renderMonthCalendar(
                 "div"
             );
 
+
         number.className =
             "day-number";
+
 
         number.textContent =
             day;
 
-        cell.appendChild(number);
+
+        cell.appendChild(
+            number
+        );
 
 
         if (
@@ -3102,10 +3666,14 @@ function renderMonthCalendar(
                     "div"
                 );
 
+
             dot.className =
                 "event-dot";
 
-            cell.appendChild(dot);
+
+            cell.appendChild(
+                dot
+            );
 
 
             const count =
@@ -3113,16 +3681,29 @@ function renderMonthCalendar(
                     "div"
                 );
 
+
             count.className =
                 "event-count";
 
-            count.textContent =
-                dayEvents.length === 1
-                ? "1 EVENT"
-                : dayEvents.length +
-                  " EVENTS";
 
-            cell.appendChild(count);
+            if (
+                dayEvents.length === 1
+            ) {
+
+                count.textContent =
+                    "1 EVENT";
+
+            } else {
+
+                count.textContent =
+                    dayEvents.length +
+                    " EVENTS";
+            }
+
+
+            cell.appendChild(
+                count
+            );
         }
 
 
@@ -3137,11 +3718,15 @@ function renderMonthCalendar(
         );
 
 
-        grid.appendChild(cell);
+        grid.appendChild(
+            cell
+        );
     }
 
 
-    display.appendChild(grid);
+    display.appendChild(
+        grid
+    );
 
 
     const heading =
@@ -3149,41 +3734,48 @@ function renderMonthCalendar(
             "div"
         );
 
+
     heading.className =
         "events-heading";
 
+
     heading.textContent =
         "Upcoming Events";
+
 
     display.appendChild(
         heading
     );
 
 
+    const monthPrefix =
+        year +
+        "-" +
+        String(
+            month + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
     const monthEvents =
         allEvents.filter(
             function(event) {
 
-                if (!event.date) {
-                    return false;
-                }
-
-                const parts =
-                    event.date.split("-");
-
                 return (
-                    Number(parts[0]) ===
-                    year &&
-                    Number(parts[1]) ===
-                    month + 1
+                    event.date &&
+                    event.date.startsWith(
+                        monthPrefix
+                    )
                 );
             }
         );
 
 
     renderEventCards(
-        display,
-        monthEvents
+        monthEvents,
+        display
     );
 }
 
@@ -3192,10 +3784,13 @@ function renderMonthCalendar(
    WEEK VIEW
 ========================================= */
 
-function renderWeekCalendar(
+function renderWeekView(
     display,
     period
 ) {
+
+    display.innerHTML = "";
+
 
     const selected =
         new Date(
@@ -3203,42 +3798,63 @@ function renderWeekCalendar(
         );
 
 
-    const sunday =
+    const start =
         new Date(
             selected
         );
 
-    sunday.setDate(
+
+    start.setDate(
         selected.getDate() -
         selected.getDay()
     );
 
-    sunday.setHours(
-        12,0,0,0
+
+    start.setHours(
+        0,
+        0,
+        0,
+        0
     );
 
 
-    const saturday =
+    const end =
         new Date(
-            sunday
+            start
         );
 
-    saturday.setDate(
-        sunday.getDate() + 6
+
+    end.setDate(
+        start.getDate() +
+        6
     );
 
 
     period.textContent =
-        formatShortDate(
-            sunday
+        start.toLocaleDateString(
+            undefined,
+            {
+                month:
+                    "short",
+
+                day:
+                    "numeric"
+            }
         ) +
         " – " +
-        formatShortDate(
-            saturday
+        end.toLocaleDateString(
+            undefined,
+            {
+                month:
+                    "short",
+
+                day:
+                    "numeric",
+
+                year:
+                    "numeric"
+            }
         );
-
-
-    display.innerHTML = "";
 
 
     const today =
@@ -3255,11 +3871,13 @@ function renderWeekCalendar(
 
         const date =
             new Date(
-                sunday
+                start
             );
 
+
         date.setDate(
-            sunday.getDate() + i
+            start.getDate() +
+            i
         );
 
 
@@ -3273,6 +3891,7 @@ function renderWeekCalendar(
             document.createElement(
                 "div"
             );
+
 
         wrapper.className =
             "week-day";
@@ -3294,25 +3913,43 @@ function renderWeekCalendar(
                 "div"
             );
 
+
         title.className =
             "week-day-title";
 
+
         title.textContent =
             date.toLocaleDateString(
-                "en-US",
+                undefined,
                 {
-                    weekday:"long",
-                    month:"long",
-                    day:"numeric"
+                    weekday:
+                        "long",
+
+                    month:
+                        "long",
+
+                    day:
+                        "numeric"
                 }
             );
+
 
         wrapper.appendChild(
             title
         );
 
 
-        const events =
+        const eventContainer =
+            document.createElement(
+                "div"
+            );
+
+
+        eventContainer.className =
+            "week-events";
+
+
+        const dayEvents =
             allEvents.filter(
                 function(event) {
 
@@ -3324,44 +3961,16 @@ function renderWeekCalendar(
             );
 
 
-        const eventContainer =
-            document.createElement(
-                "div"
-            );
-
-        eventContainer.className =
-            "week-events";
-
-
-        if (!events.length) {
-
-            const empty =
-                document.createElement(
-                    "div"
-                );
-
-            empty.className =
-                "no-events";
-
-            empty.textContent =
-                "No events.";
-
-            eventContainer.appendChild(
-                empty
-            );
-
-        } else {
-
-            renderEventCards(
-                eventContainer,
-                events
-            );
-        }
+        renderEventCards(
+            dayEvents,
+            eventContainer
+        );
 
 
         wrapper.appendChild(
             eventContainer
         );
+
 
         display.appendChild(
             wrapper
@@ -3371,14 +3980,31 @@ function renderWeekCalendar(
 
 
 /* =========================================
-   SELECTED DAY
+   SHOW ONE DAY'S EVENTS
 ========================================= */
 
 function showDayEvents(
     dateString
 ) {
 
-    const events =
+    const display =
+        document.getElementById(
+            "calendarDisplay"
+        );
+
+
+    if (!display) {
+        return;
+    }
+
+
+    const selectedDate =
+        parseLocalDate(
+            dateString
+        );
+
+
+    const dayEvents =
         allEvents.filter(
             function(event) {
 
@@ -3390,18 +4016,6 @@ function showDayEvents(
         );
 
 
-    const display =
-        document.getElementById(
-            "calendarDisplay"
-        );
-
-
-    const date =
-        parseLocalDate(
-            dateString
-        );
-
-
     display.innerHTML = "";
 
 
@@ -3410,19 +4024,29 @@ function showDayEvents(
             "div"
         );
 
+
     heading.className =
         "events-heading";
 
+
     heading.textContent =
-        date.toLocaleDateString(
-            "en-US",
+        selectedDate.toLocaleDateString(
+            undefined,
             {
-                weekday:"long",
-                month:"long",
-                day:"numeric",
-                year:"numeric"
+                weekday:
+                    "long",
+
+                month:
+                    "long",
+
+                day:
+                    "numeric",
+
+                year:
+                    "numeric"
             }
         );
+
 
     display.appendChild(
         heading
@@ -3430,8 +4054,8 @@ function showDayEvents(
 
 
     renderEventCards(
-        display,
-        events
+        dayEvents,
+        display
     );
 
 
@@ -3440,16 +4064,57 @@ function showDayEvents(
             "button"
         );
 
+
     back.className =
         "today-button";
 
+
     back.textContent =
-        "Back to Calendar";
+        "Back to Month";
+
 
     back.addEventListener(
         "click",
-        renderCalendar
+        function() {
+
+            calendarDate =
+                selectedDate;
+
+            calendarView =
+                "month";
+
+
+            const monthButton =
+                document.getElementById(
+                    "monthViewButton"
+                );
+
+
+            const weekButton =
+                document.getElementById(
+                    "weekViewButton"
+                );
+
+
+            if (
+                monthButton &&
+                weekButton
+            ) {
+
+                monthButton.classList.add(
+                    "active"
+                );
+
+                weekButton.classList.remove(
+                    "active"
+                );
+            }
+
+
+            renderCalendar();
+        }
     );
+
 
     display.appendChild(
         back
@@ -3462,26 +4127,33 @@ function showDayEvents(
 ========================================= */
 
 function renderEventCards(
-    container,
-    events
+    events,
+    container
 ) {
 
-    if (!events.length) {
+    if (
+        !events ||
+        !events.length
+    ) {
 
         const empty =
             document.createElement(
                 "div"
             );
 
+
         empty.className =
             "no-events";
 
+
         empty.textContent =
-            "No events are scheduled.";
+            "No events scheduled.";
+
 
         container.appendChild(
             empty
         );
+
 
         return;
     }
@@ -3495,8 +4167,19 @@ function renderEventCards(
                     "div"
                 );
 
+
             card.className =
                 "event-card";
+
+
+            const dateBox =
+                document.createElement(
+                    "div"
+                );
+
+
+            dateBox.className =
+                "event-date";
 
 
             const date =
@@ -3505,28 +4188,22 @@ function renderEventCards(
                 );
 
 
-            const dateBox =
-                document.createElement(
-                    "div"
-                );
-
-            dateBox.className =
-                "event-date";
-
-
             const month =
                 document.createElement(
                     "span"
                 );
 
+
             month.className =
                 "event-month";
 
+
             month.textContent =
                 date.toLocaleDateString(
-                    "en-US",
+                    undefined,
                     {
-                        month:"short"
+                        month:
+                            "short"
                     }
                 );
 
@@ -3536,8 +4213,10 @@ function renderEventCards(
                     "span"
                 );
 
+
             day.className =
                 "event-day";
+
 
             day.textContent =
                 date.getDate();
@@ -3547,8 +4226,14 @@ function renderEventCards(
                 month
             );
 
+
             dateBox.appendChild(
                 day
+            );
+
+
+            card.appendChild(
+                dateBox
             );
 
 
@@ -3556,6 +4241,7 @@ function renderEventCards(
                 document.createElement(
                     "div"
                 );
+
 
             info.className =
                 "event-info";
@@ -3566,12 +4252,15 @@ function renderEventCards(
                     "div"
                 );
 
+
             title.className =
                 "event-title";
+
 
             title.textContent =
                 event.title ||
                 "Church Event";
+
 
             info.appendChild(
                 title
@@ -3585,11 +4274,14 @@ function renderEventCards(
                         "div"
                     );
 
+
                 time.className =
                     "event-time";
 
+
                 time.textContent =
                     event.time;
+
 
                 info.appendChild(
                     time
@@ -3604,11 +4296,14 @@ function renderEventCards(
                         "div"
                     );
 
+
                 details.className =
                     "event-details";
 
+
                 details.textContent =
                     event.details;
+
 
                 info.appendChild(
                     details
@@ -3617,12 +4312,9 @@ function renderEventCards(
 
 
             card.appendChild(
-                dateBox
-            );
-
-            card.appendChild(
                 info
             );
+
 
             container.appendChild(
                 card
@@ -3633,21 +4325,26 @@ function renderEventCards(
 
 
 /* =========================================
-   DATE HELPERS
+   DATE FUNCTIONS
 ========================================= */
 
-function formatDate(date) {
+function formatDate(
+    date
+) {
 
     const year =
         date.getFullYear();
 
+
     const month =
         String(
-            date.getMonth() + 1
+            date.getMonth() +
+            1
         ).padStart(
             2,
             "0"
         );
+
 
     const day =
         String(
@@ -3656,6 +4353,7 @@ function formatDate(date) {
             2,
             "0"
         );
+
 
     return (
         year +
@@ -3671,27 +4369,65 @@ function parseLocalDate(
     dateString
 ) {
 
+    if (!dateString) {
+
+        return new Date();
+    }
+
+
     const parts =
-        dateString.split("-");
+        dateString.split(
+            "-"
+        );
+
+
+    if (
+        parts.length !== 3
+    ) {
+
+        return new Date(
+            dateString
+        );
+    }
+
 
     return new Date(
-        Number(parts[0]),
-        Number(parts[1]) - 1,
-        Number(parts[2]),
-        12
+        Number(
+            parts[0]
+        ),
+
+        Number(
+            parts[1]
+        ) - 1,
+
+        Number(
+            parts[2]
+        )
     );
 }
 
 
 function formatShortDate(
-    date
+    dateString
 ) {
 
+    const date =
+        parseLocalDate(
+            dateString
+        );
+
+
     return date.toLocaleDateString(
-        "en-US",
+        undefined,
         {
-            month:"short",
-            day:"numeric"
+            month:
+                "short",
+
+            day:
+                "numeric",
+
+            year:
+                "numeric"
         }
     );
 }
@@ -3718,15 +4454,29 @@ if (
                         "none"
                 }
             )
+
             .then(
                 function(registration) {
 
+                    console.log(
+                        "Bethany service worker registered:",
+                        registration.scope
+                    );
+
+
                     registration.update()
                     .catch(
-                        function(){}
+                        function(error) {
+
+                            console.log(
+                                "Service worker update error:",
+                                error
+                            );
+                        }
                     );
                 }
             )
+
             .catch(
                 function(error) {
 
@@ -3742,7 +4492,7 @@ if (
 
 
 /* =========================================
-   INITIAL DISPLAY
+   INITIAL CALENDAR
 ========================================= */
 
 renderCalendar();
