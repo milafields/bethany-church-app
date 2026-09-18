@@ -211,6 +211,57 @@ button {
     font-size: 13px;
 }
 
+/* NOTIFICATIONS */
+
+.notification-box {
+    margin: 15px 15px 3px;
+    padding: 16px;
+    border: 1px solid #c8dfef;
+    border-radius: 14px;
+    background: white;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(25,70,105,.07);
+}
+
+.notification-box h3 {
+    margin: 0 0 5px;
+    color: #073b6f;
+    font-family: Georgia, serif;
+    font-size: 18px;
+}
+
+.notification-box p {
+    margin: 0 0 12px;
+    color: #61788e;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.notification-button {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 15px;
+    border: 0;
+    border-radius: 10px;
+    background: #07518a;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.notification-button:disabled {
+    opacity: .65;
+    cursor: default;
+}
+
+#notificationStatus {
+    margin-top: 9px;
+    min-height: 17px;
+    color: #536b7e;
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .home-heading {
     padding: 20px 17px 5px;
     color: #073b6f;
@@ -522,8 +573,7 @@ button {
     border-radius: 12px;
     background: white;
 }
-
-.event-date {
+    .event-date {
     flex: 0 0 55px;
     padding: 7px 3px;
     border-radius: 9px;
@@ -704,6 +754,26 @@ button {
     <div class="home-verse">
         <p>“Let all things be done decently and in order.”</p>
         <strong>1 Corinthians 14:40 KJV</strong>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+
+    <div class="notification-box">
+        <h3>Church Notifications</h3>
+        <p>
+            Turn on notifications to receive important
+            Bethany Baptist Church updates and reminders.
+        </p>
+
+        <button
+            id="notificationButton"
+            class="notification-button"
+            onclick="enableNotifications()"
+        >
+            🔔 TURN ON NOTIFICATIONS
+        </button>
+
+        <div id="notificationStatus"></div>
     </div>
 
     <div class="home-heading">Church & Ministry</div>
@@ -903,8 +973,13 @@ button {
         <h2>Bus Ministry</h2>
     </div>
     <div class="section-content">
-        <div class="info-card"><h3>Bus Ministry</h3><p>Current and upcoming assignments appear below.</p></div>
-        <div id="busAssignments" class="assignment-empty">Loading assignments...</div>
+        <div class="info-card">
+            <h3>Bus Ministry</h3>
+            <p>Current and upcoming assignments appear below.</p>
+        </div>
+        <div id="busAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
     </div>
 </div>
 
@@ -914,8 +989,13 @@ button {
         <h2>Nursery Schedule</h2>
     </div>
     <div class="section-content">
-        <div class="info-card"><h3>Church Nursery Schedule</h3><p>Current and upcoming assignments appear below.</p></div>
-        <div id="nurseryAssignments" class="assignment-empty">Loading assignments...</div>
+        <div class="info-card">
+            <h3>Church Nursery Schedule</h3>
+            <p>Current and upcoming assignments appear below.</p>
+        </div>
+        <div id="nurseryAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
     </div>
 </div>
 
@@ -925,8 +1005,13 @@ button {
         <h2>Shelter Meals</h2>
     </div>
     <div class="section-content">
-        <div class="info-card"><h3>Shelter Meal Schedule</h3><p>Current and upcoming assignments appear below.</p></div>
-        <div id="shelterAssignments" class="assignment-empty">Loading assignments...</div>
+        <div class="info-card">
+            <h3>Shelter Meal Schedule</h3>
+            <p>Current and upcoming assignments appear below.</p>
+        </div>
+        <div id="shelterAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
     </div>
 </div>
 
@@ -936,8 +1021,13 @@ button {
         <h2>Security Schedule</h2>
     </div>
     <div class="section-content">
-        <div class="info-card"><h3>Security Team</h3><p>Current and upcoming assignments appear below.</p></div>
-        <div id="securityAssignments" class="assignment-empty">Loading assignments...</div>
+        <div class="info-card">
+            <h3>Security Team</h3>
+            <p>Current and upcoming assignments appear below.</p>
+        </div>
+        <div id="securityAssignments" class="assignment-empty">
+            Loading assignments...
+        </div>
     </div>
 </div>
 
@@ -947,1187 +1037,12 @@ button {
         <h2>Children's Church</h2>
     </div>
     <div class="section-content">
-        <div class="info-card"><h3>Children's Church Schedule</h3><p>Current and upcoming assignments appear below.</p></div>
-        <div id="childrensChurchAssignments" class="assignment-empty">Loading assignments...</div>
-    </div>
-</div>
-
-<div id="ladiesSection" class="section">
-    <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
-        <h2>Ladies Ministry</h2>
-    </div>
-    <div class="section-content">
-        <div class="info-card"><h3>Ladies Ministry</h3><p>Current and upcoming assignments appear below.</p></div>
-        <div id="ladiesAssignments" class="assignment-empty">Loading assignments...</div>
-    </div>
-</div>
-
-<div id="kingsKidsSection" class="section">
-    <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
-        <h2>King's Kids</h2>
-    </div>
-    <div class="section-content">
-        <div class="info-card"><h3>King's Kids</h3><p>Current and upcoming assignments appear below.</p></div>
-        <div id="kingsKidsAssignments" class="assignment-empty">Loading assignments...</div>
-    </div>
-</div>
-
-<div id="youthSection" class="section">
-    <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
-        <h2>Youth Ministry</h2>
-    </div>
-    <div class="section-content">
-        <div class="info-card"><h3>Youth Ministry</h3><p>Current and upcoming assignments appear below.</p></div>
-        <div id="youthAssignments" class="assignment-empty">Loading assignments...</div>
-    </div>
-</div>
-
-<!-- BIRTHDAYS -->
-
-<div id="birthdaysSection" class="section">
-
-    <div class="section-header">
-        <button class="back-button" onclick="showHome()">‹</button>
-        <h2>Birthdays & Anniversaries</h2>
-    </div>
-
-    <div class="section-content">
-
         <div class="info-card">
-            <p><strong>On behalf of Bethany Baptist Church, Happy Birthday and Happy Anniversary!</strong></p>
+            <h3>Children's Church Schedule</h3>
+            <p>Current and upcoming assignments appear below.</p>
         </div>
-
-        <div id="celebrationList" class="assignment-empty">
-            Loading birthdays & anniversaries...
+        <div id="childrensChurchAssignments" class="assignment-empty">
+            Loading assignments...
         </div>
-
     </div>
 </div>
-
-<!-- BOTTOM NAV -->
-
-<div class="bottom-nav">
-
-    <button class="nav-button" onclick="showHome()">
-        <span class="nav-icon">⌂</span>
-        <span class="nav-label">Home</span>
-    </button>
-
-    <button class="nav-button" onclick="openCalendar()">
-        <span class="nav-icon">▣</span>
-        <span class="nav-label">Calendar</span>
-    </button>
-
-    <button class="nav-button" onclick="showSection('announcementsSection')">
-        <span class="nav-icon">●</span>
-        <span class="nav-label">Announcements</span>
-    </button>
-
-    <button class="nav-button" onclick="showSection('nurserySection')">
-        <span class="nav-icon">•••</span>
-        <span class="nav-label">Schedules</span>
-    </button>
-
-</div>
-
-</div>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
-
-<script>
-
-/* MEMBER ACCESS */
-
-function checkCode() {
-
-    const entered = document.getElementById("memberCode").value.trim();
-
-    if (entered === "0574") {
-
-        sessionStorage.setItem("bethanyMemberAccess","yes");
-        openApp();
-
-    } else {
-
-        document.getElementById("errorMessage").textContent =
-            "Incorrect access code. Please try again.";
-
-        document.getElementById("memberCode").value = "";
-    }
-}
-
-function openApp() {
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("mainApp").style.display = "block";
-}
-
-document.getElementById("memberCode").addEventListener("keydown",function(event) {
-    if (event.key === "Enter") {
-        checkCode();
-    }
-});
-
-if (sessionStorage.getItem("bethanyMemberAccess") === "yes") {
-    openApp();
-}
-
-/* NAVIGATION */
-
-function showSection(id) {
-
-    document.querySelectorAll(".section").forEach(function(section) {
-        section.classList.remove("active");
-    });
-
-    document.getElementById(id).classList.add("active");
-    window.scrollTo(0,0);
-}
-
-function showHome() {
-    showSection("homeSection");
-}
-
-/* FIREBASE */
-
-const firebaseConfig = {
-    apiKey: "AIzaSyB7CVFqwPbjLlH5vhvGKlMAH9gtBFnM458",
-    authDomain: "calendar-a6f0f.firebaseapp.com",
-    databaseURL: "https://calendar-a6f0f-default-rtdb.firebaseio.com",
-    projectId: "calendar-a6f0f",
-    storageBucket: "calendar-a6f0f.firebasestorage.app",
-    messagingSenderId: "41941951557",
-    appId: "1:41941951557:web:739ded386d42190c97ef2c"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const database = firebase.database();
-
-const eventsRef = database.ref("events");
-const assignmentsRef = database.ref("assignments");
-const announcementsRef = database.ref("announcements");
-const prayerRequestsRef = database.ref("prayerRequests");
-const newsletterRef = database.ref("newsletter");
-const birthdaysRef = database.ref("birthdays");
-const anniversariesRef = database.ref("anniversaries");
-
-let allEvents = [];
-let allAssignments = [];
-let allAnnouncements = [];
-let allPrayerRequests = [];
-let allNewsletters = [];
-let allBirthdays = {};
-let allAnniversaries = {};
-
-/* =====================================
-   CALENDAR EVENTS
-   PAST EVENTS AUTOMATICALLY DISAPPEAR
-===================================== */
-
-eventsRef.on("value",function(snapshot) {
-
-    const data = snapshot.val() || {};
-
-    const today = formatDate(new Date());
-
-    allEvents = [];
-
-    Object.keys(data).forEach(function(key) {
-
-        const item = data[key];
-
-        /*
-        Past events remain safely stored in Firebase,
-        but are NOT loaded into the member app.
-        */
-
-        if (
-            item &&
-            item.date &&
-            item.date >= today
-        ) {
-
-            allEvents.push({
-                id: key,
-                ...item
-            });
-        }
-    });
-
-    allEvents.sort(function(a,b) {
-        return (a.date || "").localeCompare(b.date || "");
-    });
-
-    renderCalendar();
-
-},function(error) {
-
-    console.log("Events could not be loaded:",error);
-});
-
-/* ANNOUNCEMENTS */
-
-announcementsRef.on("value",function(snapshot) {
-
-    const data = snapshot.val() || {};
-
-    allAnnouncements = [];
-
-    Object.keys(data).forEach(function(key) {
-
-        const item = data[key];
-
-        if (item && item.title && item.message) {
-
-            allAnnouncements.push({
-                id:key,
-                ...item
-            });
-        }
-    });
-
-    allAnnouncements.sort(function(a,b) {
-
-        const dateCompare =
-            (b.date || "").localeCompare(a.date || "");
-
-        if (dateCompare !== 0) {
-            return dateCompare;
-        }
-
-        return (b.createdAt || 0) - (a.createdAt || 0);
-    });
-
-    renderAnnouncements();
-
-},function(error) {
-
-    console.log("Announcements could not be loaded:",error);
-
-    const container = document.getElementById("announcementList");
-
-    if (container) {
-        container.textContent = "Announcements could not be loaded.";
-    }
-});
-
-function renderAnnouncements() {
-
-    const container = document.getElementById("announcementList");
-
-    if (!container) return;
-
-    const today = formatDate(new Date());
-
-    const activeItems = allAnnouncements.filter(function(item) {
-
-        /*
-        If an expiration date is entered,
-        the announcement disappears AFTER that date.
-        */
-
-        return !item.expires || item.expires >= today;
-    });
-
-    container.innerHTML = "";
-    container.className = "";
-
-    if (!activeItems.length) {
-
-        container.className = "announcement-empty";
-        container.textContent = "There are no current announcements.";
-        return;
-    }
-
-    activeItems.forEach(function(item) {
-
-        const card = document.createElement("div");
-        card.className = "announcement-card";
-
-        const title = document.createElement("div");
-        title.className = "announcement-title";
-        title.textContent = item.title || "Church Announcement";
-        card.appendChild(title);
-
-        if (item.date) {
-
-            const date = document.createElement("div");
-            date.className = "announcement-date";
-            date.textContent = formatAssignmentDate(item.date);
-            card.appendChild(date);
-        }
-
-        const message = document.createElement("div");
-        message.className = "announcement-message";
-        message.textContent = item.message || "";
-        card.appendChild(message);
-
-        container.appendChild(card);
-    });
-}
-
-/* PRAYER REQUESTS */
-
-prayerRequestsRef.on("value",function(snapshot) {
-
-    const data = snapshot.val() || {};
-
-    allPrayerRequests = Object.keys(data)
-    .map(function(id) {
-        return {
-            id:id,
-            ...data[id]
-        };
-    })
-    .filter(function(item) {
-        return item.request;
-    });
-
-    allPrayerRequests.sort(function(a,b) {
-        return (b.date || "").localeCompare(a.date || "");
-    });
-
-    renderPrayerRequests();
-});
-
-function renderPrayerRequests() {
-
-    const container = document.getElementById("prayerList");
-
-    if (!container) return;
-
-    container.innerHTML = "";
-    container.className = "";
-
-    if (!allPrayerRequests.length) {
-
-        container.className = "assignment-empty";
-        container.textContent = "There are no current prayer requests.";
-        return;
-    }
-
-    allPrayerRequests.forEach(function(item) {
-
-        const card = document.createElement("div");
-        card.className = "live-card";
-
-        const name = document.createElement("div");
-        name.className = "live-title";
-        name.textContent = item.name || "Prayer Request";
-        card.appendChild(name);
-
-        if (item.date) {
-
-            const date = document.createElement("div");
-            date.className = "live-meta";
-            date.textContent = formatAssignmentDate(item.date);
-            card.appendChild(date);
-        }
-
-        const request = document.createElement("div");
-        request.className = "live-text";
-        request.textContent = item.request || "";
-        card.appendChild(request);
-
-        container.appendChild(card);
-    });
-}
-
-/* NEWSLETTERS */
-
-newsletterRef.on("value",function(snapshot) {
-
-    const data = snapshot.val() || {};
-
-    allNewsletters = Object.keys(data)
-    .map(function(id) {
-        return {
-            id:id,
-            ...data[id]
-        };
-    })
-    .filter(function(item) {
-        return item.title && item.url;
-    });
-
-    allNewsletters.sort(function(a,b) {
-        return (b.date || "").localeCompare(a.date || "");
-    });
-
-    renderNewsletters();
-});
-
-function renderNewsletters() {
-
-    const container = document.getElementById("newsletterList");
-
-    if (!container) return;
-
-    container.innerHTML = "";
-    container.className = "";
-
-    if (!allNewsletters.length) {
-
-        container.className = "assignment-empty";
-        container.textContent = "No newsletters have been published yet.";
-        return;
-    }
-
-    allNewsletters.forEach(function(item) {
-
-        const card = document.createElement("div");
-        card.className = "live-card";
-
-        const title = document.createElement("div");
-        title.className = "live-title";
-        title.textContent = item.title;
-        card.appendChild(title);
-
-        if (item.date) {
-
-            const date = document.createElement("div");
-            date.className = "live-meta";
-            date.textContent = formatAssignmentDate(item.date);
-            card.appendChild(date);
-        }
-
-        if (item.note) {
-
-            const note = document.createElement("div");
-            note.className = "live-text";
-            note.textContent = item.note;
-            card.appendChild(note);
-        }
-
-        const link = document.createElement("a");
-        link.className = "live-link";
-        link.href = item.url;
-        link.target = "_blank";
-        link.rel = "noopener";
-        link.textContent = "OPEN NEWSLETTER";
-
-        card.appendChild(link);
-        container.appendChild(card);
-    });
-}
-
-/* BIRTHDAYS & ANNIVERSARIES */
-
-birthdaysRef.on("value",function(snapshot) {
-    allBirthdays = snapshot.val() || {};
-    renderCelebrations();
-});
-
-anniversariesRef.on("value",function(snapshot) {
-    allAnniversaries = snapshot.val() || {};
-    renderCelebrations();
-});
-
-function renderCelebrations() {
-
-    const container = document.getElementById("celebrationList");
-
-    if (!container) return;
-
-    container.innerHTML = "";
-    container.className = "";
-
-    let items = [];
-
-    Object.keys(allBirthdays).forEach(function(id) {
-
-        items.push({
-            id:id,
-            type:"Birthday",
-            ...allBirthdays[id]
-        });
-    });
-
-    Object.keys(allAnniversaries).forEach(function(id) {
-
-        items.push({
-            id:id,
-            type:"Wedding Anniversary",
-            ...allAnniversaries[id]
-        });
-    });
-
-    items.sort(function(a,b) {
-
-        return (
-            Number(a.month) - Number(b.month)
-        )
-        ||
-        (
-            Number(a.day) - Number(b.day)
-        )
-        ||
-        (a.name || "").localeCompare(b.name || "");
-    });
-
-    if (!items.length) {
-
-        container.className = "assignment-empty";
-        container.textContent =
-            "No birthdays or anniversaries have been added yet.";
-
-        return;
-    }
-
-    let lastMonth = 0;
-
-    items.forEach(function(item) {
-
-        const monthNumber = Number(item.month);
-
-        if (monthNumber !== lastMonth) {
-
-            const heading = document.createElement("div");
-            heading.className = "month-heading";
-
-            heading.textContent =
-                new Date(2026,monthNumber - 1,1)
-                .toLocaleDateString("en-US",{
-                    month:"long"
-                });
-
-            container.appendChild(heading);
-
-            lastMonth = monthNumber;
-        }
-
-        const card = document.createElement("div");
-        card.className = "live-card";
-
-        const name = document.createElement("div");
-        name.className = "live-title";
-        name.textContent = item.name || "";
-        card.appendChild(name);
-
-        const meta = document.createElement("div");
-        meta.className = "live-meta";
-
-        const date = new Date(
-            2026,
-            monthNumber - 1,
-            Number(item.day)
-        );
-
-        meta.textContent =
-            item.type +
-            " • " +
-            date.toLocaleDateString("en-US",{
-                month:"long",
-                day:"numeric"
-            });
-
-        card.appendChild(meta);
-        container.appendChild(card);
-    });
-}
-
-/* MINISTRY ASSIGNMENTS */
-
-assignmentsRef.on("value",function(snapshot) {
-
-    const data = snapshot.val() || {};
-
-    allAssignments = [];
-
-    Object.keys(data).forEach(function(key) {
-
-        const item = data[key];
-
-        if (item && item.ministry && item.date) {
-
-            allAssignments.push({
-                id:key,
-                ...item
-            });
-        }
-    });
-
-    allAssignments.sort(function(a,b) {
-
-        const dateCompare =
-            (a.date || "").localeCompare(b.date || "");
-
-        if (dateCompare !== 0) {
-            return dateCompare;
-        }
-
-        return (a.service || "").localeCompare(b.service || "");
-    });
-
-    renderAllMinistryAssignments();
-});
-
-function renderAllMinistryAssignments() {
-
-    const ministryContainers = {
-
-        bus:"busAssignments",
-        nursery:"nurseryAssignments",
-        shelter:"shelterAssignments",
-        security:"securityAssignments",
-        childrensChurch:"childrensChurchAssignments",
-        ladies:"ladiesAssignments",
-        kingsKids:"kingsKidsAssignments",
-        youth:"youthAssignments"
-    };
-
-    Object.keys(ministryContainers).forEach(function(ministry) {
-
-        renderMinistryAssignments(
-            ministry,
-            ministryContainers[ministry]
-        );
-    });
-}
-
-function renderMinistryAssignments(ministry,containerId) {
-
-    const container = document.getElementById(containerId);
-
-    if (!container) return;
-
-    const today = formatDate(new Date());
-
-    /*
-    Past ministry assignments automatically
-    disappear from the member app.
-    */
-
-    const items = allAssignments.filter(function(item) {
-
-        return (
-            item.ministry === ministry &&
-            (item.date || "") >= today
-        );
-    });
-
-    container.innerHTML = "";
-    container.className = "";
-
-    if (!items.length) {
-
-        container.className = "assignment-empty";
-        container.textContent =
-            "No current or upcoming assignments have been published.";
-
-        return;
-    }
-
-    let lastMonth = "";
-
-    items.forEach(function(item) {
-
-        const monthKey = (item.date || "").slice(0,7);
-
-        if (monthKey !== lastMonth) {
-
-            const parts = item.date.split("-");
-
-            const monthDate = new Date(
-                Number(parts[0]),
-                Number(parts[1]) - 1,
-                1
-            );
-
-            const heading = document.createElement("div");
-            heading.className = "month-heading";
-
-            heading.textContent =
-                monthDate.toLocaleDateString("en-US",{
-                    month:"long",
-                    year:"numeric"
-                });
-
-            container.appendChild(heading);
-            lastMonth = monthKey;
-        }
-
-        const card = document.createElement("div");
-        card.className = "assignment-card";
-
-        const date = document.createElement("div");
-        date.className = "assignment-date";
-        date.textContent = formatAssignmentDate(item.date);
-        card.appendChild(date);
-
-        if (item.service) {
-
-            const service = document.createElement("div");
-            service.className = "assignment-service";
-            service.textContent = item.service;
-            card.appendChild(service);
-        }
-
-        const workers = document.createElement("div");
-        workers.className = "assignment-workers";
-        workers.textContent = "Assigned: " + (item.workers || "");
-        card.appendChild(workers);
-
-        if (item.notes) {
-
-            const notes = document.createElement("div");
-            notes.className = "assignment-notes";
-            notes.textContent = item.notes;
-            card.appendChild(notes);
-        }
-
-        container.appendChild(card);
-    });
-}
-
-function formatAssignmentDate(dateString) {
-
-    if (!dateString) return "";
-
-    const parts = dateString.split("-");
-
-    const date = new Date(
-        Number(parts[0]),
-        Number(parts[1]) - 1,
-        Number(parts[2])
-    );
-
-    return date.toLocaleDateString("en-US",{
-        weekday:"long",
-        month:"long",
-        day:"numeric",
-        year:"numeric"
-    });
-}
-
-/* CALENDAR */
-
-let calendarView = "month";
-let calendarDate = new Date();
-
-function openCalendar() {
-    showSection("calendarSection");
-    renderCalendar();
-}
-
-function setCalendarView(view) {
-
-    calendarView = view;
-
-    document.getElementById("monthViewButton")
-    .classList.toggle("active",view === "month");
-
-    document.getElementById("weekViewButton")
-    .classList.toggle("active",view === "week");
-
-    renderCalendar();
-}
-
-function goToday() {
-    calendarDate = new Date();
-    renderCalendar();
-}
-
-function previousPeriod() {
-
-    if (calendarView === "month") {
-
-        calendarDate = new Date(
-            calendarDate.getFullYear(),
-            calendarDate.getMonth() - 1,
-            1
-        );
-
-    } else {
-
-        calendarDate.setDate(
-            calendarDate.getDate() - 7
-        );
-    }
-
-    renderCalendar();
-}
-
-function nextPeriod() {
-
-    if (calendarView === "month") {
-
-        calendarDate = new Date(
-            calendarDate.getFullYear(),
-            calendarDate.getMonth() + 1,
-            1
-        );
-
-    } else {
-
-        calendarDate.setDate(
-            calendarDate.getDate() + 7
-        );
-    }
-
-    renderCalendar();
-}
-
-function renderCalendar() {
-
-    if (calendarView === "month") {
-        renderMonth();
-    } else {
-        renderWeek();
-    }
-}
-
-function renderMonth() {
-
-    const year = calendarDate.getFullYear();
-    const month = calendarDate.getMonth();
-
-    document.getElementById("calendarPeriod").textContent =
-        new Date(year,month,1)
-        .toLocaleDateString("en-US",{
-            month:"long",
-            year:"numeric"
-        });
-
-    const firstDay = new Date(year,month,1);
-    const lastDay = new Date(year,month + 1,0);
-    const days = lastDay.getDate();
-
-    const container = document.getElementById("calendarDisplay");
-    container.innerHTML = "";
-
-    const grid = document.createElement("div");
-    grid.className = "month-grid";
-
-    ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-    .forEach(function(day) {
-
-        const element = document.createElement("div");
-        element.className = "weekday";
-        element.textContent = day;
-        grid.appendChild(element);
-    });
-
-    for (let i = 0; i < firstDay.getDay(); i++) {
-
-        const empty = document.createElement("div");
-        empty.className = "calendar-day empty";
-        grid.appendChild(empty);
-    }
-
-    for (let day = 1; day <= days; day++) {
-
-        const date = new Date(year,month,day);
-        const dateString = formatDate(date);
-
-        const events = eventsForDate(dateString);
-
-        const box = document.createElement("div");
-        box.className = "calendar-day";
-
-        if (isToday(date)) {
-            box.classList.add("today");
-        }
-
-        const number = document.createElement("div");
-        number.className = "day-number";
-        number.textContent = day;
-
-        box.appendChild(number);
-
-        if (events.length) {
-
-            const dot = document.createElement("div");
-            dot.className = "event-dot";
-            box.appendChild(dot);
-
-            const count = document.createElement("div");
-            count.className = "event-count";
-
-            count.textContent =
-                events.length === 1
-                ? "1 event"
-                : events.length + " events";
-
-            box.appendChild(count);
-        }
-
-        box.onclick = function() {
-            showDayEvents(date);
-        };
-
-        grid.appendChild(box);
-    }
-
-    container.appendChild(grid);
-
-    const heading = document.createElement("div");
-    heading.className = "events-heading";
-    heading.textContent = "Upcoming Events This Month";
-    container.appendChild(heading);
-
-    const monthEvents = allEvents.filter(function(event) {
-
-        if (!event.date) return false;
-
-        const parts = event.date.split("-");
-
-        return (
-            Number(parts[0]) === year &&
-            Number(parts[1]) - 1 === month
-        );
-    });
-
-    renderEventCards(monthEvents,container);
-}
-
-function renderWeek() {
-
-    const start = new Date(calendarDate);
-
-    start.setHours(0,0,0,0);
-
-    start.setDate(
-        start.getDate() -
-        start.getDay()
-    );
-
-    const end = new Date(start);
-    end.setDate(end.getDate() + 6);
-
-    document.getElementById("calendarPeriod").textContent =
-        start.toLocaleDateString("en-US",{
-            month:"short",
-            day:"numeric"
-        })
-        +
-        " – "
-        +
-        end.toLocaleDateString("en-US",{
-            month:"short",
-            day:"numeric",
-            year:"numeric"
-        });
-
-    const container = document.getElementById("calendarDisplay");
-    container.innerHTML = "";
-
-    for (let i = 0; i < 7; i++) {
-
-        const date = new Date(start);
-        date.setDate(start.getDate() + i);
-
-        const wrapper = document.createElement("div");
-        wrapper.className = "week-day";
-
-        if (isToday(date)) {
-            wrapper.classList.add("today-week");
-        }
-
-        const title = document.createElement("div");
-        title.className = "week-day-title";
-
-        title.textContent =
-            date.toLocaleDateString("en-US",{
-                weekday:"long",
-                month:"long",
-                day:"numeric"
-            });
-
-        wrapper.appendChild(title);
-
-        const eventArea = document.createElement("div");
-        eventArea.className = "week-events";
-
-        const events = eventsForDate(formatDate(date));
-
-        if (!events.length) {
-
-            const none = document.createElement("div");
-            none.className = "no-events";
-            none.textContent = "No events scheduled.";
-            eventArea.appendChild(none);
-
-        } else {
-
-            renderEventCards(events,eventArea);
-        }
-
-        wrapper.appendChild(eventArea);
-        container.appendChild(wrapper);
-    }
-}
-
-function showDayEvents(date) {
-
-    const events = eventsForDate(formatDate(date));
-
-    const container = document.getElementById("calendarDisplay");
-
-    container.innerHTML = "";
-
-    const heading = document.createElement("div");
-    heading.className = "events-heading";
-
-    heading.textContent =
-        date.toLocaleDateString("en-US",{
-            weekday:"long",
-            month:"long",
-            day:"numeric",
-            year:"numeric"
-        });
-
-    container.appendChild(heading);
-
-    renderEventCards(events,container);
-
-    const back = document.createElement("button");
-    back.className = "today-button";
-    back.textContent = "Back to Month";
-    back.onclick = renderMonth;
-
-    container.appendChild(back);
-}
-
-function eventsForDate(dateString) {
-
-    return allEvents.filter(function(event) {
-        return event.date === dateString;
-    });
-}
-
-function renderEventCards(events,container) {
-
-    if (!events.length) {
-
-        const none = document.createElement("div");
-        none.className = "no-events";
-        none.textContent = "No events scheduled.";
-        container.appendChild(none);
-        return;
-    }
-
-    events.forEach(function(item) {
-
-        const parts = item.date.split("-");
-
-        const date = new Date(
-            Number(parts[0]),
-            Number(parts[1]) - 1,
-            Number(parts[2])
-        );
-
-        const card = document.createElement("div");
-        card.className = "event-card";
-
-        const dateBox = document.createElement("div");
-        dateBox.className = "event-date";
-
-        const month = document.createElement("span");
-        month.className = "event-month";
-
-        month.textContent =
-            date.toLocaleDateString("en-US",{
-                month:"short"
-            });
-
-        const day = document.createElement("span");
-        day.className = "event-day";
-        day.textContent = date.getDate();
-
-        dateBox.appendChild(month);
-        dateBox.appendChild(day);
-
-        const info = document.createElement("div");
-        info.className = "event-info";
-
-        const title = document.createElement("div");
-        title.className = "event-title";
-        title.textContent = item.title || "Church Event";
-        info.appendChild(title);
-
-        if (item.time) {
-
-            const time = document.createElement("div");
-            time.className = "event-time";
-            time.textContent = item.time;
-            info.appendChild(time);
-        }
-
-        if (item.details) {
-
-            const details = document.createElement("div");
-            details.className = "event-details";
-            details.textContent = item.details;
-            info.appendChild(details);
-        }
-
-        card.appendChild(dateBox);
-        card.appendChild(info);
-
-        container.appendChild(card);
-    });
-}
-
-/* DATE HELPERS */
-
-function formatDate(date) {
-
-    const year = date.getFullYear();
-
-    const month =
-        String(date.getMonth() + 1)
-        .padStart(2,"0");
-
-    const day =
-        String(date.getDate())
-        .padStart(2,"0");
-
-    return year + "-" + month + "-" + day;
-}
-
-function isToday(date) {
-
-    const today = new Date();
-
-    return (
-        date.getFullYear() === today.getFullYear() &&
-        date.getMonth() === today.getMonth() &&
-        date.getDate() === today.getDate()
-    );
-}
-
-/* SERVICE WORKER */
-
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load",function() {
-
-        navigator.serviceWorker
-        .register("./service-worker.js",{
-            updateViaCache:"none"
-        })
-        .then(function(registration) {
-
-            registration.update()
-            .catch(function(){});
-
-        })
-        .catch(function(error) {
-
-            console.log(
-                "Service worker registration failed:",
-                error
-            );
-        });
-    });
-}
-
-</script>
-
-</body>
-</html>
